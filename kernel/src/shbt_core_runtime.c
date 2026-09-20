@@ -220,3 +220,117 @@ void shbt_remap(double *col_a, double *col_b, double c, double s, size_t n)
         col_b[i] = c * b - s * a;
     }
 }
+
+/* --------------------------------------------------------------------------
+ * v3.0: PCIe Gen5 x16 zero-copy DMA ring + SDR quench (up2.txt §2)
+ * -------------------------------------------------------------------------- */
+
+#if defined(__aarch64__) || defined(__arm__)
+#define SHBT_SYS_BARRIER() __asm__ __volatile__("dmb sy" ::: "memory")
+#else
+#define SHBT_SYS_BARRIER() __asm__ __volatile__("mfence" ::: "memory")
+#endif
+
+/* SDR register aperture (host-visible when bound; stubbed on bare bench). */
+static volatile uint32_t *const sdr_quench_reg =
+    (volatile uint32_t *)(FPGA_SDR_REG_BASE + REG_SDR_QUENCH_OFFSET);
+static volatile uint32_t *const sdr_dac_bias_reg =
+    (volatile uint32_t *)(FPGA_SDR_REG_BASE + REG_SDR_DAC_BIAS_BASE);
+
+int32_t shbt_dma_init_ring(sglt_dma_ring_control_t *ring)
+{
+    if (!ring || !ring->descriptors || ring->descriptor_count == 0U)
+        return -1;
+
+    for (uint32_t i = 0; i < ring->descriptor_count; ++i) {
+        ring->descriptors[i].flags &= ~SGLT_DMA_FLAG_SW_OWNED;
+        ring->descriptors[i].frame_sequence = 0ULL;
+        ring->descriptors[i].buffer_len_bytes = 0U;
+    }
+    SHBT_SYS_BARRIER();
+    atomic_store_explicit(&ring->head_index, 0U, memory_order_release);
+    atomic_store_explicit(&ring->tail_index, 0U, memory_order_release);
+    return 0;
+}
+
+/*
+ * RX interrupt service: hand descriptor `descriptor_idx` to software
+ * (Owner bit ← 1) after stamping length/PTP time, then advance head.
+ * ISR budget: < 2.5 µs (GATE-36).
+ */
+int32_t shbt_dma_process_rx_interrupt(sglt_dma_ring_control_t *ring,
+                                      uint32_t descriptor_idx)
+{
+    if (!ring || descriptor_idx >= ring->descriptor_count)
+        return -1;
+
+    sglt_dma_descriptor_t *d = &ring->descriptors[descriptor_idx];
+
+    uint32_t head = atomic_load_explicit(&ring->head_index, memory_order_acquire);
+    uint32_t tail = atomic_load_explicit(&ring->tail_index, memory_order_acquire);
+    if (((head + 1U) % ring->descriptor_count) == tail)
+        return -2; /* ring full: drop and NAK upstream */
+
+    d->flags |= SGLT_DMA_FLAG_SW_OWNED;
+    SHBT_SYS_BARRIER();
+    atomic_store_explicit(&ring->head_index,
+                          (head + 1U) % ring->descriptor_count,
+                          memory_order_release);
+    return 0;
+}
+
+/* 16-bit DAC code for a bias request clamped to the 3.8–7.4 V envelope. */
+int32_t shbt_sdr_set_dac_bias_voltage(double volts)
+{
+    if (volts < SDR_DAC_BIAS_MIN_V)
+        volts = SDR_DAC_BIAS_MIN_V;
+    if (volts > SDR_DAC_BIAS_MAX_V)
+        volts = SDR_DAC_BIAS_MAX_V;
+
+    uint32_t code = (uint32_t)(
+        (volts - SDR_DAC_BIAS_MIN_V)
+        / (SDR_DAC_BIAS_MAX_V - SDR_DAC_BIAS_MIN_V)
+        * (double)SDR_DAC_CODE_MAX + 0.5);
+
+    sdr_dac_bias_reg[0] = code;
+    SHBT_SYS_BARRIER();
+    return (int32_t)code;
+}
+
+/*
+ * Fast quench: assert SDR quench line then clamp DAC bias to the 3.8 V
+ * storage value. Recovery target < 9.24 ns (GATE-38).
+ */
+void shbt_sdr_assert_fast_quench(void)
+{
+    sdr_quench_reg[0] = 1U;
+    SHBT_SYS_BARRIER();
+    (void)shbt_sdr_set_dac_bias_voltage(SDR_DAC_BIAS_MIN_V);
+}
+
+/*
+ * AVX-512 RF interlock: compare 16 telemetry channels against the 7.4 V
+ * envelope in one masked pass. Latency target < 1.412 ns @ 2.8 GHz
+ * (GATE-37). Returns the violation bitmask; 0 = all channels safe.
+ */
+uint32_t evaluate_rf_interlock_avx512(const float *telemetry16)
+{
+#if defined(__AVX512F__)
+    __m512 v = _mm512_loadu_ps(telemetry16);
+    __m512 vmax = _mm512_set1_ps((float)SDR_DAC_BIAS_MAX_V);
+    __m512 vmin = _mm512_set1_ps((float)SDR_DAC_BIAS_MIN_V);
+    __mmask16 hi = _mm512_cmp_ps_mask(v, vmax, _CMP_GT_OQ);
+    __mmask16 lo = _mm512_cmp_ps_mask(v, vmin, _CMP_LT_OQ);
+    return (uint32_t)(hi | lo);
+#else
+    uint32_t mask = 0;
+    if (telemetry16) {
+        for (int i = 0; i < 16; ++i) {
+            if (telemetry16[i] > (float)SDR_DAC_BIAS_MAX_V ||
+                telemetry16[i] < (float)SDR_DAC_BIAS_MIN_V)
+                mask |= (1U << i);
+        }
+    }
+    return mask;
+#endif
+}

@@ -74,6 +74,68 @@ _Static_assert(offsetof(ShbtRegisters, ecc_counts)     == 0x30U, "ShbtRegisters.
 _Static_assert(offsetof(ShbtRegisters, control)         == 0x34U, "ShbtRegisters.control offset");
 _Static_assert(sizeof(ShbtRegisters)                   == 0x38U, "ShbtRegisters total size");
 
+/* --------------------------------------------------------------------------
+ * v3.0: PCIe Gen5 x16 FPGA SDR DMA ring (up2.txt §2)
+ * -------------------------------------------------------------------------- */
+#include <stdatomic.h>
+
+#define SGLT_DMA_RING_SIZE          4096U
+#define SGLT_CACHE_LINE_SIZE        64U
+#define SGLT_DMA_BUFFER_SIZE        (16U * 1024U * 1024U)
+#define SGLT_DMA_FLAG_SW_OWNED      (1U << 0)
+
+/* 64-byte descriptor, hardware-fixed offsets 0x00..0x3F. */
+typedef struct {
+    uint64_t host_phys_addr;      /* 0x00 */
+    uint64_t fpga_local_addr;     /* 0x08 */
+    uint32_t buffer_len_bytes;    /* 0x10 */
+    uint32_t flags;               /* 0x14  bit0 Owner: 0=HW 1=SW */
+    uint64_t frame_sequence;      /* 0x18 */
+    uint64_t ptp_timestamp_sec;   /* 0x20 */
+    uint32_t ptp_timestamp_nsec;  /* 0x28 */
+    uint32_t descriptor_crc32;    /* 0x2C */
+    uint8_t  reserved[16];        /* 0x30 */
+} sglt_dma_descriptor_t;
+
+_Static_assert(sizeof(sglt_dma_descriptor_t)          == 64U,   "desc size");
+_Static_assert(offsetof(sglt_dma_descriptor_t, host_phys_addr)     == 0x00U, "desc 0x00");
+_Static_assert(offsetof(sglt_dma_descriptor_t, fpga_local_addr)    == 0x08U, "desc 0x08");
+_Static_assert(offsetof(sglt_dma_descriptor_t, buffer_len_bytes)   == 0x10U, "desc 0x10");
+_Static_assert(offsetof(sglt_dma_descriptor_t, flags)              == 0x14U, "desc 0x14");
+_Static_assert(offsetof(sglt_dma_descriptor_t, frame_sequence)     == 0x18U, "desc 0x18");
+_Static_assert(offsetof(sglt_dma_descriptor_t, ptp_timestamp_sec)  == 0x20U, "desc 0x20");
+_Static_assert(offsetof(sglt_dma_descriptor_t, ptp_timestamp_nsec) == 0x28U, "desc 0x28");
+_Static_assert(offsetof(sglt_dma_descriptor_t, descriptor_crc32)   == 0x2CU, "desc 0x2C");
+_Static_assert(offsetof(sglt_dma_descriptor_t, reserved)           == 0x30U, "desc 0x30");
+
+/* Lock-free SPSC ring control shared with the FPGA DMA engine. */
+typedef struct {
+    _Atomic uint32_t head_index;
+    _Atomic uint32_t tail_index;
+    sglt_dma_descriptor_t *descriptors;
+    uint32_t descriptor_count;
+    uint8_t  _reserved[36];
+} sglt_dma_ring_control_t;
+
+_Static_assert(sizeof(sglt_dma_ring_control_t) <= 64U, "ring ctrl cache line");
+
+/* --------------------------------------------------------------------------
+ * v3.0 FPGA SDR MMIO aperture (up2.txt §2.2)
+ * -------------------------------------------------------------------------- */
+#define FPGA_SDR_REG_BASE           0x8000000000000000ULL
+#define REG_SDR_QUENCH_OFFSET       0x0004ULL
+#define REG_SDR_DAC_BIAS_BASE       0x0100ULL
+#define SDR_DAC_BIAS_MIN_V          3.8
+#define SDR_DAC_BIAS_MAX_V          7.4
+#define SDR_DAC_CODE_MAX            65535U
+
+int32_t  shbt_dma_init_ring(sglt_dma_ring_control_t *ring);
+int32_t  shbt_dma_process_rx_interrupt(sglt_dma_ring_control_t *ring,
+                                       uint32_t descriptor_idx);
+int32_t  shbt_sdr_set_dac_bias_voltage(double volts);
+void     shbt_sdr_assert_fast_quench(void);
+uint32_t evaluate_rf_interlock_avx512(const float *telemetry16);
+
 #ifdef __cplusplus
 }
 #endif
