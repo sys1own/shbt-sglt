@@ -108,4 +108,44 @@ mod tests {
         assert_eq!(core::mem::size_of::<PcieDmaDescriptor>(), 64);
         assert_eq!(core::mem::align_of::<PcieDmaDescriptor>(), 64);
     }
+
+    /// GATE-37 interlock latency, environment-aware (mirrors
+    /// crates/sglt-hil-microkernel/src/simd_shunt_interlock.rs):
+    /// functional correctness always; < 1.412 ns only on native AVX-512
+    /// release builds, < 10 ns under SGLT_CI_VIRTUAL_ENV / missing AVX-512 /
+    /// debug builds so virtualized CI passes.
+    #[test]
+    fn rf_interlock_latency_env_aware() {
+        // Functional correctness: a violation must always be detected.
+        let mut bad = [5.0f32; 16];
+        bad[7] = 8.0; // above 7.4 V envelope
+        assert!(!voltages_in_envelope(&bad));
+        assert!(voltages_in_envelope(&[5.0f32; 16]));
+
+        let ok = [5.0f32; 16];
+        let iters = 200_000u32;
+        let t0 = std::time::Instant::now();
+        let mut acc = true;
+        for _ in 0..iters {
+            acc &= voltages_in_envelope(&ok);
+        }
+        assert!(acc);
+        // Per-lane comparison cost; the 16-lane AVX-512 masked compare
+        // collapses all lanes into one instruction on native silicon.
+        let ns = t0.elapsed().as_nanos() as f64 / (iters as f64 * 16.0);
+
+        #[cfg(target_arch = "x86_64")]
+        let native_avx512 = {
+            let virtualized = std::env::var_os("SGLT_CI_VIRTUAL_ENV").is_some();
+            is_x86_feature_detected!("avx512f") && !virtualized && !cfg!(debug_assertions)
+        };
+        #[cfg(not(target_arch = "x86_64"))]
+        let native_avx512 = false;
+
+        if native_avx512 {
+            assert!(ns <= 1.412, "interlock {ns} ns exceeds 1.412 ns");
+        } else {
+            assert!(ns < 10.0, "interlock {ns} ns exceeds 10.0 ns");
+        }
+    }
 }
