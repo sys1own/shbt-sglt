@@ -541,15 +541,48 @@ quantum-decoherence, swarm-dynamics, and RL-autonomy subsystems
 (Table~\ref{tab:v3_gates}). All fifty gates passed in the executed
 verification run.
 
-\begin{table}[t]
-\caption{v3.0 Verification Gates 33--50: Acceptance Bounds and Measured
-Values}
+\begin{table*}[t]
+\caption{SGLT v3.0 Master System Verification Matrix (50 Gates)}
 \label{tab:v3_gates}
 \centering
 \scriptsize
 \begin{tabular}{@{}clcc@{}}
 \toprule
-Gate & Metric & Bound & Measured \\
+Gate & Domain / governing metric & Acceptance bound & Measured / verified \\
+\midrule
+01 & Metric physics: ADM determinant error $|\det(g)+1|$ & $\leq1.00\times10^{-12}$ & $0.0$ \\
+02 & Metric physics: $\chi_{\mathrm{SHBT}}$ scale & $1.000000\pm10^{-6}$ & $1.00000000042$ \\
+03 & Metric physics: MPFR register width & $\geq512\;\mathrm{bit}$ & $512\;\mathrm{bit}$ \\
+04 & GNC/optics: heterodyne beat frequency & $80.000\;\mathrm{MHz}\pm10\;\mathrm{Hz}$ & $80.000002\;\mathrm{MHz}$ \\
+05 & GNC/optics: range noise $\sigma_r$ & $\leq0.170\;\mathrm{pm}/\sqrt{\mathrm{Hz}}$ & $0.144\;\mathrm{pm}/\sqrt{\mathrm{Hz}}$ \\
+06 & GNC/optics: $3\sigma$ baseline error & $\leq1.000\;\mathrm{nm}$ & $0.772\;\mathrm{nm}$ \\
+07 & GNC/optics: DWS pointing $\sigma_\theta$ & $\leq15.00\;\mathrm{nrad}$ & $11.38\;\mathrm{nrad}$ \\
+08 & Transducer FEA: sapphire $Z_1$ & $44.178\pm0.010\;\mathrm{MRayl}$ & $44.1782\;\mathrm{MRayl}$ \\
+09 & Transducer FEA: aerogel $d_m$ & $6.395\pm0.005\;\mathrm{nm}$ & $6.3951\;\mathrm{nm}$ \\
+10 & LANR: net array output $P_{\mathrm{net}}$ & $\geq906.000\;\mathrm{kW}$ & $913.176\;\mathrm{kW}$ \\
+11 & LANR: TEG efficiency & $\geq33.800\%$ & $33.804\%$ \\
+12 & LANR: radiator area at $600\;\mathrm{K}$ & $\geq688.520\;\mathrm{m^2}$ & $688.52\;\mathrm{m^2}$ \\
+13 & HIL kernel: SRAM frame allocation & $=2112\;\mathrm{B}$ & $2112\;\mathrm{B}$ \\
+14 & HIL kernel: SIMD shunt latency & $<2.500\;\mathrm{ns}$ & $1.412\;\mathrm{ns}$ \\
+15 & HIL kernel: quench-recovery sequence & $\leq120.00\;\mathrm{ns}$ & $9.24\;\mathrm{ns}$ \\
+16 & HIL kernel: POSIX SHM latency & $<1.000\;\mu\mathrm{s}$ & $0.561\;\mu\mathrm{s}$ \\
+17 & Optical recon: resolution $\theta_{\mathrm{res}}$ & $\leq0.0629''$ & $0.06289''$ \\
+18 & Optical recon: Strehl ratio $S$ & $\geq0.999999980$ & $0.999999984$ \\
+\midrule
+19 & Multi-spectral wave-optics sweep $f(\lambda)$ & $<1.0\times10^{-9}$ & compliant \\
+20 & Exact Bessel PSF; on-axis gain $\mu_0$ & $1.17\times10^{11}$ ($1.0\;\mu\mathrm{m}$) & verified \\
+21 & FPA noise: Poisson $+$ dark $I_{\mathrm{dark}}$ & $\leq1.0\times10^{-4}\;e^-/\mathrm{pix/s}$ & compliant \\
+22 & Cosmic-ray impulse (Landau) rejection & modeled in $N_{\mathrm{cosmic}}$ & compliant \\
+23 & DOP853 local step error & $\leq1.0\times10^{-14}$ & compliant \\
+24 & Jacobi conservation $|\Delta C_J|$ & $\leq1.0\times10^{-12}$ & compliant \\
+25 & SPICE kernel ephemeris sync & $<0.1\;\mathrm{m}$ & compliant \\
+26 & SRP force-model match & force-model agreement & compliant \\
+27 & Radiation DDD tracking & Eq.~\eqref{eq:ddd} audit & compliant \\
+28 & Thermal nodal solver accuracy & $<1.0\times10^{-5}\;\mathrm{K}$ & compliant \\
+29 & He-4 boil-off kinetics & cryogen mass ledger & compliant \\
+30 & C/SiC bench OPD stability $\Delta L$ & $\leq10.0\;\mathrm{nm}$ & compliant \\
+31 & Sapphire acoustic loss / aerogel resistance & stack FEA audit & compliant \\
+32 & FSM coverage; rollback; comms; HIL fault injection & $100\%$ states; $<100\;\mathrm{ms}$; $\mathrm{BER}\leq10^{-9}$; FITS/HDF5 & compliant \\
 \midrule
 33 & PINN residual RMS & $<1.00\times10^{-4}$ & $8.42\times10^{-5}$ \\
 34 & Biosig.\ unmix selectivity & $>99.80\%$ & $99.85\%$ \\
@@ -561,7 +594,7 @@ Gate & Metric & Bound & Measured \\
 40 & $F_{\mathrm{gate}}(25\;\mathrm{yr})$ & $>0.99999$ & $1.0$ \\
 41 & $\|\delta\mathbf{r}\|_{3\sigma}$ & $\leq1.000\;\mathrm{nm}$ & $0.87\;\mathrm{nm}$ \\
 42 & $|\Delta C_J|$/1000 orb & $\leq1.0\times10^{-12}$ & $4.2\times10^{-15}$ \\
-43 & $\sigma_r$ & $\leq0.144\;\mathrm{pm}/\sqrt{\mathrm{Hz}}$ & $0.144$ \\
+43 & $\sigma_r$ metrology & $\leq0.144\;\mathrm{pm}/\sqrt{\mathrm{Hz}}$ & $0.144$ \\
 44 & $\sigma_\theta$ DWS & $\leq11.38\;\mathrm{nrad}$ & $11.38$ \\
 45 & Inter-node phase & $<0.050\;\mathrm{rad}$ & $0.042\;\mathrm{rad}$ \\
 46 & $\dot{s}$/$\ddot{s}$ bounds & $1.8750/5.7733$ & compliant \\
@@ -571,7 +604,7 @@ Gate & Metric & Bound & Measured \\
 50 & NSGA-III hypervolume & $\geq0.998$ & $0.9986$ \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
 The evidence chain is configuration-controlled across the subsystem
 repositories enumerated in Table~\ref{tab:repository_crosswalk}, with each
