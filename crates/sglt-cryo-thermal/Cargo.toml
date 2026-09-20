@@ -1,0 +1,19 @@
+[package]
+name = "sglt-cryo-thermal"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "3D nodal transient cryo thermal-fluid solver: He-4 bath, MLI radiation, C/SiC bench FEM deformation, boil-off kinetics (up1.txt §4)."
+
+[dependencies]
+thiserror = { workspace = true }
+nalgebra = { workspace = true, optional = true }
+ndarray = { workspace = true, optional = true }
+
+[features]
+default = []
+linalg = ["nalgebra", "ndarray"]
+
+[lib]
+crate-type = ["rlib", "cdylib"]

@@ -1,0 +1,20 @@
+[package]
+name = "sglt-orbital-flight"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Ephemeris-driven 4-body CR3BP integrator (DOP853), SPICE ephemeris sync, and DDD radiation dose tracking (up1.txt §3)."
+
+[dependencies]
+thiserror = { workspace = true }
+cspice-sys = { workspace = true, optional = true }
+nalgebra = { workspace = true, optional = true }
+
+[features]
+default = []
+spice = ["cspice-sys"]
+linalg = ["nalgebra"]
+
+[lib]
+crate-type = ["rlib", "cdylib"]

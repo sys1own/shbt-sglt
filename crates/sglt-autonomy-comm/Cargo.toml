@@ -1,0 +1,13 @@
+[package]
+name = "sglt-autonomy-comm"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "8-phase mission autonomy FSM plus 12 Gbps optical (16-PPM, LDPC/RS, Rytov) and 32 GHz Ka-band fallback link budgets (up1.txt §5)."
+
+[dependencies]
+thiserror = { workspace = true }
+
+[lib]
+crate-type = ["rlib", "cdylib"]
