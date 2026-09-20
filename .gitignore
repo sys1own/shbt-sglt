@@ -1,0 +1,7 @@
+/target
+/kernel/build
+/crates/sglt-hil-microkernel/bin
+__pycache__/
+*.pyc
+/sim_outputs
+/verification_matrix.json

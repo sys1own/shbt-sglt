@@ -1,0 +1,22 @@
+# shbt-sglt workspace manifest — Synthetic Gravitational Lensing Telescope
+# digital-twin / HIL co-simulation suite (sglt.txt §1).
+
+[workspace]
+resolver = "2"
+members = [
+    "crates/sglt-core-metric",
+    "crates/sglt-flight-gnc",
+    "crates/sglt-transducer-fea",
+    "crates/sglt-lanr-power",
+    "crates/sglt-hil-microkernel",
+    "crates/sglt-astro-reconstruction",
+]
+
+[workspace.package]
+edition = "2021"
+license = "MIT"
+
+[workspace.dependencies]
+rug = { version = "=1.24.0", features = ["float"] }
+libc = "0.2"
+cc = "1"

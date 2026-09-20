@@ -1,0 +1,12 @@
+[package]
+name = "sglt-flight-gnc"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+description = "SE-L2 formation flight dynamics, heterodyne metrology, and 2-tier hybrid GNC."
+
+[dependencies]
+
+[[test]]
+name = "test_gnc_convergence"
+path = "../../tests/test_gnc_convergence.rs"

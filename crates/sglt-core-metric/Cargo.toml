@@ -1,0 +1,13 @@
+[package]
+name = "sglt-core-metric"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+description = "512-bit ADM metric, interference tensor, and eikonal pre-distortion math for SGLT."
+
+[dependencies]
+rug = { workspace = true }
+
+[[test]]
+name = "test_metric_fidelity"
+path = "../../tests/test_metric_fidelity.rs"
