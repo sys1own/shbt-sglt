@@ -1,4 +1,4 @@
-# Static Holographic Boundary Theory(SHBT) — Synthetic Gravitational Lensing Telescope (SGLT) Simulation Stack
+# Static Holographic Boundary Theory (SHBT) — Synthetic Gravitational Lensing Telescope (SGLT) Simulation Stack
 
 Implementation of the Static Holographic Boundary Theory Synthetic Gravitational Lensing Telescope (`shbt-sglt`) based on the engineering blueprint (`sglt.pdf`). The workspace integrates a multi-crate Rust core, a freestanding C11 microkernel (`shbt-os`), Automated Electronic Design (EDA) layout generators, PyO3 FFI bindings, and a Python orchestration CLI and telemetry HUD.
 
