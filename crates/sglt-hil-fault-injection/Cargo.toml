@@ -1,0 +1,14 @@
+[package]
+name = "sglt-hil-fault-injection"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "POSIX SHM fault injector (/dev/shm/sglt_frame_buffer), Poisson SEU/MBU .stinespring_frame mutation, dark-ledger Fibonacci anyon braid decoder, Solovay-Kitaev error tracking (up1.txt §6)."
+
+[dependencies]
+thiserror = { workspace = true }
+libc = { workspace = true }
+
+[lib]
+crate-type = ["rlib", "cdylib"]

@@ -1,22 +1,49 @@
 # shbt-sglt workspace manifest — Synthetic Gravitational Lensing Telescope
-# digital-twin / HIL co-simulation suite (sglt.txt §1).
+# digital-twin / HIL co-simulation suite (sglt.txt §1, up1.txt v2.0 §1).
 
 [workspace]
 resolver = "2"
 members = [
+    # v1.0 crates (sglt.txt)
     "crates/sglt-core-metric",
     "crates/sglt-flight-gnc",
     "crates/sglt-transducer-fea",
     "crates/sglt-lanr-power",
     "crates/sglt-hil-microkernel",
     "crates/sglt-astro-reconstruction",
+    # v2.0 crates (up1.txt)
+    "crates/sglt-optical-raytrace",
+    "crates/sglt-orbital-flight",
+    "crates/sglt-cryo-thermal",
+    "crates/sglt-autonomy-comm",
+    "crates/sglt-hil-fault-injection",
+    "crates/sglt-target-observatory",
 ]
 
 [workspace.package]
+version = "2.0.0"
 edition = "2021"
+authors = ["SGLT Core Systems Engineering Team"]
 license = "MIT"
 
 [workspace.dependencies]
+# v1.0
 rug = { version = "=1.24.0", features = ["float"] }
-libc = "0.2"
 cc = "1"
+# v2.0 (up1.txt §1 workspace dependency pinning)
+nalgebra = "0.32"
+ndarray = { version = "0.15", features = ["rayon"] }
+rayon = "1.8"
+libc = "0.2"
+thiserror = "1.0"
+pyo3 = { version = "0.20", features = ["extension-module", "abi3-py310"] }
+fitsio = "0.21"
+hdf5 = "0.8"
+cspice-sys = "1.0"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+debug = false

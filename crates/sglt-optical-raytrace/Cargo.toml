@@ -1,0 +1,21 @@
+[package]
+name = "sglt-optical-raytrace"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Wideband wave-optics SGL raytrace engine: 1PN relativistic 3D propagation, extended-disk convolution, coronagraph, and CMOS/EMCCD FPA noise (up1.txt §2)."
+
+[dependencies]
+thiserror = { workspace = true }
+rayon = { workspace = true, optional = true }
+nalgebra = { workspace = true, optional = true }
+ndarray = { workspace = true, optional = true }
+
+[features]
+default = []
+parallel = ["rayon"]
+linalg = ["nalgebra", "ndarray"]
+
+[lib]
+crate-type = ["rlib", "cdylib"]

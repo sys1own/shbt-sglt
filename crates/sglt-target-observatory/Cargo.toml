@@ -1,0 +1,21 @@
+[package]
+name = "sglt-target-observatory"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Exoplanet transmission spectroscopy, coronagraphic speckle suppression, FITS v4.0 writer, and HDF5 datacube exporter (up1.txt §7)."
+
+[dependencies]
+thiserror = { workspace = true }
+libc = { workspace = true }
+fitsio = { workspace = true, optional = true }
+hdf5 = { workspace = true, optional = true }
+
+[features]
+default = []
+fits = ["fitsio"]
+hdf5-io = ["hdf5"]
+
+[lib]
+crate-type = ["rlib", "cdylib"]
