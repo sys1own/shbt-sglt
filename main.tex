@@ -6,6 +6,7 @@
 \usepackage{siunitx}
 \usepackage{array}
 \usepackage{multirow}
+\usepackage{graphicx}
 \usepackage{url}
 \usepackage{cite}
 
@@ -192,6 +193,7 @@ of the $i$-th Sensor Craft with respect to the Lens Craft in a
 Local-Vertical Local-Horizontal frame, the nonlinear relative equation of
 motion is
 \begin{equation}
+\resizebox{\columnwidth}{!}{$
 \begin{aligned}
 \ddot{\mathbf{r}}_{0i}={}&-GM_{\odot}\left(
 \frac{\mathbf{R}_0+\mathbf{r}_{0i}}{\|\mathbf{R}_0+\mathbf{r}_{0i}\|^{3}}
@@ -204,7 +206,7 @@ motion is
 +\Delta\mathbf{a}_{\mathrm{SRP},0i}
 +\frac{\mathbf{F}_{\mathrm{thrust},i}}{m_i}
 -\frac{\mathbf{F}_{\mathrm{thrust},0}}{m_0},
-\end{aligned}
+\end{aligned}$}
 \label{eq:relative_eom}
 \end{equation}
 where $\Delta\mathbf{a}_{x,0i}=\mathbf{a}_{x,i}-\mathbf{a}_{x,0}$ denotes
@@ -220,9 +222,11 @@ $I_{\mathrm{beat},ij}(t)=I_0\left(1+\gamma\cos(\Delta\omega t
 $d_{ij}=\|\mathbf{r}_j-\mathbf{r}_i\|$. The synthesized range covariance
 satisfies
 \begin{equation}
+\resizebox{\columnwidth}{!}{$
+\displaystyle
 \mathbf{\Sigma}_r=\operatorname{diag}\left(\sigma_{r,12}^{2},\dots,
 \sigma_{r,(M-1)M}^{2}\right),\quad
-\sigma_{r,ij}\leq0.144\;\mathrm{pm}/\sqrt{\mathrm{Hz}},
+\sigma_{r,ij}\leq0.144\;\mathrm{pm}/\sqrt{\mathrm{Hz}}$}
 \label{eq:range_cov}
 \end{equation}
 with verified three-sigma relative-positioning error
@@ -294,22 +298,25 @@ $\mathbf{B}\sim\mathcal{N}(0,\sigma_b^{2})$, $\sigma_b=16.0$. The forward
 image model convolves the emitted surface brightness with the SGL point
 spread function,
 \begin{equation}
+\resizebox{\columnwidth}{!}{$
 \begin{aligned}
 \hat{I}(\mathbf{u},\lambda)=\iint_{\Omega_p}
 P\!\left(\|\mathbf{u}-\mathbf{M}\mathbf{r}\|;\lambda\right)
 \Big[&A(\mathbf{r},\lambda)I_{\mathrm{star}}(\lambda)
 e^{-\tau_{\mathrm{cloud}}(\mathbf{r},\lambda)}\\
 &+E_{\mathrm{atm}}(\mathbf{r},\lambda)\Big]\,d^{2}\mathbf{r}.
-\end{aligned}
+\end{aligned}$}
 \label{eq:forward_image}
 \end{equation}
 The composite physics-informed loss
 \begin{equation}
+\resizebox{\columnwidth}{!}{$
+\displaystyle
 \mathcal{L}_{\mathrm{PINN}}(\theta)=
 \mathcal{L}_{\mathrm{data}}(I_{\mathrm{obs}},\hat{I})
 +\lambda_{\mathrm{phys}}\left\|\nabla^{2}E
 +k^{2}\left(1+\tfrac{4r_g}{r}\right)E\right\|_{\Omega}^{2}
-+\lambda_{\mathrm{reg}}\mathcal{R}(f_\theta)
++\lambda_{\mathrm{reg}}\mathcal{R}(f_\theta)$}
 \label{eq:pinn_loss}
 \end{equation}
 employs a Huber data fidelity with threshold $\delta=10^{-3}$ for
@@ -338,11 +345,13 @@ selectivity against a $99.80\%$ requirement.
 
 The CMOS/EMCCD focal-plane assembly implements the compound noise model
 \begin{equation}
+\resizebox{\columnwidth}{!}{$
+\displaystyle
 N_{\mathrm{total}}(x,y)=
 \operatorname{Poisson}\!\left(I_{\mathrm{optical}}\eta_{\mathrm{QE}}
 t_{\mathrm{exp}}+I_{\mathrm{dark}}t_{\mathrm{exp}}\right)
 +\mathcal{N}(0,\sigma_{\mathrm{read}}^{2})
-+N_{\mathrm{cosmic}}(x,y),
++N_{\mathrm{cosmic}}(x,y)$}
 \label{eq:fpa_noise}
 \end{equation}
 incorporating photon-shot, dark-current, read, and cosmic-ray impulse
