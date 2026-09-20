@@ -1,0 +1,13 @@
+[package]
+name = "sglt-squeezed-metrology"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "TMSV squeezed-light + N00N-state heterodyne metrology mesh (r_squeeze=2.50, 21.7 dB, sub-SQL S_r^1/2 <= 0.010 pm/rtHz, 3-sigma tracking <= 0.100 nm)."
+
+[dependencies]
+libm = "0.2"
+
+[lib]
+crate-type = ["rlib", "cdylib"]

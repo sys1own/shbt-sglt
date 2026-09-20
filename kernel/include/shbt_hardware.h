@@ -136,6 +136,26 @@ int32_t  shbt_sdr_set_dac_bias_voltage(double volts);
 void     shbt_sdr_assert_fast_quench(void);
 uint32_t evaluate_rf_interlock_avx512(const float *telemetry16);
 
+/* --------------------------------------------------------------------------
+ * Dark-ledger TQEC + metamaterial self-healing bridge
+ * -------------------------------------------------------------------------- */
+#define SGLT_DARK_LEDGER_BYTES      1472U
+#define SGLT_BRAID_DESCRIPTORS      124U
+#define SGLT_SYNDROME_INTERVAL_US   100U
+#define GST_HEAL_FLUENCE_MJ_CM2     27.9
+#define SGLT_UF_MWPM_CROSSOVER      0.025
+
+/* Extract one stabilizer syndrome round over the 1,472-byte dark ledger.
+ * Returns popcount of non-trivial syndromes; writes packed bits to
+ * *syndrome_bits_out. */
+uint32_t shbt_dark_ledger_extract_syndrome(const uint64_t *ledger,
+                                           uint64_t *syndrome_bits_out);
+
+/* Issue a nanosecond GST self-healing pulse if `fluence_mj_cm2` meets the
+ * 27.9 mJ/cm^2 threshold. Returns 0 when the pulse fires. */
+int32_t  shbt_metamaterial_heal_pulse(double fluence_mj_cm2,
+                                      uint32_t duration_ns);
+
 #ifdef __cplusplus
 }
 #endif

@@ -1,0 +1,12 @@
+[package]
+name = "sglt-webgpu-vis"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Zero-dependency WebAssembly + WebGPU native rendering engine: WGSL compute shaders for 3D ADM metric curvature, Bessel J0^2 caustics, and M-node swarm dynamics at 60 FPS."
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]

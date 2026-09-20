@@ -846,6 +846,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "sglt-2pn-coronal-optics"
+version = "2.0.0"
+dependencies = [
+ "libm",
+]
+
+[[package]]
 name = "sglt-astro-reconstruction"
 version = "0.1.0"
 
@@ -873,8 +880,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "sglt-diamond-transducer"
+version = "2.0.0"
+dependencies = [
+ "libm",
+]
+
+[[package]]
 name = "sglt-flight-gnc"
 version = "0.1.0"
+
+[[package]]
+name = "sglt-gpu-physics"
+version = "2.0.0"
 
 [[package]]
 name = "sglt-hardware-dma"
@@ -902,6 +920,13 @@ dependencies = [
 [[package]]
 name = "sglt-lanr-power"
 version = "0.1.0"
+
+[[package]]
+name = "sglt-metamaterial-radiation"
+version = "2.0.0"
+dependencies = [
+ "libm",
+]
 
 [[package]]
 name = "sglt-neural-optics"
@@ -938,6 +963,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "sglt-squeezed-metrology"
+version = "2.0.0"
+dependencies = [
+ "libm",
+]
+
+[[package]]
 name = "sglt-swarm-dynamics"
 version = "2.0.0"
 dependencies = [
@@ -955,8 +987,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "sglt-tqec-dark-ledger"
+version = "2.0.0"
+dependencies = [
+ "libm",
+]
+
+[[package]]
 name = "sglt-transducer-fea"
 version = "0.1.0"
+
+[[package]]
+name = "sglt-uncertainty-uq"
+version = "2.0.0"
+
+[[package]]
+name = "sglt-webgpu-vis"
+version = "2.0.0"
 
 [[package]]
 name = "shlex"

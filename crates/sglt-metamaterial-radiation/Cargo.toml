@@ -1,0 +1,13 @@
+[package]
+name = "sglt-metamaterial-radiation"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "GST phase-change metamaterial routing, DDD >= 100 krad(Si) tracking, nanosecond self-healing (F >= 27.9 mJ/cm^2) recovering >= 99.9% conductivity."
+
+[dependencies]
+libm = "0.2"
+
+[lib]
+crate-type = ["rlib", "cdylib"]

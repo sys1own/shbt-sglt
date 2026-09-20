@@ -1,0 +1,12 @@
+[package]
+name = "sglt-gpu-physics"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Distributed multi-GPU 2PN wave-optics solver: GPUDirect Storage NVMe-oF ingestion (>100 GB/s), CUDA-aware MPI halo exchange, LibTorch PINN deconvolution at >100 Hz for 4096x4096 frames."
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+
+[dependencies]
