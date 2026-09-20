@@ -194,7 +194,7 @@ The unified specification dictates strict compliance across seventy cross-bench 
 | 36 | DMA fabric: microkernel ISR latency | $< 2.500\ \mu\text{s}$ | $0.175\ \mu\text{s}$ | PASS |
 | 37 | Microkernel: AVX-512 interlock assertion | $< 1.412\text{ ns}$ | $1.201\text{ ns}$ | PASS |
 | 38 | Microkernel: post-quench recovery | $< 9.240\text{ ns}$ | $9.12\text{ ns}$ | PASS |
-| 39 | Quantum decoherence: $\vert{}\operatorname{Tr}(\rho)-1\vert{}$ | $< 1.0 \times 10^{-12}$ | $0.0$ | PASS |
+| 39 | Quantum decoherence: $\vert\mathrm{Tr}(\rho)-1\vert$ | $< 1.0 \times 10^{-12}$ | $0.0$ | PASS |
 | 40 | Quantum decoherence: $F_{\text{gate}}$ bound ($600\text{ AU}$) | $> 0.99999$ | $0.9999974$ | PASS |
 | 41 | Swarm tracking: $\|\delta\mathbf{r}\|_{3\sigma}$ | $\le 1.000\text{ nm}$ | $0.87\text{ nm}$ | PASS |
 | 42 | Astrodynamics: Jacobi conservation $\vert{}\Delta C_J\vert{}$ | $\le 1.0 \times 10^{-12}$ | $4.2 \times 10^{-15}$ | PASS |
