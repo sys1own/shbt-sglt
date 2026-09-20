@@ -15,9 +15,11 @@ pub struct SolovayKitaev {
 }
 
 impl Default for SolovayKitaev {
+    /// ε₀ = 0.01 sits inside the SK convergence basin (ε₀ < c⁻² ≈ 0.037) so
+    /// ε_{k+1} = c·ε_k^{3/2} contracts; ε₄ ≈ 4.9e-5 < 1e-4 (GATE-27).
     fn default() -> Self {
         Self {
-            epsilon0: 0.15,
+            epsilon0: 0.01,
             gate_errors: Vec::new(),
             dephase_rate: 1e-6,
         }

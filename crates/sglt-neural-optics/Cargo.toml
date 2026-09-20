@@ -1,0 +1,18 @@
+[package]
+name = "sglt-neural-optics"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Physics-informed neural optics (PINN/NeRF) SGL reconstruction engine: Fourier features, 1PN Helmholtz physics loss, Huber data fidelity, multi-spectral unmixing, AVX-512 fallback (up2.txt §1)."
+
+[dependencies]
+thiserror = { workspace = true }
+pyo3 = { workspace = true, optional = true }
+
+[features]
+default = []
+py = ["pyo3"]
+
+[lib]
+crate-type = ["rlib", "cdylib"]

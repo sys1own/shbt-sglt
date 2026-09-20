@@ -5,6 +5,12 @@ pub mod fsm_engine;
 pub mod mppm_fec;
 pub mod optical_link;
 pub mod rf_link;
+pub mod rl_autonomy;
+
+pub use rl_autonomy::{
+    MinimumJerkProfile, RLTrajectoryPlanner, ReactorHealthState, KINEMATIC_MAX_ACCELERATION_BOUND,
+    KINEMATIC_MAX_VELOCITY_BOUND, MIN_EOL_PROPELLANT_RESERVE_MARGIN,
+};
 
 pub use fsm_engine::{MissionPhase, MissionStateMachine};
 pub use mppm_fec::{ppm_ber, rs_correctable, LDPC_RATE};

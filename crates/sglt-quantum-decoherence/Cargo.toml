@@ -1,0 +1,13 @@
+[package]
+name = "sglt-quantum-decoherence"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Open-system dynamics of the 124-qubit Fibonacci-anyon braid array: dense Lindblad solver, MPO-DMRG χ=512 truncation, F/R gate matrices, SK fidelity bound (up2.txt §3)."
+
+[dependencies]
+thiserror = { workspace = true }
+
+[lib]
+crate-type = ["rlib", "cdylib"]

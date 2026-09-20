@@ -18,6 +18,11 @@ members = [
     "crates/sglt-autonomy-comm",
     "crates/sglt-hil-fault-injection",
     "crates/sglt-target-observatory",
+    # v3.0 crates (up2.txt)
+    "crates/sglt-neural-optics",
+    "crates/sglt-hardware-dma",
+    "crates/sglt-quantum-decoherence",
+    "crates/sglt-swarm-dynamics",
 ]
 
 [workspace.package]

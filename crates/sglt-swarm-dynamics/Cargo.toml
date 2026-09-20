@@ -1,0 +1,13 @@
+[package]
+name = "sglt-swarm-dynamics"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "M-node SGL swarm dynamics: 1PN + J2 heliocentric EOM, bounded-error relative flight, M(M−1)/2 heterodyne metrology mesh at 0.144 pm/√Hz (up2.txt §4)."
+
+[dependencies]
+thiserror = { workspace = true }
+
+[lib]
+crate-type = ["rlib", "cdylib"]

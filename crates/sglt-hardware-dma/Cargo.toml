@@ -1,0 +1,13 @@
+[package]
+name = "sglt-hardware-dma"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "PCIe Gen5 x16 zero-copy DMA ring interface to the FPGA SDR backend: 4096×64 B descriptors, PTP timestamps, lock-free head/tail, C11 microkernel bridge (up2.txt §2)."
+
+[dependencies]
+thiserror = { workspace = true }
+
+[lib]
+crate-type = ["rlib", "cdylib"]
