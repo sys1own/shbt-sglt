@@ -1,0 +1,13 @@
+[package]
+name = "sglt-2pn-coronal-optics"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Baumbach-Allen coronal plasma density, 2PN harmonic-coordinate wave optics, wideband eikonal pre-distortion for tilt > 15 deg."
+
+[dependencies]
+libm = "0.2"
+
+[lib]
+crate-type = ["rlib", "cdylib"]

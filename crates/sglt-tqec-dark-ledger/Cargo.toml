@@ -1,0 +1,13 @@
+[package]
+name = "sglt-tqec-dark-ledger"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Active Fibonacci surface/color-code syndrome extraction over the 124-descriptor dark ledger (eta_D = 23/33), hybrid distributed Union-Find + MWPM Blossom V decoding, F_logical >= 0.999999 for 30-year transit."
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+
+[dependencies]
+libm = "0.2"

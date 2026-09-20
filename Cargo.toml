@@ -23,6 +23,15 @@ members = [
     "crates/sglt-hardware-dma",
     "crates/sglt-quantum-decoherence",
     "crates/sglt-swarm-dynamics",
+    # unified expansion crates
+    "crates/sglt-squeezed-metrology",
+    "crates/sglt-diamond-transducer",
+    "crates/sglt-2pn-coronal-optics",
+    "crates/sglt-metamaterial-radiation",
+    "crates/sglt-gpu-physics",
+    "crates/sglt-uncertainty-uq",
+    "crates/sglt-tqec-dark-ledger",
+    "crates/sglt-webgpu-vis",
 ]
 
 [workspace.package]

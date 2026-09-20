@@ -1,0 +1,12 @@
+[package]
+name = "sglt-uncertainty-uq"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Hyper-dual automatic differentiation Monte Carlo engine (N >= 1e7): GNC/thermal/LANR/quantum noise coupling, 99.73% Bayesian biosignature coverage, ISO/IEC Guide 98-3 Supp 1/2."
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+
+[dependencies]

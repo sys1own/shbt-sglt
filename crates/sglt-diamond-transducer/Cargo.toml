@@ -1,0 +1,13 @@
+[package]
+name = "sglt-diamond-transducer"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Diamond-on-GaN substrate (K >= 2000 W/m*K), NbN/MgB2 superconducting routing, Debye T^3 quench kinetics, >11.79 K headroom."
+
+[dependencies]
+libm = "0.2"
+
+[lib]
+crate-type = ["rlib", "cdylib"]
