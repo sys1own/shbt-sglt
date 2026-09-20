@@ -1,0 +1,12 @@
+[package]
+name = "sglt-lanr-power"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+description = "1,800-module LANR power ledger and N-k fault-tolerant seed-mass derating."
+
+[dependencies]
+
+[[test]]
+name = "test_power_derating"
+path = "../../tests/test_power_derating.rs"

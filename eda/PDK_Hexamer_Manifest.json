@@ -1,0 +1,22 @@
+{
+  "pdk": "SHBT-SGLT InP/InGaAs HBT hexamer PDK",
+  "array": {"dim": [8, 8], "pitch_um": 50.0, "material": "InP/InGaAs"},
+  "layers": [
+    {"gds_layer": 1, "datatype": 0, "name": "EMITTER_MESA", "material": "InGaAs"},
+    {"gds_layer": 2, "datatype": 0, "name": "PAD_RING", "material": "TiAu"},
+    {"gds_layer": 3, "datatype": 0, "name": "PHASE_SHIFTER_HEATER", "material": "NiCr"}
+  ],
+  "interposer": {
+    "substrate": "Rogers RO4350B",
+    "layers": 12,
+    "er": 3.66,
+    "tan_delta": 0.0031,
+    "freq_range_hz": [1.0e8, 1.0e11],
+    "export_format": "Touchstone .s2p (RI, 50 Ohm)"
+  },
+  "rules": {
+    "min_feature_um": 0.5,
+    "min_spacing_um": 0.2,
+    "grid_snap_nm": 1
+  }
+}
