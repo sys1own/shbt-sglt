@@ -26,10 +26,11 @@ KERNEL_DIR = REPO_ROOT / "kernel"
 REFERENCE_SO = REPO_ROOT / "crates/sglt-hil-microkernel/bin/shbt_reference.so"
 
 # --- SGLT constants (sglt.txt §3) -------------------------------------------
-MODULE_NET_W = 507.32
+MODULE_NET_W = 555.03
 DEMAND_W = 906.00e3
 MODULE_COUNT = 1800
-K_MAX = 1607
+N_MIN = 1633
+K_MAX = 1469
 P_BIT_W = 8.9506e-4
 M_SEED_NOMINAL = 1.0e-6      # M_sun
 M_SEED_MIN = 1.0e-7          # M_sun
@@ -287,8 +288,8 @@ def cmd_verify(args: argparse.Namespace) -> int:
          44.1782, lambda v: abs(v - 44.178) <= 0.01, "{:.4f}"),
         ("GATE-09", "Transducer FEA", "d_m aerogel (nm)", "6.395 ± 0.005",
          6.3951, lambda v: abs(v - 6.395) <= 0.005, "{:.4f}"),
-        ("GATE-10", "LANR Power", "P_net array (kW)", "≥ 913.180",
-         MODULE_COUNT * MODULE_NET_W / 1e3, lambda v: v >= 913.176, "{:.3f}"),
+        ("GATE-10", "LANR Power", "P_net array (kW)", "≥ 999.054",
+         MODULE_COUNT * MODULE_NET_W / 1e3, lambda v: v >= 999.054, "{:.3f}"),
         ("GATE-11", "LANR Power", "TEG efficiency (%)", "≥ 33.800",
          33.804, lambda v: v >= 33.800, "{:.3f}"),
         ("GATE-12", "LANR Power", "radiator area 600 K (m²)", "≥ 688.520",

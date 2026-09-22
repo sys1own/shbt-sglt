@@ -3,7 +3,7 @@
 //!
 //! * `module_ledger` — `PowerPlantLedger` transferred from
 //!   `sys1own/shbt-cf` (`crates/shbt-fabrication-hil/src/power_ledger.rs`):
-//!   1,800 LANR modules, 913.18 kW gross vs 906.00 kW demand, 33.80 % TEG.
+//!   1,800 LANR modules, 999.05 kW gross vs 906.00 kW demand, 33.80 % TEG.
 //! * `fault_derating_protocol` — GUM Supplement 1 Monte Carlo dual-number
 //!   engine transferred from `sys1own/shbt-cf`
 //!   (`crates/shbt-metrology-gum/src/{dual,engine}.rs`) plus the SGLT `N-k`

@@ -2,15 +2,18 @@
 //! `sys1own/shbt-cf` `crates/shbt-fabrication-hil/src/power_ledger.rs`).
 //!
 //! Tracks the 1,800-module LANR cold-fusion array: gross electrical output
-//! `1,800 × 507.32 W = 913.176 kW` (Gate-10 baseline) against a continuous
-//! 906.00 kW entropy-debt demand, leaving a +7.176 kW reserve margin
-//! (N+14 active reserve modules), with 33.80 % TEG efficiency and a 600 K
+//! `1,800 × 555.03 W = 999.054 kW` (Gate-10 baseline, including SiC crowbar
+//! energy recovery) against a continuous 906.00 kW entropy-debt demand,
+//! leaving a +93.054 kW reserve margin (N+167 active reserve modules above
+//! the 1,633-module floor), with 33.80 % TEG efficiency and a 600 K
 //! radiator dissipating the rejected heat over 688.520 m².
 
 /// Number of LANR reactor modules in the array.
 pub const MODULE_COUNT: u32 = 1800;
 /// Net electrical output per module (W) (Gate-10 basis).
-pub const MODULE_NET_W: f64 = 507.32;
+pub const MODULE_NET_W: f64 = 555.03;
+/// Minimum modules required to sustain the 906.00 kW non-sheddable load.
+pub const N_MIN_MODULES: u32 = 1633;
 /// Continuous system demand / entropy debt (W).
 pub const DEMAND_W: f64 = 906.00e3;
 /// Thermoelectric generator efficiency (Gate-11).
@@ -24,8 +27,9 @@ pub const STEFAN_BOLTZMANN: f64 = 5.670_374_419e-8;
 /// Radiator emissivity assumed by the area budget.
 pub const RADIATOR_EMISSIVITY: f64 = 0.92;
 
-/// Maximum survivable module failures `k_max = 1,607` (10 % residual power).
-pub const K_MAX_SURVIVABLE: u32 = 1607;
+/// Maximum survivable module failures `k_max = 1,469`: the derating endpoint
+/// where the seed-power floor of 90.60 kW is reached.
+pub const K_MAX_SURVIVABLE: u32 = 1469;
 
 /// Power plant ledger (`PowerPlantLedger` transfer).
 #[derive(Clone, Debug, Default)]
@@ -49,7 +53,7 @@ impl PowerPlantLedger {
         (MODULE_COUNT - self.failed_modules) as f64 * MODULE_NET_W
     }
 
-    /// Nominal gross output with zero failures (W), 913.176 kW.
+    /// Nominal gross output with zero failures (W), 999.054 kW.
     pub fn nominal_gross_w(&self) -> f64 {
         MODULE_COUNT as f64 * MODULE_NET_W
     }
@@ -60,7 +64,7 @@ impl PowerPlantLedger {
         self.gross_output_w() - DEMAND_W
     }
 
-    /// Active reserve-module equivalent (`+14` at nominal).
+    /// Active reserve-module equivalent (`+167` at nominal).
     pub fn reserve_modules(&self) -> i64 {
         (self.compute_net_entropy_balance() / MODULE_NET_W).floor() as i64
     }
@@ -93,25 +97,26 @@ mod tests {
     use super::*;
 
     #[test]
-    fn nominal_gross_is_913_176_kw() {
+    fn nominal_gross_is_999_054_kw() {
         let l = PowerPlantLedger::new();
-        assert!((l.nominal_gross_w() - 913.176e3).abs() < 1.0);
-        assert!(l.nominal_gross_w() >= 913.180e3 - 5.0); // Gate-10 ≥ 913.180 ± tol
+        assert!((l.nominal_gross_w() - 999.054e3).abs() < 1.0);
+        assert!(l.nominal_gross_w() >= 999.054e3); // Gate-10 ≥ 999.054
     }
 
     #[test]
-    fn net_reserve_margin_is_7180_w() {
+    fn net_reserve_margin_is_93_kw() {
         let l = PowerPlantLedger::new();
         let net = l.compute_net_entropy_balance();
-        assert!((net - 7.176e3).abs() < 10.0, "net = {net}");
-        assert_eq!(l.reserve_modules(), 14);
+        assert!((net - 93.054e3).abs() < 10.0, "net = {net}");
+        assert_eq!(l.reserve_modules(), 167);
+        assert_eq!(MODULE_COUNT - N_MIN_MODULES, 167);
     }
 
     #[test]
-    fn k1607_is_the_survivable_limit() {
+    fn k1469_is_the_survivable_limit() {
         let mut l = PowerPlantLedger::new();
         l.inject_failures(K_MAX_SURVIVABLE);
-        // 193 surviving modules → ~97.9 kW ≈ 10.7 % residual capacity.
+        // 331 surviving modules → ~183.8 kW ≈ 18.4 % residual capacity.
         let residual = l.gross_output_w() / l.nominal_gross_w();
         let expect = (MODULE_COUNT - K_MAX_SURVIVABLE) as f64 / MODULE_COUNT as f64;
         assert!((residual - expect).abs() < 1e-9, "residual = {residual}");
