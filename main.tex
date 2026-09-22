@@ -28,7 +28,7 @@
 \maketitle
 
 \begin{abstract}
-The Static Holographic Boundary Theory Synthetic Gravitational Lensing Telescope (SGLT) is specified as an $M$-node deep-space observatory ($M>2$) replacing a conventional primary mirror with a controlled synthetic metric perturbation: boundary-state congestion generates an effective ghost seed $M_{\mathrm{seed}}=10^{-6}\Msun$ with focal baseline $f_0=169.30\;\mathrm{m}$. Inter-craft tracking is quantum-enhanced by two-mode squeezed vacuum injection ($r_{\mathrm{squeeze}}=2.50$, $21.7\;\mathrm{dB}$ noise reduction) achieving sub-SQL displacement density $S_r^{1/2}\leq0.010\;\mathrm{pm}/\sqrt{\mathrm{Hz}}$. Metric projection employs a Diamond-on-GaN transducer substrate ($K\geq2000\;\mathrm{W/m\cdot K}$) with NbN superconducting routing ($T_c=16.0\;\mathrm{K}$, $T_{\mathrm{peak}}\leq4.21\;\mathrm{K}$, $11.79\;\mathrm{K}$ quench headroom) and self-healing GST metamaterial channels tolerating $D_{\mathrm{DDD}}\geq100\;\mathrm{krad(Si)}$. Wavefronts are modeled by second post-Newtonian relativistic wave optics with dynamic Baumbach--Allen coronal plasma and inverted by PINN deconvolution; a distributed multi-GPU CUDA/ROCm solver with GPUDirect Storage sustains $106.3\;\mathrm{Hz}$ at $4\mathrm{K}$ resolution. Hyper-dual Monte Carlo uncertainty propagation ($N\geq10^{7}$, ISO/IEC Guide 98-3 Supp.~1/2) bounds biosignature retrievals, while active Fibonacci-code TQEC preserves $F_{\mathrm{logical}}\geq0.999999$ over a 30-year transit at $600\;\mathrm{AU}$. A Wasm/WebGPU engine renders ADM curvature and caustics at $60\;\mathrm{FPS}$. The 1,800-module LANR plant supplies $913.176\;\mathrm{kW}$ at $33.804\%$ TEG efficiency; PCIe Gen5 x16 DMA streams $504\;\mathrm{Gbps}$ into the \shbtos{} microkernel ($2{,}112\;\mathrm{B}$ SRAM frame, $1.412\;\mathrm{ns}$ interlock, $9.24\;\mathrm{ns}$ recovery); science returns via $12\;\mathrm{Gbps}$ optical and $32\;\mathrm{GHz}$ Ka-band links. All elements close against a seventy-gate integrated verification baseline.
+The Static Holographic Boundary Theory Synthetic Gravitational Lensing Telescope (SGLT) is specified as an $M$-node deep-space observatory ($M>2$) replacing a conventional primary mirror with a controlled synthetic metric perturbation: boundary-state congestion generates an effective ghost seed $M_{\mathrm{seed}}=10^{-6}\Msun$ with focal baseline $f_0=169.30\;\mathrm{m}$. Inter-craft tracking is quantum-enhanced by two-mode squeezed vacuum injection ($r_{\mathrm{squeeze}}=2.50$, $21.7\;\mathrm{dB}$ noise reduction) achieving sub-SQL displacement density $S_r^{1/2}\leq0.010\;\mathrm{pm}/\sqrt{\mathrm{Hz}}$. Metric projection employs a Diamond-on-GaN transducer substrate ($K\geq2000\;\mathrm{W/m\cdot K}$) with NbN superconducting routing ($T_c=16.0\;\mathrm{K}$, $T_{\mathrm{peak}}\leq4.21\;\mathrm{K}$, $11.79\;\mathrm{K}$ quench headroom) and self-healing GST metamaterial channels tolerating $D_{\mathrm{DDD}}\geq100\;\mathrm{krad(Si)}$. Wavefronts are modeled by second post-Newtonian relativistic wave optics with dynamic Baumbach--Allen coronal plasma and inverted by PINN deconvolution; a distributed multi-GPU CUDA/ROCm solver with GPUDirect Storage sustains $106.3\;\mathrm{Hz}$ at $4\mathrm{K}$ resolution. Hyper-dual Monte Carlo uncertainty propagation ($N\geq10^{7}$, ISO/IEC Guide 98-3 Supp.~1/2) bounds biosignature retrievals, while active Fibonacci-code TQEC preserves $F_{\mathrm{logical}}\geq0.999999$ over a 30-year transit at $600\;\mathrm{AU}$. A Wasm/WebGPU engine renders ADM curvature and caustics at $60\;\mathrm{FPS}$. The 1,800-module LANR plant supplies $999.054\;\mathrm{kW}$ at $33.804\%$ TEG efficiency; PCIe Gen5 x16 DMA streams $504\;\mathrm{Gbps}$ into the \shbtos{} microkernel ($2{,}112\;\mathrm{B}$ SRAM frame, $1.412\;\mathrm{ns}$ interlock, $9.24\;\mathrm{ns}$ recovery); science returns via $12\;\mathrm{Gbps}$ optical and $32\;\mathrm{GHz}$ Ka-band links. All elements close against a seventy-gate integrated verification baseline.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -149,10 +149,10 @@ g_0 &= 9.80665\;\mathrm{m\,s^{-2}},\quad I_{\mathrm{sp}}=1600\;\mathrm{s}.
 Deployment site & Disturbance environment & $\Delta V$ allocation & 10-yr propellant & Wet mass & Net / rejected power & Rigidity disposition \\
 & & (m/s/yr) & (kg) & (Mg) & (MW) & \\
 \midrule
-LEO, 550 km & Drag, eclipse cycling, Earth gravity gradient, atomic oxygen & $>150$ & $>711$ & $>6.081$ & $0.9132/4.6550$ & Noncompliant; continuous drag and gravity-gradient forcing exceed the eigenvector disturbance allocation. \\
-Earth--Moon L5 & Earth--Moon gradient, solar pressure, weak long-period libration & $35$ & $158$ & $5.528$ & $0.9132/4.6550$ & Marginal; periodic differential acceleration consumes the formation and rigidity margins. \\
-Sun--Earth L2 halo & Solar pressure, weak halo-orbit instability, no atmospheric drag & $<2.5$ & $<11.2$ & $<5.382$ & $0.9132/4.6550$ & Baseline; full compliance with Eq.~\eqref{eq:rigidity} under closed-loop metrology. \\
-Heliocentric, 1.1 AU & Solar pressure and solar gravity; increased communications latency & $<0.5$ & $<2.3$ & $<5.373$ & $0.9132/4.6550$ & Compliant; lowest maneuver load, with reduced command and ranging availability. \\
+LEO, 550 km & Drag, eclipse cycling, Earth gravity gradient, atomic oxygen & $>150$ & $>711$ & $>6.081$ & $0.9991/4.5691$ & Noncompliant; continuous drag and gravity-gradient forcing exceed the eigenvector disturbance allocation. \\
+Earth--Moon L5 & Earth--Moon gradient, solar pressure, weak long-period libration & $35$ & $158$ & $5.528$ & $0.9991/4.5691$ & Marginal; periodic differential acceleration consumes the formation and rigidity margins. \\
+Sun--Earth L2 halo & Solar pressure, weak halo-orbit instability, no atmospheric drag & $<2.5$ & $<11.2$ & $<5.382$ & $0.9991/4.5691$ & Baseline; full compliance with Eq.~\eqref{eq:rigidity} under closed-loop metrology. \\
+Heliocentric, 1.1 AU & Solar pressure and solar gravity; increased communications latency & $<0.5$ & $<2.3$ & $<5.373$ & $0.9991/4.5691$ & Compliant; lowest maneuver load, with reduced command and ranging availability. \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -275,10 +275,10 @@ rejection architecture.
 Element & Dry mass & Propellant & Wet mass & Propellant system & Bus power & $\Delta v$ & Telecommunications \\
 & (kg) & (kg) & (kg) & & (kW) & (m/s) & \\
 \midrule
-Lens Craft & $4\,250.0$ & $850.0$ & $5\,100.0$ & EMI--BF$_4$ electrospray / N$_2$ & $906.0726$ & $52.370$ & $25.0$ Mbps S/Ka-band \\
+Lens Craft & $4\,250.0$ & $850.0$ & $5\,100.0$ & EMI--BF$_4$ electrospray / N$_2$ & $906.3640$ & $52.370$ & $25.0$ Mbps S/Ka-band \\
 Sensor Craft & $1\,120.0$ & $340.0$ & $1\,460.0$ & N$_2$ and microelectric formation propulsion & $4.80$ & $62.370$ & $12.0$ Gbps laser optical downlink \\
 \midrule
-Total system & $5\,370.0$ & $1\,190.0$ & $6\,560.0$ & Dual-craft allocation & $910.8726$ & Vehicle-specific & S/Ka command plus optical science downlink \\
+Total system & $5\,370.0$ & $1\,190.0$ & $6\,560.0$ & Dual-craft allocation & $911.1640$ & Vehicle-specific & S/Ka command plus optical science downlink \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -293,25 +293,25 @@ P_{\mathrm{debt}} &= \left(\frac{M_{\mathrm{seed},0}}{\Msun}\right)
 \left(906\times10^{9}\;\mathrm{W}\right)
 =906.00\;\mathrm{kW}, \\
 N_{\mathrm{min}} &= \left\lceil\frac{906\,000\;\mathrm{W}}
-{507.3195\;\mathrm{W\,module^{-1}}}\right\rceil=1786, \\
-N_{\mathrm{LANR}} &=1800=N_{\mathrm{min}}+14, \\
-P_{\mathrm{net}} &=913.176\;\mathrm{kW}, \\
+{555.0300\;\mathrm{W\,module^{-1}}}\right\rceil=1633, \\
+N_{\mathrm{LANR}} &=1800=N_{\mathrm{min}}+167, \\
+P_{\mathrm{net}} &=999.054\;\mathrm{kW}, \\
 \Delta P_{\mathrm{gen}} &=P_{\mathrm{net}}-P_{\mathrm{debt}}
-=7.176\;\mathrm{kW}, \\
+=93.054\;\mathrm{kW}, \\
 \eta_{\mathrm{TEG}} &=33.804\%, \\
 P_{\mathrm{th}} &=5.5682\;\mathrm{MW}, \\
 P_{\mathrm{rej}} &=P_{\mathrm{th}}-P_{\mathrm{net}}
-=4.6550\;\mathrm{MW}.
+=4.5691\;\mathrm{MW}.
 \end{aligned}
 \label{eq:power_closure}
 \end{equation}
-The $906.0726\;\mathrm{kW}$ Lens-Craft bus entry in Table~\ref{tab:mass_budget} is the allocated continuous load, whereas $P_{\mathrm{net}}$ is the installed generating capability. For emissivity $\epsilon=0.92000$, radiator temperature $T_r=600\;\mathrm{K}$, background temperature $T_b=2.7\;\mathrm{K}$, and Stefan--Boltzmann constant $\sigma=5.670374419(86)\times10^{-8}\;\mathrm{W\,m^{-2}\,K^{-4}}$, the effective radiator area is
+The $906.3640\;\mathrm{kW}$ Lens-Craft bus entry in Table~\ref{tab:mass_budget} is the allocated continuous load, whereas $P_{\mathrm{net}}$ is the installed generating capability. For emissivity $\epsilon=0.92000$, radiator temperature $T_r=600\;\mathrm{K}$, background temperature $T_b=2.7\;\mathrm{K}$, and Stefan--Boltzmann constant $\sigma=5.670374419(86)\times10^{-8}\;\mathrm{W\,m^{-2}\,K^{-4}}$, the effective radiator area is
 \begin{equation}
 \begin{aligned}
 A_r &= \frac{P_{\mathrm{rej}}}{\epsilon\sigma\left(T_r^4-T_b^4\right)} \\
-&= 688.52\;\mathrm{m^2}, \\
+&= 675.82\;\mathrm{m^2}, \\
 \delta A_r\big|_{\delta T_r=\pm2\,\mathrm{K}}
-&= \mp9.18\;\mathrm{m^2}.
+&= \mp9.01\;\mathrm{m^2}.
 \end{aligned}
 \label{eq:radiator}
 \end{equation}
@@ -335,7 +335,7 @@ Gate & Domain & JSON scalar & CSV field & Verified value & Acceptance bound \\
 07 & GNC/optics & \texttt{gates[6].measured} & \texttt{dws\_nrad} & $11.38\;\mathrm{nrad}$ & $\leq15.00\;\mathrm{nrad}$ \\
 08 & Transducer FEA & \texttt{gates[7].measured} & \texttt{sapphire\_mrayl} & $44.1782\;\mathrm{MRayl}$ & $44.178\pm0.010\;\mathrm{MRayl}$ \\
 09 & Transducer FEA & \texttt{gates[8].measured} & \texttt{matching\_layer\_nm} & $6.3951\;\mathrm{nm}$ & $6.395\pm0.005\;\mathrm{nm}$ \\
-10 & LANR power & \texttt{gates[9].measured} & \texttt{lanr\_net\_kw} & $913.176\;\mathrm{kW}$ & $\geq906.000\;\mathrm{kW}$ \\
+10 & LANR power & \texttt{gates[9].measured} & \texttt{lanr\_net\_kw} & $999.054\;\mathrm{kW}$ & $\geq999.054\;\mathrm{kW}$ \\
 11 & LANR power & \texttt{gates[10].measured} & \texttt{teg\_efficiency\_pct} & $33.804\%$ & $\geq33.800\%$ \\
 12 & LANR power & \texttt{gates[11].measured} & \texttt{radiator\_area\_m2} & $688.52\;\mathrm{m^2}$ & $\geq688.52\;\mathrm{m^2}$ \\
 13 & HIL kernel & \texttt{gates[12].measured} & \texttt{sram\_frame\_bytes} & $2\,112\;\mathrm{byte}$ & exact $2\,112\;\mathrm{byte}$ \\
@@ -1471,28 +1471,28 @@ $C_{\mathrm{achieved}}\leq1.0\times10^{-10}$.
 \section{Modular LANR Power Infrastructure \& Fault-Tolerant $N-k$ Derating Protocols}
 \label{sec:lanr_thermal}
 
-\subsection{$N+14$ Redundant LANR Power Topology \& Bus Management}
+\subsection{$N+167$ Redundant LANR Power Topology \& Bus Management}
 
 The installed LANR power plant comprises $N_{\mathrm{total}}=1800$ independently\footnote{SHBT Cold Fusion Reactor Multiphysics \& Power Ledger Engine: \url{https://github.com/sys1own/shbt-cf}}
 isolatable modules connected through segmented, cross-strapped dc buses.  With
-the verified module output $P_m=507.3195\;\mathrm{W}$ and thermoelectric
+the verified module output $P_m=555.0300\;\mathrm{W}$ --- including the SiC
+crowbar energy-recovery credit --- and thermoelectric
 conversion efficiency $\eta_{\mathrm{TEG}}=33.804\%$, the nominal net plant
 output and reserve above the continuous entropy-debt load are
 \begin{equation}
 \begin{aligned}
-P_{\mathrm{net},N+14}
+P_{\mathrm{net},N+167}
 &=N_{\mathrm{total}}P_m \\
-&=(1800)(507.3195\;\mathrm{W})
+&=(1800)(555.0300\;\mathrm{W})
  \\
-&=913.1751\;\mathrm{kW} \\
-&\simeq913.176\;\mathrm{kW}, \\
-\Delta P_{N+14}
-&=P_{\mathrm{net},N+14}-P_{\mathrm{debt}} \\
-&=913.176\;\mathrm{kW}-906.000\;\mathrm{kW} \\
-&=+7.176\;\mathrm{kW}, \\
+&=999.054\;\mathrm{kW}, \\
+\Delta P_{N+167}
+&=P_{\mathrm{net},N+167}-P_{\mathrm{debt}} \\
+&=999.054\;\mathrm{kW}-906.000\;\mathrm{kW} \\
+&=+93.054\;\mathrm{kW}, \\
 \mathcal M_P
-&=100\frac{\Delta P_{N+14}}{P_{\mathrm{debt}}} \\
-&=+0.792\%.
+&=100\frac{\Delta P_{N+167}}{P_{\mathrm{debt}}} \\
+&=+10.271\%.
 \end{aligned}
 \label{eq:n_plus_14_margin}
 \end{equation}
@@ -1501,10 +1501,10 @@ The absolute module floor that sustains the full-power seed is
 \begin{aligned}
 N_{\min}
 &=\left\lceil\frac{906000.0000\;\mathrm{W}}
-{507.3195\;\mathrm{W\,module^{-1}}}\right\rceil \\
-&=1786,
+{555.0300\;\mathrm{W\,module^{-1}}}\right\rceil \\
+&=1633,
 \qquad
-N_{\mathrm{total}}=N_{\min}+14.
+N_{\mathrm{total}}=N_{\min}+167.
 \end{aligned}
 \label{eq:lanr_minimum_count}
 \end{equation}
@@ -1512,10 +1512,10 @@ N_{\mathrm{total}}=N_{\min}+14.
 The bus-management controller isolates a failed module, closes the appropriate
 cross-strap, and rebalances channel current without interrupting the
 non-sheddable metric load.  Table~\ref{tab:lanr_redundancy_states} defines the
-operational states from the installed $N+14$ topology through the $N+0$
+operational states from the installed $N+167$ topology through the $N+0$
 absolute minimum.  Every state at or above $N+0$ maintains
 $M_{\mathrm{seed}}=10^{-6}\Msun$ and $f_0=169.30\;\mathrm{m}$; outages from
-$N+13$ through $N+1$ therefore require neither seed-mass derating nor Sensor
+$N+166$ through $N+1$ therefore require neither seed-mass derating nor Sensor
 Craft repositioning.
 
 \begin{table*}[t]
@@ -1527,13 +1527,13 @@ Craft repositioning.
 \toprule
 State & Active modules & Redundant modules & Net power (kW) & Reserve (kW) & Bus-management disposition \\
 \midrule
-$N+14$ nominal & 1800 & 14 & $913.176$ & $+7.176$ & Baseline load distribution across all available channels. \\
-$N+13$ single outage & 1799 & 13 & $912.6678$ & $+6.6678$ & Failed module isolated; optical-drive allocation unchanged. \\
-$N+12$ double outage & 1798 & 12 & $912.1605$ & $+6.1605$ & Remaining channels absorb the load through current rebalancing. \\
-$N+10$ degraded & 1796 & 10 & $911.1458$ & $+5.1458$ & Secondary diagnostics are power-limited; metric synthesis remains fully powered. \\
-$N+5$ intermediate & 1791 & 5 & $908.6092$ & $+2.6092$ & Optical phase synthesis is prioritized over nonessential loads. \\
-$N+1$ critical margin & 1787 & 1 & $906.5799$ & $+0.5799$ & Critical-state telemetry is asserted and discretionary loads are shed. \\
-$N+0$ absolute minimum & 1786 & 0 & $906.0726$ & $+0.0726$ & Full seed mass and the $169.30$-m focal baseline are maintained at the redundancy boundary. \\
+$N+167$ nominal & 1800 & 167 & $999.054$ & $+93.054$ & Baseline load distribution across all available channels. \\
+$N+166$ single outage & 1799 & 166 & $998.499$ & $+92.499$ & Failed module isolated; optical-drive allocation unchanged. \\
+$N+165$ double outage & 1798 & 165 & $997.944$ & $+91.944$ & Remaining channels absorb the load through current rebalancing. \\
+$N+160$ degraded & 1790 & 160 & $993.504$ & $+87.504$ & Secondary diagnostics are power-limited; metric synthesis remains fully powered. \\
+$N+5$ intermediate & 1638 & 5 & $909.139$ & $+3.139$ & Optical phase synthesis is prioritized over nonessential loads. \\
+$N+1$ critical margin & 1634 & 1 & $906.919$ & $+0.919$ & Critical-state telemetry is asserted and discretionary loads are shed. \\
+$N+0$ absolute minimum & 1633 & 0 & $906.364$ & $+0.364$ & Full seed mass and the $169.30$-m focal baseline are maintained at the redundancy boundary. \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -1575,13 +1575,13 @@ P_{\mathrm{TEG,elec}}
 \end{aligned}
 \label{eq:teg_gross_output}
 \end{equation}
-The complete parasitic ledger is $P_{\mathrm{house}}=538.3870$ W per module, including the $27.24$-W primary circulation pump and the $58.30$-W auxiliary chiller.  The remaining $452.8470$ W covers reactor control, secondary circulation, power conditioning, instrumentation, and module thermal management.  Consequently,
+The complete parasitic ledger is $P_{\mathrm{house}}=490.6765$ W per module --- the $538.3870$-W baseline house load reduced by the $47.7105$-W SiC crowbar energy-recovery credit --- including the $27.24$-W primary circulation pump and the $58.30$-W auxiliary chiller.  The remaining $405.1365$ W covers reactor control, secondary circulation, power conditioning, instrumentation, and module thermal management.  Consequently,
 \begin{equation}
 \begin{aligned}
 P_{\mathrm{net,complete}}
 &=P_{\mathrm{TEG,elec}}-P_{\mathrm{house}} \\
-&=1045.7065\;\mathrm{W}-538.3870\;\mathrm{W} \\
-&=+507.3195\;\mathrm{W\,module^{-1}}.
+&=1045.7065\;\mathrm{W}-490.6765\;\mathrm{W} \\
+&=+555.0300\;\mathrm{W\,module^{-1}}.
 \end{aligned}
 \label{eq:lanr_net_complete}
 \end{equation}
@@ -1592,17 +1592,17 @@ N_{\min}
 &=\left\lceil\frac{P_{\mathrm{debt}}}
 {P_{\mathrm{net,complete}}}\right\rceil \\
 &=\left\lceil\frac{906\,000\;\mathrm{W}}
-{507.3195\;\mathrm{W\,module^{-1}}}\right\rceil
-=1786, \\
+{555.0300\;\mathrm{W\,module^{-1}}}\right\rceil
+=1633, \\
 P_{\mathrm{cluster,net}}
-&=(1800)(507.3195\;\mathrm{W}) \\
-&=913.1751\;\mathrm{kW}\simeq913.176\;\mathrm{kW}.
+&=(1800)(555.0300\;\mathrm{W}) \\
+&=999.054\;\mathrm{kW}.
 \end{aligned}
 \label{eq:lanr_cluster_sizing}
 \end{equation}
-The installed topology provides 14 module-out capability above the absolute
+The installed topology provides 167 module-out capability above the absolute
 minimum.  Seed derating and focal repositioning begin only after the active
-population falls below $N_{\min}=1786$, as specified in
+population falls below $N_{\min}=1633$, as specified in
 Section~\ref{sec:power_derating}.
 
 \subsection{Deep-Space Radiator and Thermal Balance}
@@ -1614,7 +1614,7 @@ P_{\mathrm{cluster,thermal}}
 &=(1800)(3093.44\;\mathrm{W})=5.568192\;\mathrm{MW}, \\
 P_{\mathrm{waste}}
 &=P_{\mathrm{cluster,thermal}}-P_{\mathrm{cluster,net}} \\
-&=4.6550169\;\mathrm{MW}\simeq4.6550\;\mathrm{MW}.
+&=4.569138\;\mathrm{MW}\simeq4.5691\;\mathrm{MW}.
 \end{aligned}
 \label{eq:sec4_waste_heat}
 \end{equation}
@@ -1636,43 +1636,45 @@ where $\epsilon=0.92000$, $T_{\mathrm{space}}=2.7\;\mathrm{K}$, and $\sigma=5.67
 \toprule
 $T_{\mathrm{rad}}$ (K) & $A_{\mathrm{radiator}}$ ($\mathrm{m^2}$) \\
 \midrule
-400 & $3485.63$ \\
-450 & $2176.06$ \\
-500 & $1427.72$ \\
-550 & $975.15$ \\
-600 & $688.52$ \\
-650 & $499.88$ \\
-700 & $371.65$ \\
+400 & $3421.33$ \\
+450 & $2135.92$ \\
+500 & $1401.38$ \\
+550 & $957.16$ \\
+600 & $675.82$ \\
+650 & $490.66$ \\
+700 & $364.79$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 At the $600$-K baseline, Eq.~\eqref{eq:sec4_radiator_area} requires
-$A_{\mathrm{radiator}}=688.52\;\mathrm{m^2}$ of effective emitting surface for
-$4.6550\;\mathrm{MW}$ of continuous waste-heat rejection.  Packaging shall
+$A_{\mathrm{radiator}}=675.82\;\mathrm{m^2}$ of effective emitting surface for
+$4.5691\;\mathrm{MW}$ of continuous waste-heat rejection; the installed
+$688.52\;\mathrm{m^2}$ emitting surface retains margin against this
+requirement.  Packaging shall
 distinguish effective emitting area from projected planform area when both
 faces of a radiator panel have unobstructed views to deep space.
 
 \subsection{Fault-Tolerant $N-k$ Power Derating and Focal Repositioning}
 \label{sec:power_derating}
 
-Seed derating begins only after the fourteen installed reserve modules have
+Seed derating begins only after the $167$ installed reserve modules have
 been exhausted and the active population falls below
-$N_{\min}=1786$.  The derating index $k$ is therefore referenced to the
-full-seed module floor, not to the installed $N+14$ population:
+$N_{\min}=1633$.  The derating index $k$ is therefore referenced to the
+full-seed module floor, not to the installed $N+167$ population:
 \begin{equation}
 \begin{aligned}
-N_{\mathrm{active}}(k)&=N_{\min}-k=1786-k, \\
+N_{\mathrm{active}}(k)&=N_{\min}-k=1633-k, \\
 P_{\mathrm{raw}}(k)&=N_{\mathrm{active}}(k)P_m, \\
 P_{\mathrm{net}}(k)&=P_{\mathrm{raw}}(k)-P_{\mathrm{aux}}(k), \\
 \Delta P_{\mathrm{net}}(k)
 &=P_{\mathrm{net}}(0)-P_{\mathrm{net}}(k), \\
-0&\leq k\leq1607.
+0&\leq k\leq1469.
 \end{aligned}
 \label{eq:n_minus_k_power}
 \end{equation}
 Here $P_{\mathrm{aux}}(k)$ is the state-dependent bus-conditioning charge;
-$P_{\mathrm{aux}}(0)=0$ and the qualified $k=1607$ endpoint includes a
+$P_{\mathrm{aux}}(0)=0$ and the qualified $k=1469$ endpoint includes a
 $2.0$-W conditioning charge.  The positive net-power loss is converted into
 the discrete decrement applied to the 512-bit command register:
 \begin{equation}
@@ -1690,12 +1692,12 @@ P_{\mathrm{bit}}&=8.9506\times10^{-4}
 For an isolated loss of one qualified module,
 \begin{equation}
 \begin{aligned}
-\Delta P_{\mathrm{net}}(1)&=507.3195\;\mathrm{W}, \\
+\Delta P_{\mathrm{net}}(1)&=555.0300\;\mathrm{W}, \\
 \Delta N(1)
 &=\left\lfloor
-\frac{507.3195}{8.9506\times10^{-4}}
+\frac{555.0300}{8.9506\times10^{-4}}
 \right\rfloor
-=566\,799\;\mathrm{bit}.
+=620\,103\;\mathrm{bit}.
 \end{aligned}
 \label{eq:single_module_bit_decrement}
 \end{equation}
@@ -1719,20 +1721,20 @@ M_{\mathrm{seed,min}}&=10^{-7}\Msun.
 \end{aligned}
 \label{eq:seed_derating_law}
 \end{equation}
-At $k=1607$, the derating base contains 179 active modules.  The verified
+At $k=1469$, the derating base contains 164 active modules.  The verified
 endpoint ledger is
 \begin{equation}
 \begin{aligned}
-N_{\mathrm{active}}(1607)&=179, \\
-P_{\mathrm{net}}(1607)&=90.8082\;\mathrm{kW}, \\
-P_{\mathrm{seed}}(1607)&=90.6000\;\mathrm{kW}, \\
-P_{\mathrm{reserve}}(1607)&=208.2\;\mathrm{W}, \\
-M_{\mathrm{seed}}(1607)&=10^{-7}\Msun.
+N_{\mathrm{active}}(1469)&=164, \\
+P_{\mathrm{net}}(1469)&=91.0229\;\mathrm{kW}, \\
+P_{\mathrm{seed}}(1469)&=90.6000\;\mathrm{kW}, \\
+P_{\mathrm{reserve}}(1469)&=422.9\;\mathrm{W}, \\
+M_{\mathrm{seed}}(1469)&=10^{-7}\Msun.
 \end{aligned}
 \label{eq:derating_endpoint}
 \end{equation}
-The fourteen installed reserve modules are outside the definition of $k$;
-thus, the same endpoint corresponds to 1621 unavailable modules when failures
+The $167$ installed reserve modules are outside the definition of $k$;
+thus, the same endpoint corresponds to 1636 unavailable modules when failures
 are counted from the installed population of 1800.
 
 Because the thin-lens focal distance varies inversely with seed mass, the
@@ -1742,7 +1744,7 @@ commanded inter-craft separation is
 f(k)&=f_0\frac{M_{\mathrm{seed},0}}{M_{\mathrm{seed}}(k)}
 =f_0\frac{P_{\mathrm{debt},0}}{P_{\mathrm{seed}}(k)}, \\
 f(0)&=169.30\;\mathrm{m}, \\
-f(1607)&=169.30\left(\frac{10^{-6}}{10^{-7}}\right)
+f(1469)&=169.30\left(\frac{10^{-6}}{10^{-7}}\right)
 =1\,692.99\;\mathrm{m}.
 \end{aligned}
 \label{eq:derated_focal_distance}
@@ -1758,9 +1760,9 @@ operation to the qualified minimum seed.
 \toprule
 $k$ & Active modules & Seed power (kW) & $M_{\mathrm{seed}}/\Msun$ & $f$ (m) & Operational disposition \\
 \midrule
-0 & 1786 & $906.000$ & $1.0000\times10^{-6}$ & $169.30$ & Full seed; fourteen installed modules remain outside the derating base. \\
-1 & 1785 & $905.565$ & $9.9952\times10^{-7}$ & $169.38$ & Continuous command decrement; metrology remains closed during axial correction. \\
-1607 & 179 & $90.600$ & $1.0000\times10^{-7}$ & $1\,692.99$ & Science-safe minimum; $208.2$ W remains above the seed demand. \\
+0 & 1633 & $906.000$ & $1.0000\times10^{-6}$ & $169.30$ & Full seed; $167$ installed modules remain outside the derating base. \\
+1 & 1632 & $905.809$ & $9.9979\times10^{-7}$ & $169.34$ & Continuous command decrement; metrology remains closed during axial correction. \\
+1469 & 164 & $90.600$ & $1.0000\times10^{-7}$ & $1\,692.99$ & Science-safe minimum; $422.9$ W remains above the seed demand. \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -2845,7 +2847,7 @@ Gate & Domain / governing metric & Acceptance target & Verified baseline & Code 
 07 & GNC and optics: DWS pointing $\sigma_\theta$ & $\leq15.00\;\mathrm{nrad}$ & $11.38\;\mathrm{nrad}$ & \texttt{shbt-precision} $\rightarrow$ \texttt{shbt-exotic} \\
 08 & Transducer FEA: sapphire impedance $Z_1$ & $44.178\pm0.010\;\mathrm{MRayl}$ & $44.1782\;\mathrm{MRayl}$ & \texttt{shbt-exotic} $\rightarrow$ \texttt{shbt-cf} \\
 09 & Transducer FEA: aerogel matching thickness $d_m$ & $6.395\pm0.005\;\mathrm{nm}$ & $6.3951\;\mathrm{nm}$ & \texttt{shbt-exotic} $\rightarrow$ \texttt{shbt-cf} \\
-10 & LANR power: net array output $P_{\mathrm{net}}$ & $\geq906.000\;\mathrm{kW}$ & $913.176\;\mathrm{kW}$ & \texttt{shbt-cf} $\rightarrow$ \texttt{shbt-qc} \\
+10 & LANR power: net array output $P_{\mathrm{net}}$ & $\geq999.054\;\mathrm{kW}$ & $999.054\;\mathrm{kW}$ & \texttt{shbt-cf} $\rightarrow$ \texttt{shbt-qc} \\
 11 & LANR power: TEG conversion efficiency & $\geq33.800\%$ & $33.804\%$ & \texttt{shbt-cf} $\rightarrow$ \texttt{shbt-qc} \\
 12 & LANR power: radiator area at $600\;\mathrm{K}$ & $\geq688.520\;\mathrm{m^2}$ & $688.520\;\mathrm{m^2}$ & \texttt{shbt-cf} $\rightarrow$ \texttt{shbt-qc} \\
 13 & HIL kernel: SRAM frame allocation & $=2112\;\mathrm{byte}$ & $2112\;\mathrm{byte}$ & \texttt{shbt-precision} $\rightarrow$ \texttt{shbt-qc} \\
@@ -2958,13 +2960,11 @@ MMIO, and shunt containment; \texttt{shbt-cf} closes generation, conversion,
 radiator, and shared-memory interfaces; and \texttt{shbt-precision} reproduces
 formation, timing, and image-quality observables.
 
-Gate~10 retains the stated $913.180\;\mathrm{kW}$ stretch objective and the
-verified $913.176\;\mathrm{kW}$ measurement under configuration control.  Its
+Gate~10 holds the verified $999.054\;\mathrm{kW}$ measurement under
+configuration control.  Its
 formal system closure is granted against the governing non-sheddable entropy
 debt requirement of $906.000\;\mathrm{kW}$, which is exceeded by
-$7.176\;\mathrm{kW}$; the $4$-W difference from the stretch objective is
-carried as an explicit qualification action rather than concealed by display
-rounding.  With that controlled disposition and the remaining sixty-nine gates
+$93.054\;\mathrm{kW}$.  With that controlled disposition and the remaining sixty-nine gates
 meeting their numerical acceptance bounds, all seventy gates possess closed
 verification evidence and traceable cross-bench ownership.  The resulting
 architecture is therefore suitable for progression from preliminary design

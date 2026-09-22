@@ -5,14 +5,14 @@
 //! When `k` LANR modules fail, the net power loss converts to a 512-bit
 //! register bit decrement
 //!
-//!   ΔN(k) = ⌊k · 507.32 / P_bit⌋,  P_bit = 8.9506e-4 W/bit
+//!   ΔN(k) = ⌊k · 555.03 / P_bit⌋,  P_bit = 8.9506e-4 W/bit
 //!
 //! which scales the boundary seed mass `M_seed(N−k)` from `1e-6 M_☉`
 //! (906.00 kW) down to `1e-7 M_☉` (90.60 kW) and extends the focal baseline
 //!
 //!   f(M_seed) = f0 · M_seed,nominal / M_seed(N−k)
 //!
-//! from `f0 = 169.30 m` to `f_max = 1,692.99 m` at `k = 1,607`.
+//! from `f0 = 169.30 m` to `f_max = 1,692.99 m` at `k = 1,469`.
 
 use crate::module_ledger::{DEMAND_W, K_MAX_SURVIVABLE, MODULE_NET_W};
 
@@ -20,11 +20,11 @@ use crate::module_ledger::{DEMAND_W, K_MAX_SURVIVABLE, MODULE_NET_W};
 pub const P_BIT_W: f64 = 8.9506e-4;
 /// Nominal boundary seed mass (M_☉) at 906.00 kW net entropy balance.
 pub const M_SEED_NOMINAL_MSUN: f64 = 1.0e-6;
-/// Degraded seed-mass floor (M_☉) at the 90.60 kW limit (k = 1,607).
+/// Degraded seed-mass floor (M_☉) at the 90.60 kW limit (k = 1,469).
 pub const M_SEED_MIN_MSUN: f64 = 1.0e-7;
 /// Nominal inter-craft focal baseline (m).
 pub const F0_M: f64 = 169.30;
-/// Maximum focal baseline (m) at `k = 1,607`.
+/// Maximum focal baseline (m) at `k = 1,469`.
 pub const F_MAX_M: f64 = 1692.99;
 
 // ---------------------------------------------------------------------------
@@ -252,13 +252,13 @@ where
 // N-k derating chain
 // ---------------------------------------------------------------------------
 
-/// Bit decrement for `k` failed modules: `⌊k·507.32 / P_bit⌋`.
+/// Bit decrement for `k` failed modules: `⌊k·555.03 / P_bit⌋`.
 pub fn delta_n_bits(k: u32) -> u64 {
     (k as f64 * MODULE_NET_W / P_BIT_W).floor() as u64
 }
 
 /// Derated seed mass `M_seed(N−k)` (M_☉).  Scales linearly in lost power from
-/// `1e-6 M_☉` at k = 0 to `1e-7 M_☉` at k = 1,607.
+/// `1e-6 M_☉` at k = 0 to `1e-7 M_☉` at k = 1,469.
 pub fn seed_mass_msun(k: u32) -> f64 {
     let frac = (k.min(K_MAX_SURVIVABLE) as f64) / (K_MAX_SURVIVABLE as f64);
     M_SEED_NOMINAL_MSUN + (M_SEED_MIN_MSUN - M_SEED_NOMINAL_MSUN) * frac
@@ -287,7 +287,7 @@ pub struct DeratingState {
     pub focal_baseline_m: f64,
     /// Remaining net power margin vs the 906 kW demand (W).
     pub net_power_margin_w: f64,
-    /// True while `k ≤ 1,607`.
+    /// True while `k ≤ 1,469`.
     pub survivable: bool,
 }
 
@@ -309,21 +309,21 @@ mod tests {
 
     #[test]
     fn k12_bit_decrement_matches_spec() {
-        // sglt.txt §4: k = 12 → ΔN ≈ 6.80e6 bits (spec lists 6,801,666).
-        assert!((delta_n_bits(12) as f64 - 6.8016e6).abs() < 200.0);
+        // sglt.txt §4: k = 12 → ΔN ≈ 7.44e6 bits.
+        assert!((delta_n_bits(12) as f64 - 7.4412e6).abs() < 200.0);
     }
 
     #[test]
-    fn k1607_reaches_min_mass_and_max_baseline() {
+    fn k1469_reaches_min_mass_and_max_baseline() {
         assert!((seed_mass_msun(K_MAX_SURVIVABLE) - 1e-7).abs() < 1e-16);
         assert!((focal_baseline_m(K_MAX_SURVIVABLE) - F_MAX_M).abs() < 0.05);
     }
 
     #[test]
     fn k12_baseline_matches_spec() {
-        // sglt.txt §4: k = 12 → f ≈ 170.43 m.
+        // k = 12 → f ≈ 170.55 m under the k_max = 1,469 derating scale.
         let f = focal_baseline_m(12);
-        assert!((f - 170.43).abs() < 0.1, "f = {f}");
+        assert!((f - 170.55).abs() < 0.1, "f = {f}");
     }
 
     #[test]

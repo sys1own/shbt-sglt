@@ -15,7 +15,7 @@ fn adm_determinant_within_1e_minus_12() {
 fn holographic_scale_invariance_holds() {
     // χ_SHBT = 1 + α_seed·ΔN must stay within 1e-6 for simulated deratings.
     for k in [0u32, 12, 100] {
-        let dn = (k as f64 * 507.32 / 8.9506e-4).floor();
+        let dn = (k as f64 * 555.03 / 8.9506e-4).floor();
         let chi = 1.0 + alpha_seed_m_sun_per_bit_f64() * dn;
         assert!((chi - 1.0).abs() <= 1e-6, "chi = {chi} at k = {k}");
     }
