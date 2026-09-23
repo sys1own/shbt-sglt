@@ -10,7 +10,7 @@ Get the digital twin running and launch the interactive telemetry HUD in under t
 
 ```bash
 # 1. Clone repository
-git clone [https://github.com/sys1own/shbt-sglt.git](https://github.com/sys1own/shbt-sglt.git) && cd shbt-sglt
+git clone https://github.com/sys1own/shbt-sglt.git && cd shbt-sglt
 
 # 2. Build freestanding C11 microkernel
 python python/shbt_sglt/cli/main.py build-kernel
