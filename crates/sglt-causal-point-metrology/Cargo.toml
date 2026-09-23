@@ -1,0 +1,13 @@
+[package]
+name = "sglt-causal-point-metrology"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Causal Point observer memory metrology (sys1own/shbt-precision transfer): rank-one history projectors Pi = |psi><psi|, holographic register bound N_limit = min(N_local, A/(4 L_P^2 ln2)), Landauer GET cost C_get = max(1, log2|R|), and heat bound Q_H >= k_B T ln2 * C_op."
+
+[dependencies]
+libm = "0.2"
+
+[lib]
+crate-type = ["rlib", "cdylib"]

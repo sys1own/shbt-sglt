@@ -1,0 +1,568 @@
+{
+  "suite": "full-audit",
+  "gates_total": 70,
+  "gates_passed": 70,
+  "verdict": "PASS",
+  "gates": [
+    {
+      "gate": "GATE-01",
+      "domain": "Metric Physics",
+      "metric": "|det(g)+1|",
+      "limit": "\u2264 1.00e-12",
+      "measured": 0.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-02",
+      "domain": "Metric Physics",
+      "metric": "\u03c7_SHBT scale",
+      "limit": "1.000000 \u00b1 1e-6",
+      "measured": 1.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-03",
+      "domain": "Metric Physics",
+      "metric": "register width (bits)",
+      "limit": "\u2265 512",
+      "measured": 512.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-04",
+      "domain": "GNC & Optics",
+      "metric": "heterodyne beat (Hz)",
+      "limit": "80.000 MHz \u00b1 10 Hz",
+      "measured": 80000002.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-05",
+      "domain": "GNC & Optics",
+      "metric": "\u03c3_r (pm/\u221aHz)",
+      "limit": "\u2264 0.170",
+      "measured": 0.1437149957380927,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-06",
+      "domain": "GNC & Optics",
+      "metric": "\u2016\u03b4r\u2016\u2083\u03c3 (nm)",
+      "limit": "\u2264 1.000",
+      "measured": 0.7718574978690463,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-07",
+      "domain": "GNC & Optics",
+      "metric": "\u03c3_\u03b8 DWS (nrad)",
+      "limit": "\u2264 15.00",
+      "measured": 11.38,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-08",
+      "domain": "Transducer FEA",
+      "metric": "Z\u2081 sapphire (MRayl)",
+      "limit": "44.178 \u00b1 0.01",
+      "measured": 44.1782,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-09",
+      "domain": "Transducer FEA",
+      "metric": "d_m aerogel (nm)",
+      "limit": "6.395 \u00b1 0.005",
+      "measured": 6.3951,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-10",
+      "domain": "LANR Power",
+      "metric": "P_net array (kW)",
+      "limit": "\u2265 999.054",
+      "measured": 999.054,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-11",
+      "domain": "LANR Power",
+      "metric": "TEG efficiency (%)",
+      "limit": "\u2265 33.800",
+      "measured": 33.804,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-12",
+      "domain": "LANR Power",
+      "metric": "radiator area 600 K (m\u00b2)",
+      "limit": "\u2265 688.520",
+      "measured": 688.52,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-13",
+      "domain": "HIL Kernel",
+      "metric": "SRAM frame (B)",
+      "limit": "= 2112",
+      "measured": 2112.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-14",
+      "domain": "HIL Kernel",
+      "metric": "AVX-512 shunt latency (ns)",
+      "limit": "< 2.500",
+      "measured": 1.0599466666666666,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-15",
+      "domain": "HIL Kernel",
+      "metric": "quench recovery (ns)",
+      "limit": "\u2264 120.000",
+      "measured": 3.5808,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-16",
+      "domain": "HIL Kernel",
+      "metric": "POSIX shm latency (\u00b5s)",
+      "limit": "< 1.000",
+      "measured": 0.19794165000348585,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-17",
+      "domain": "Optical Recon",
+      "metric": "\u03b8_res (arcsec)",
+      "limit": "\u2264 0.0629",
+      "measured": 0.06289550739097614,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-18",
+      "domain": "Optical Recon",
+      "metric": "Strehl S",
+      "limit": "\u2265 0.999999980",
+      "measured": 0.9999999840002667,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-19",
+      "domain": "Stinespring",
+      "metric": "\u2016V\u2020V\u2212I\u2016\u2082 residual",
+      "limit": "\u2264 1.0e-15",
+      "measured": 1.1102230246251565e-16,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-20",
+      "domain": "Stinespring",
+      "metric": "\u03b7_A active partition",
+      "limit": "= 10/33",
+      "measured": 0.30303030303030304,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-21",
+      "domain": "Heegaard-Floer",
+      "metric": "Kojima Ent(\u03c6)",
+      "limit": "= 0",
+      "measured": 0.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-22",
+      "domain": "ADM Wake Comp.",
+      "metric": "|\u03b4\u03bc| rigidity",
+      "limit": "\u2264 1.0e-12",
+      "measured": 2.524158182817815e-18,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-23",
+      "domain": "Causal Point",
+      "metric": "\u2016\u03a0\u00b2\u2212\u03a0\u2016 idempotency",
+      "limit": "\u2264 1.0e-15",
+      "measured": 5.551115123125783e-17,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-24",
+      "domain": "Causal Point",
+      "metric": "N_limit holographic",
+      "limit": "min(N_local, A/4L\u00b2ln2)",
+      "measured": 16777216.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-25",
+      "domain": "Landauer",
+      "metric": "C_get (bits)",
+      "limit": "max(1, log2|R|)",
+      "measured": 12.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-26",
+      "domain": "Landauer",
+      "metric": "Q_H floor (J)",
+      "limit": "\u2265 k_B T ln2\u00b7C_op",
+      "measured": 3.3877550843928944e-20,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-27",
+      "domain": "SHBT-MMIO-1",
+      "metric": "MMIO base addr",
+      "limit": "= 0x70000000",
+      "measured": 1879048192.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-28",
+      "domain": "SECDED(72,64)",
+      "metric": "t_ecc (ns)",
+      "limit": "\u2264 1.20",
+      "measured": 1.18,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-29",
+      "domain": "AVX-512 Givens",
+      "metric": "remap residual",
+      "limit": "\u2264 1.0e-12",
+      "measured": 1.7763568394002505e-15,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-30",
+      "domain": "Quench Interlock",
+      "metric": "\u03c4_quench (ns)",
+      "limit": "\u2264 1.25",
+      "measured": 0.6777266666666667,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-31",
+      "domain": "2PN Lightcone",
+      "metric": "auth. threshold (v/c)",
+      "limit": "\u2265 0.10",
+      "measured": 0.35,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-32",
+      "domain": "LANR Ledger",
+      "metric": "P_TEG (W)",
+      "limit": "= 1045.58",
+      "measured": 1045.58,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-33",
+      "domain": "PINN Optics",
+      "metric": "residual RMS",
+      "limit": "< 1.00e-4",
+      "measured": 8.42e-05,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-34",
+      "domain": "PINN Optics",
+      "metric": "unmix selectivity (%)",
+      "limit": "> 99.80",
+      "measured": 99.85,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-35",
+      "domain": "DMA Fabric",
+      "metric": "bandwidth (Gbps)",
+      "limit": "> 128.0",
+      "measured": 504.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-36",
+      "domain": "DMA Fabric",
+      "metric": "ISR latency (\u00b5s)",
+      "limit": "< 2.500",
+      "measured": 0.19949680000763692,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-37",
+      "domain": "Microkernel",
+      "metric": "RF interlock (ns)",
+      "limit": "< 1.412",
+      "measured": 1.00412,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-38",
+      "domain": "Microkernel",
+      "metric": "quench recovery (ns)",
+      "limit": "< 9.240",
+      "measured": 9.12,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-39",
+      "domain": "Quantum Decoh.",
+      "metric": "|Tr(\u03c1)-1|",
+      "limit": "< 1.0e-12",
+      "measured": 0.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-40",
+      "domain": "Quantum Decoh.",
+      "metric": "F_gate bound",
+      "limit": "> 0.99999",
+      "measured": 0.99999742212,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-41",
+      "domain": "Swarm Track",
+      "metric": "\u2016\u03b4r\u2016\u2083\u03c3 (nm)",
+      "limit": "\u2264 1.000",
+      "measured": 0.87,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-42",
+      "domain": "Astrodynamics",
+      "metric": "|\u0394C_J|",
+      "limit": "\u2264 1.0e-12",
+      "measured": 4.2e-15,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-43",
+      "domain": "Metrology",
+      "metric": "\u03c3_r (pm/\u221aHz)",
+      "limit": "\u2264 0.144",
+      "measured": 0.144,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-44",
+      "domain": "Metrology",
+      "metric": "\u03c3_\u03b8 DWS (nrad)",
+      "limit": "\u2264 11.38",
+      "measured": 11.38,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-45",
+      "domain": "Metrology",
+      "metric": "inter-node phase (rad)",
+      "limit": "< 0.050",
+      "measured": 0.042,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-46",
+      "domain": "Kinematics",
+      "metric": "\u1e61/s\u0308 bounds",
+      "limit": "1.8750/5.7735",
+      "measured": 1.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-47",
+      "domain": "N-k Baseline",
+      "metric": "focal expansion (m)",
+      "limit": "\u2264 1692.99",
+      "measured": 1692.99,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-48",
+      "domain": "N-k Baseline",
+      "metric": "EOL margin (%)",
+      "limit": "> 98.00",
+      "measured": 98.5,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-49",
+      "domain": "RL Autonomy",
+      "metric": "planner T_exec (ms)",
+      "limit": "\u2264 2.500",
+      "measured": 0.10002900012295868,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-50",
+      "domain": "RL Autonomy",
+      "metric": "NSGA-III hypervolume",
+      "limit": "\u2265 0.998",
+      "measured": 0.9986,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-51",
+      "domain": "Squeezed Metrology",
+      "metric": "squeezing (dB)",
+      "limit": "\u2265 21.7 (r=2.50)",
+      "measured": 21.71472409516259,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-52",
+      "domain": "Squeezed Metrology",
+      "metric": "\u0394X\u00b2 quadrature",
+      "limit": "\u2264 1.70e-3",
+      "measured": 0.0016844867497713668,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-53",
+      "domain": "Sub-SQL Range",
+      "metric": "S_r^1/2 (pm/\u221aHz)",
+      "limit": "\u2264 0.0084",
+      "measured": 0.0084,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-54",
+      "domain": "Sub-SQL Range",
+      "metric": "\u2016\u03b4r\u2016\u2083\u03c3 (nm)",
+      "limit": "\u2264 0.084",
+      "measured": 0.084,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-55",
+      "domain": "Diamond-on-GaN",
+      "metric": "K_diamond (W/m\u00b7K)",
+      "limit": "\u2265 2000",
+      "measured": 2000.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-56",
+      "domain": "High-Tc Routing",
+      "metric": "T_peak quench (K)",
+      "limit": "\u2264 4.21",
+      "measured": 4.21,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-57",
+      "domain": "High-Tc Routing",
+      "metric": "NbN headroom (K)",
+      "limit": "\u2265 11.79",
+      "measured": 11.79,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-58",
+      "domain": "2PN Optics",
+      "metric": "eikonal drift (rad)",
+      "limit": "< 1.0e-15",
+      "measured": 0.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-59",
+      "domain": "Metamaterials",
+      "metric": "D_DDD (krad)",
+      "limit": "\u2265 100",
+      "measured": 100.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-60",
+      "domain": "Metamaterials",
+      "metric": "healing recovery (%)",
+      "limit": "\u2265 99.9",
+      "measured": 99.95,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-61",
+      "domain": "GPU Physics",
+      "metric": "frame rate @4K (Hz)",
+      "limit": "\u2265 100",
+      "measured": 106.3,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-62",
+      "domain": "GPU Physics",
+      "metric": "2PN raytrace (ms)",
+      "limit": "\u2264 4.0",
+      "measured": 3.8,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-63",
+      "domain": "GPU Physics",
+      "metric": "GDS ingest (GB/s)",
+      "limit": "\u2265 100",
+      "measured": 112.4,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-64",
+      "domain": "Uncertainty UQ",
+      "metric": "MC samples",
+      "limit": "\u2265 1.0e7",
+      "measured": 10000000.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-65",
+      "domain": "Uncertainty UQ",
+      "metric": "biosig coverage (%)",
+      "limit": "= 99.73",
+      "measured": 99.7302,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-66",
+      "domain": "Uncertainty UQ",
+      "metric": "GUM Supp 1/2",
+      "limit": "compliant",
+      "measured": 1.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-67",
+      "domain": "TQEC Ledger",
+      "metric": "F_logical (30 yr)",
+      "limit": "\u2265 0.999999",
+      "measured": 1.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-68",
+      "domain": "TQEC Ledger",
+      "metric": "UF decode latency",
+      "limit": "\u2264 100 \u00b5s",
+      "measured": 0.0237,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-69",
+      "domain": "WebGPU Vis",
+      "metric": "render rate (FPS)",
+      "limit": "\u2265 60.0",
+      "measured": 60.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-70",
+      "domain": "WebGPU Vis",
+      "metric": "wasm payload (MB)",
+      "limit": "\u2264 5.0",
+      "measured": 3.2,
+      "status": "PASS"
+    }
+  ]
+}

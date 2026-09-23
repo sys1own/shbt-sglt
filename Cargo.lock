@@ -864,6 +864,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "sglt-causal-point-metrology"
+version = "2.0.0"
+dependencies = [
+ "libm",
+]
+
+[[package]]
 name = "sglt-core-metric"
 version = "0.1.0"
 dependencies = [
@@ -934,6 +941,13 @@ version = "2.0.0"
 dependencies = [
  "pyo3",
  "thiserror",
+]
+
+[[package]]
+name = "sglt-nonlocal-telemetry"
+version = "2.0.0"
+dependencies = [
+ "libm",
 ]
 
 [[package]]

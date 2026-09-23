@@ -32,6 +32,9 @@ members = [
     "crates/sglt-uncertainty-uq",
     "crates/sglt-tqec-dark-ledger",
     "crates/sglt-webgpu-vis",
+    # non-local sensor-mesh crates (sglt1.txt)
+    "crates/sglt-nonlocal-telemetry",
+    "crates/sglt-causal-point-metrology",
 ]
 
 [workspace.package]

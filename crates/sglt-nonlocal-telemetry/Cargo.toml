@@ -1,0 +1,13 @@
+[package]
+name = "sglt-nonlocal-telemetry"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Non-local synthetic-aperture telemetry: isometric Stinespring dilation (eta_A=10/33, eta_D=23/33), Heegaard-Floer Sp(2g,Z) boundary relabeling with Kojima zero-entropy bound, and 3+1 ADM shift nullification with third-order wake-tensor compensation (|delta_mu| <= 1e-12)."
+
+[dependencies]
+libm = "0.2"
+
+[lib]
+crate-type = ["rlib", "cdylib"]
