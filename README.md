@@ -242,3 +242,16 @@ The unified specification dictates strict compliance across seventy cross-bench 
 | 68 | TQEC ledger: Union-Find decode latency | $\le 100\ \mu\text{s}$ | $0.0237\ \mu\text{s}$ | PASS |
 | 69 | WebGPU visualizer: native render rate | $\ge 60.0\text{ FPS}$ | $60.0\text{ FPS}$ | PASS |
 | 70 | WebGPU visualizer: wasm payload size | $\le 5.0\text{ MB}$ | $3.2\text{ MB}$ | PASS |
+
+---
+
+## Code Repository Crosswalk
+
+| Sub-engine | Repository |
+| --- | --- |
+| Transducer / HBT array | [`sys1own/shbt-exotic`](https://github.com/sys1own/shbt-exotic.git) |
+| C11 microkernel / QC runtime | [`sys1own/shbt-qc`](https://github.com/sys1own/shbt-qc) |
+| Cold-fusion / thermo solver | [`sys1own/shbt-cf`](https://github.com/sys1own/shbt-cf) |
+| SGLT platform & CLI | [`sys1own/shbt-sglt`](https://github.com/sys1own/shbt-sglt) |
+| Precision cosmology & audits | [`sys1own/shbt-precision`](https://github.com/sys1own/shbt-precision) |
+| Unified translocator workspace | [`sys1own/shbt-recon`](https://github.com/sys1own/shbt-recon) |
