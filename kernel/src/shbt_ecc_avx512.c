@@ -202,6 +202,21 @@ int32_t shbt_recover_on(ShbtRegisters *hw)
     return 0;
 }
 
+/* Hamming(72,64) mask-parallel encode latency (ns/op) — the parity-tree
+ * fast path that hardware implements (same check code as the normative
+ * scalar loop in shbt_stinespring_kernel.c). */
+double shbt_ecc_encode_bench(unsigned iters)
+{
+    volatile uint8_t sink = 0;
+    uint64_t data = 0xA5A5C3C39E3779B9ULL;
+    uint64_t t0 = shbt_cycles();
+    for (unsigned i = 0; i < iters; ++i)
+        sink ^= shbt_ecc_encode(data + i);
+    (void)sink;
+    uint64_t dt = shbt_cycles() - t0;
+    return (double)dt * 1.0e9 / ((double)SHBT_TSC_HZ * (double)iters);
+}
+
 double shbt_recover_bench(unsigned iters)
 {
     /* Simulated register block with PLL already locked so the wait loop is

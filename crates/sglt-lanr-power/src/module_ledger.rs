@@ -1,6 +1,10 @@
 //! LANR power plant ledger (`PowerPlantLedger` transfer from
 //! `sys1own/shbt-cf` `crates/shbt-fabrication-hil/src/power_ledger.rs`).
 //!
+//! Per-module ledger (`sys1own/shbt-cf`): `P_thermal = 3093.44 W`,
+//! `P_TEG = 1045.58 W`, `P_net = 555.03 W` after the `490.55 W`
+//! housekeeping load with SiC crowbar energy recovery.
+//!
 //! Tracks the 1,800-module LANR cold-fusion array: gross electrical output
 //! `1,800 × 555.03 W = 999.054 kW` (Gate-10 baseline, including SiC crowbar
 //! energy recovery) against a continuous 906.00 kW entropy-debt demand,
@@ -12,6 +16,14 @@
 pub const MODULE_COUNT: u32 = 1800;
 /// Net electrical output per module (W) (Gate-10 basis).
 pub const MODULE_NET_W: f64 = 555.03;
+/// Per-module LANR thermal output (W) (sys1own/shbt-cf ledger).
+pub const MODULE_THERMAL_W: f64 = 3093.44;
+/// Per-module TEG gross electrical output (W) — includes the SiC crowbar
+/// energy-recovery credit.
+pub const MODULE_TEG_W: f64 = 1045.58;
+/// Per-module housekeeping/parasitic load after SiC crowbar recovery (W):
+/// `P_TEG - P_net`.
+pub const MODULE_HOUSE_W: f64 = MODULE_TEG_W - MODULE_NET_W;
 /// Minimum modules required to sustain the 906.00 kW non-sheddable load.
 pub const N_MIN_MODULES: u32 = 1633;
 /// Continuous system demand / entropy debt (W).

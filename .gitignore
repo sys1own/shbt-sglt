@@ -4,4 +4,8 @@
 __pycache__/
 *.pyc
 /sim_outputs
-/verification_matrix.json
+main.aux
+main.fdb_latexmk
+main.fls
+main.log
+main.pdf

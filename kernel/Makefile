@@ -9,7 +9,12 @@ CFLAGS  ?= -O3 -mavx512f -nostdlib -ffreestanding -fno-stack-protector \
            -fPIC -Iinclude -std=c11 -DSHBT_BARE_METAL
 
 BIN     := ../crates/sglt-hil-microkernel/bin
-OBJS    := build/shbt_core_runtime.o build/shbt_ecc_avx512.o
+OBJS    := build/shbt_core_runtime.o build/shbt_ecc_avx512.o \
+           build/shbt_stinespring_kernel.o
+# Hosted build of the Stinespring driver for shbt_reference.so: same code,
+# but MMIO accesses target a shadow register block instead of 0x70000000.
+OBJS_SO := build/shbt_core_runtime.o build/shbt_ecc_avx512.o \
+           build/host_stinespring_kernel.o
 
 all: $(BIN)/shbt_reference.so build/shbt_kernel.elf
 
@@ -19,11 +24,15 @@ build:
 build/%.o: src/%.c include/shbt_hardware.h | build
 	$(CC) $(CFLAGS) -c $< -o $@
 
+build/host_stinespring_kernel.o: src/shbt_stinespring_kernel.c \
+		include/shbt_stinespring.h | build
+	$(CC) $(CFLAGS) -USHBT_BARE_METAL -c $< -o $@
+
 build/shbt_kernel.elf: $(OBJS) linker.ld
 	$(CC) $(CFLAGS) -static -Wl,-T,linker.ld $(OBJS) -o $@
 
-$(BIN)/shbt_reference.so: $(OBJS)
-	$(CC) $(CFLAGS) -nostdlib -shared $(OBJS) -o $@
+$(BIN)/shbt_reference.so: $(OBJS_SO)
+	$(CC) $(CFLAGS) -nostdlib -shared $(OBJS_SO) -o $@
 
 clean:
 	rm -rf build $(BIN)/shbt_reference.so

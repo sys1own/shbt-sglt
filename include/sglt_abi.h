@@ -12,6 +12,11 @@
  *   sglt_uncertainty_uq_evaluate             (sglt-uncertainty-uq)
  *   sglt_tqec_dark_ledger_decode             (sglt-tqec-dark-ledger)
  *   sglt_webgpu_vis_bind_frame               (sglt-webgpu-vis)
+ *   sglt_nonlocal_telemetry_evaluate         (sglt-nonlocal-telemetry)
+ *   sglt_causal_point_evaluate               (sglt-causal-point-metrology)
+ *
+ * Plus the SHBT-MMIO-1 zero-copy register surface `shbt_sglt_mmio_t`
+ * (base 0x70000000) for the non-local sensor-mesh upgrade (sglt1.txt).
  */
 #ifndef SGLT_ABI_H
 #define SGLT_ABI_H
@@ -24,7 +29,7 @@
 extern "C" {
 #endif
 
-#define SGLT_ABI_VERSION_UNIFIED 4U
+#define SGLT_ABI_VERSION_UNIFIED 5U
 #define SGLT_CACHE_LINE_SIZE     64U
 
 /* --------------------------------------------------------------------------
@@ -235,6 +240,97 @@ typedef struct {
 int32_t sglt_webgpu_vis_bind_frame(
     const sglt_vis_telemetry_frame_t *frame,
     sglt_vis_render_stats_t *out_stats);
+
+/* --------------------------------------------------------------------------
+ * sglt-nonlocal-telemetry: Stinespring dilation + Heegaard-Floer relabeling
+ * + ADM shift nullification / wake-tensor compensation (sglt1.txt)
+ * -------------------------------------------------------------------------- */
+typedef struct {
+    uint32_t active_dim;
+    uint32_t dark_dim;
+    uint32_t mesh_nodes;
+    uint32_t genus;
+    double   wake_amplitude;
+    double   wake_timescale_s;
+    double   eval_time_s;
+    uint8_t  _pad[8];
+} __attribute__((aligned(64))) sglt_nonlocal_telemetry_config_t;
+
+typedef struct {
+    double   isometry_residual;      /* ||V^dag V - I|| */
+    double   eta_active;             /* 10/33 */
+    double   eta_dark;               /* 23/33 */
+    double   symplectic_residual;    /* ||T^T J T - J|| */
+    double   topological_entropy;    /* Kojima Ent(phi) = 0 */
+    double   delta_mu;               /* |delta_mu| <= 1e-12 */
+    double   adm_shift_norm;         /* ||beta^i|| -> 0 */
+    uint8_t  _pad[8];
+} __attribute__((aligned(64))) sglt_nonlocal_telemetry_metrics_t;
+
+int32_t sglt_nonlocal_telemetry_evaluate(
+    const sglt_nonlocal_telemetry_config_t *config,
+    sglt_nonlocal_telemetry_metrics_t *out_metrics);
+
+/* --------------------------------------------------------------------------
+ * sglt-causal-point-metrology: Causal Point observer memory + Landauer
+ * GET accounting (sys1own/shbt-precision transfer)
+ * -------------------------------------------------------------------------- */
+typedef struct {
+    uint32_t history_dim;
+    uint32_t _rsvd0;
+    uint64_t local_log_capacity;
+    double   boundary_area_m2;
+    uint64_t record_cardinality;
+    double   temperature_k;
+    uint8_t  _pad[24];
+} __attribute__((aligned(64))) sglt_causal_point_config_t;
+
+typedef struct {
+    double   projector_residual;     /* ||Pi^2 - Pi|| */
+    uint64_t n_limit;                /* holographic register bound */
+    double   c_get;                  /* max(1, log2|R|) */
+    double   landauer_heat_j;        /* k_B T ln2 * C_op */
+    int32_t  landauer_satisfied;
+    uint8_t  _pad[36];
+} __attribute__((aligned(64))) sglt_causal_point_metrics_t;
+
+int32_t sglt_causal_point_evaluate(
+    const sglt_causal_point_config_t *config,
+    sglt_causal_point_metrics_t *out_metrics);
+
+/* --------------------------------------------------------------------------
+ * SHBT-MMIO-1 unified sensor-mesh register surface (sglt1.txt §C-ABI).
+ * Zero-copy, 64-byte aligned; lives at SHBT_MMIO_BASE_ADDR 0x70000000.
+ * -------------------------------------------------------------------------- */
+typedef struct __attribute__((packed, aligned(64))) {
+    volatile uint32_t status_flags;     /* 0x0000: Status & Interlock Bits */
+    uint32_t          reserved0;
+    volatile double   r_squeeze_db;     /* 0x0008: TMSV Squeezing (dB) */
+    volatile double   range_noise_pm;   /* 0x0010: Range Noise (pm/rtHz) */
+    volatile double   t_peak_kelvin;    /* 0x0018: Diamond Peak Temp (K) */
+    volatile double   nbn_headroom_k;   /* 0x0020: Quench Headroom (K) */
+    volatile uint64_t frame_counter;    /* 0x0028: HIL Frame Counter */
+    uint32_t          matrix_dim;       /* 0x0030: Matrix Dimension */
+    uint32_t          reserved1;
+    volatile uint64_t d_stinespring;    /* 0x0040: GPUDirect Stinespring ptr */
+} shbt_sglt_mmio_t;
+
+_Static_assert(offsetof(shbt_sglt_mmio_t, status_flags)    == 0x0000U,
+               "shbt_sglt_mmio_t.status_flags offset");
+_Static_assert(offsetof(shbt_sglt_mmio_t, r_squeeze_db)    == 0x0008U,
+               "shbt_sglt_mmio_t.r_squeeze_db offset");
+_Static_assert(offsetof(shbt_sglt_mmio_t, range_noise_pm)  == 0x0010U,
+               "shbt_sglt_mmio_t.range_noise_pm offset");
+_Static_assert(offsetof(shbt_sglt_mmio_t, t_peak_kelvin)   == 0x0018U,
+               "shbt_sglt_mmio_t.t_peak_kelvin offset");
+_Static_assert(offsetof(shbt_sglt_mmio_t, nbn_headroom_k)  == 0x0020U,
+               "shbt_sglt_mmio_t.nbn_headroom_k offset");
+_Static_assert(offsetof(shbt_sglt_mmio_t, frame_counter)   == 0x0028U,
+               "shbt_sglt_mmio_t.frame_counter offset");
+_Static_assert(offsetof(shbt_sglt_mmio_t, matrix_dim)      == 0x0030U,
+               "shbt_sglt_mmio_t.matrix_dim offset");
+_Static_assert(offsetof(shbt_sglt_mmio_t, d_stinespring)   == 0x0040U,
+               "shbt_sglt_mmio_t.d_stinespring offset");
 
 #ifdef __cplusplus
 }
