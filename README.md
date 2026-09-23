@@ -4,6 +4,22 @@ Unified multi-domain digital-twin and hardware-in-the-loop co-simulation suite f
 
 ---
 
+## Quickstart (3-Step Fast Track)
+
+Get the digital twin running and launch the interactive telemetry HUD in under two minutes:
+
+```bash
+# 1. Clone repository
+git clone [https://github.com/sys1own/shbt-sglt.git](https://github.com/sys1own/shbt-sglt.git) && cd shbt-sglt
+
+# 2. Build freestanding C11 microkernel
+python python/shbt_sglt/cli/main.py build-kernel
+
+# 3. Launch interactive telemetry HUD & WebGPU visualizer
+streamlit run python/shbt_sglt/dashboard_hud.py
+```
+---
+
 ## Technical Overview
 
 The SGLT synthesizes an artificial gravitational lens via a boundary-state congestion ghost seed of $M_{\text{seed}} = 10^{-6} M_{\odot}$ ($\Delta N_0 = 7.5426 \times 10^{44}\text{ bit}$), producing a thin-lens focal baseline of $f_0 = 169.30\text{ m}$ for an impact parameter $r_0 = 1.000\text{ m}$, observed by an $M$-node spacecraft swarm ($M > 2$) distributed across heliocentric distances $z \in [547.8\text{ AU}, 650.0\text{ AU}]$. The upgraded architecture operates as a **Non-Local Synthetic Aperture Sensor Mesh & Gravitational Telescope**: optical phase telemetry is de-rendered into dark-ledger degrees of freedom through the Stinespring dilation channel, eliminating light-like signal degradation across inter-craft baselines.
@@ -161,6 +177,20 @@ python python/shbt_sglt/cli/main.py export-eda
 # Run master 70-gate verification audit and output JSON report
 python python/shbt_sglt/cli/main.py verify > verification_matrix.json
 ```
+
+### CLI Parameter Guide
+
+The primary CLI entry point `python/shbt_sglt/cli/main.py` provides tools for simulation, observation, EDA export, and system audit:
+
+| Command | Key Parameters | Description |
+| --- | --- | --- |
+| `build-kernel` | None | Compiles freestanding C11 microkernel reference library (`shbt_reference.so`) |
+| `sim-full` | `--w-min 200.0 --w-max 5000.0 --distance 550.0 --resolution 1024` | Runs full multi-spectral 2PN wave-optics digital twin co-simulation |
+| `observe-target` | `--target-name <str> --output <path.h5>` | Generates synthetic exoplanetary optical spectroscopy datacubes |
+| `export-fits` | `--input-bin <path.h5> --output-fits <path.fits>` | Converts raw HDF5 datacubes into FITS v4.0 science data products |
+| `inject-faults` | `--rate <float> --target <str> --duration <sec>` | Simulates POSIX SHM fault injection and triggers TQEC active decoding |
+| `export-eda` | None | Exports GDSII lithographic masks and Touchstone S2P RF interposers |
+| `verify` | None | Executes 70-gate verification audit and outputs `verification_matrix.json` |
 
 Additional workflows: `cargo test --workspace` executes the full Rust test suite; `python tests/run_all_tests.py` runs the master HIL latency harness; `streamlit run python/shbt_sglt/dashboard_hud.py` launches the interactive telemetry HUD; `python python/shbt_sglt/cli/main.py sim --duration 3600` runs a bounded mission-timeline co-simulation.
 
