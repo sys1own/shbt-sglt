@@ -37,8 +37,10 @@ pub struct MetrologyMetrics {
     pub range_uncertainty_3sigma_m: f64,
 }
 
+/// # Safety
+/// `config` and `out_metrics` must be valid, non-null pointers.
 #[no_mangle]
-pub extern "C" fn sglt_squeezed_metrology_evaluate_phase(
+pub unsafe extern "C" fn sglt_squeezed_metrology_evaluate_phase(
     config: *const SqueezedMetrologyConfig,
     out_metrics: *mut MetrologyMetrics,
 ) -> c_int {
@@ -46,7 +48,7 @@ pub extern "C" fn sglt_squeezed_metrology_evaluate_phase(
         return -1;
     }
 
-    let cfg = unsafe { &*config };
+    let cfg = &*config;
 
     if cfg.squeezing_param_r < 0.0 || cfg.carrier_power_w <= 0.0 {
         return -2;
@@ -68,12 +70,10 @@ pub extern "C" fn sglt_squeezed_metrology_evaluate_phase(
     let sigma_range = range_density * sqrt(cfg.integration_bandwidth_hz);
     let uncertainty_3sigma = 3.0 * sigma_range;
 
-    unsafe {
-        (*out_metrics).quadrature_variance = quad_var;
-        (*out_metrics).squeezing_db = squeezing_db;
-        (*out_metrics).range_noise_density_m_sqrt_hz = range_density;
-        (*out_metrics).range_uncertainty_3sigma_m = uncertainty_3sigma;
-    }
+    (*out_metrics).quadrature_variance = quad_var;
+    (*out_metrics).squeezing_db = squeezing_db;
+    (*out_metrics).range_noise_density_m_sqrt_hz = range_density;
+    (*out_metrics).range_uncertainty_3sigma_m = uncertainty_3sigma;
 
     0
 }

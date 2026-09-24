@@ -52,7 +52,7 @@ pub const WAKE_3_STR: &str = "0.000015409115291847192384102938102391029381023928
 /// Isotropic seed perturbation template used for each ghost seed.
 const SEED_PERTURBATION_TEMPLATE: [f64; 4] = [1.0, 1.0, 1.0, 1.0];
 
-fn parse_512bit(s: &str) -> Float {
+pub(crate) fn parse_512bit(s: &str) -> Float {
     let parsed = Float::parse(s).expect("valid 512-bit coefficient");
     Float::with_val(PREC, parsed)
 }

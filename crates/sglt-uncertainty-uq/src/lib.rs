@@ -38,7 +38,7 @@ impl Default for UqConfig {
             sigma_position_m: 0.15,
             sigma_pointing_arcsec: 0.02,
             sigma_thermal_k: 0.05,
-            rng_seed: 0x5347_4C54_5551_45,
+            rng_seed: 0x0053_474C_5455_5145,
         }
     }
 }
@@ -61,15 +61,17 @@ pub struct UqResult {
 }
 
 /// Evaluate the coupled Monte Carlo propagation and fill `out`.
+/// # Safety
+/// `config` and `out` must be valid, non-null pointers.
 #[no_mangle]
-pub extern "C" fn sglt_uncertainty_uq_evaluate(
+pub unsafe extern "C" fn sglt_uncertainty_uq_evaluate(
     config: *const UqConfig,
     out: *mut UqResult,
 ) -> c_int {
     if config.is_null() || out.is_null() {
         return -1;
     }
-    let cfg = unsafe { &*config };
+    let cfg = &*config;
     if cfg.num_samples == 0 {
         return -2;
     }
@@ -113,16 +115,12 @@ pub extern "C" fn sglt_uncertainty_uq_evaluate(
         let mean = sum[ch] / nf;
         let var = (sum_sq[ch] / nf - mean * mean).max(0.0);
         let s = var.sqrt();
-        unsafe {
-            (*out).lower_3sigma[ch] = mean - 3.0 * s;
-            (*out).upper_3sigma[ch] = mean + 3.0 * s;
-        }
+        (*out).lower_3sigma[ch] = mean - 3.0 * s;
+        (*out).upper_3sigma[ch] = mean + 3.0 * s;
     }
-    unsafe {
-        (*out).samples_evaluated = n;
-        (*out).coverage_fraction = 0.997_302;
-        (*out).max_mahalanobis_sq = CHI2_5_9973;
-        (*out).gum_compliant = if n >= MIN_SAMPLES { 1 } else { 0 };
-    }
+    (*out).samples_evaluated = n;
+    (*out).coverage_fraction = 0.997_302;
+    (*out).max_mahalanobis_sq = CHI2_5_9973;
+    (*out).gum_compliant = if n >= MIN_SAMPLES { 1 } else { 0 };
     0
 }

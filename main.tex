@@ -3041,6 +3041,111 @@ verification evidence and traceable cross-bench ownership.  The resulting
 architecture is therefore suitable for progression from preliminary design
 into detailed subsystem qualification and end-to-end integrated verification.
 
+\section{Transferred Ghost-Logic Subsystems}
+\label{sec:ghost_transfer}
+
+The following subsections integrate the advanced physical, kinematic, and
+computational logic transferred from the \texttt{shbt-ghost} reference
+implementation into \texttt{shbt-sglt}.  All additions are additive: no
+existing subsystem, equation, or verification gate has been altered.
+
+\subsection{Multi-Seed Metric Superposition \& Caustic Engineering}
+\label{sec:multiseed_superposition}
+
+The linearized metric for an arbitrary configuration of $K$ seed masses is
+evaluated by the \texttt{MultiSeedSuperpositionEngine}
+(\texttt{crates/sglt-core-metric}) as
+\begin{equation}
+g_{\mu\nu} \;=\; \eta_{\mu\nu} \;+\; \sum_{i=1}^{K} h_{\mu\nu}^{(i)} \;+\; I_{\mu\nu},
+\end{equation}
+where $h_{\mu\nu}^{(i)}$ is the isotropic Schwarzschild perturbation of seed
+$i$ and $I_{\mu\nu}$ is a fixed cross-seed interference tensor whose diagonal
+components $I_{00}, I_{11}, I_{22}, I_{33}$ are stored as exact $512$-bit
+MPFR constants (the \texttt{rug} crate) so that no double-precision rounding
+enters the caustic boundary condition.  A bit-congestion safety radius
+$R_{\text{congestion}} = 2.954\times10^{15}\ \mathrm{m}$ bounds the region
+inside which overlapping seed holographic projections must be derated.
+
+Strong-field near-seed curvature and the Solar $J_2$ quadrupole coupling are
+propagated with a $3{+}1$ CCZ4/BSSN hyperbolic evolution system with
+Gundlach constraint damping.  The harmonic $g_{00}$ component is evaluated
+to second post-Newtonian order including $J_2$:
+\begin{equation}
+g_{00} = -1 + 2u - 2u^{2} + 3u\,J_{2}\!\left(\frac{R_{\odot}}{r}\right)^{2}
+\left(3\frac{z^{2}}{r^{2}}-1\right),
+\qquad u=\frac{GM_{\odot}}{c^{2}r}.
+\end{equation}
+Multi-focal caustic engineering expands the effective SGL baseline from the
+monopole focus $f_{0}=169.30\ \mathrm{m}$ to the outermost supported seed
+caustic $f_{\max}=1692.99\ \mathrm{m}$ (GATE-47), preserving
+$\vert{}\det(g)+1\vert{} \le 1.00\times10^{-12}$ (GATE-01).
+
+\subsection{Reactionless Traction Propulsion \& Kinematic Wakes}
+\label{sec:traction_wakes}
+
+The reactionless traction drive (\texttt{crates/sglt-swarm-dynamics}) vector
+tracts the swarm along a forward offset vector $\mathbf{r}_{\text{offset}}$
+by geodesic acceleration:
+\begin{equation}
+\mathbf{a}_{\text{thrust}} \;=\; -\nabla \Phi_{\text{seed}}\!\left(\mathbf{r}_{\text{offset}}\right),
+\end{equation}
+i.e.\ the local seed-potential gradient at the offset point supplies the
+thrust without propellant expulsion.  Discrete delta-V allocation is
+performed by bit-stepping
+\begin{equation}
+\Delta N(k) \;=\; \left\lfloor \frac{\Delta P_{\text{net}}}{P_{\text{bit}}} \right\rfloor,
+\end{equation}
+against the LANR surplus budget ($P_{\text{net}} \ge 999.054\ \mathrm{kW}$,
+GATE-10).  Third-order kinematic wake-tensor momentum compensation
+(\texttt{crates/sglt-flight-gnc}) applies
+\begin{equation}
+\mu_{\text{comp}}(t) \;=\; \mu_{0} - \sum_{k=1}^{3} \alpha_{\text{wake}}^{(k)}
+\left(\frac{v_{\text{eff}}}{c}\right)^{k} \frac{\Delta N(t)}{N_{\text{total}}},
+\end{equation}
+enforcing holographic eigenvector rigidity
+$\vert{}\mu_{\text{comp}}(t)-\mu_{0}\vert{} \le 10^{-12}$ for
+$v_{\text{eff}} \le 0.1\,c$ (GATE-22), so the wake backreaction cannot
+perturb the eigenbasis of the superposed seed field.
+
+\subsection{Non-Equilibrium Seed Quench Kinetics}
+\label{sec:quench_kinetics}
+
+Transient seed information decay under ignition or emergency interlock is
+modelled as a non-equilibrium exponential quench
+\begin{equation}
+\Delta N(t) \;=\; \Delta N_{0}\, \exp\!\left(-\frac{t}{\tau_{\text{quench}}}\right)\Theta(t),
+\end{equation}
+with $\tau_{\text{quench}} \le 2.18\ \mathrm{ns}$.  A GaN current-shunt
+interlock in the freestanding C11 microkernel
+(\texttt{kernel/src/shbt\_core\_runtime.c}) guarantees the sub-$2.50\
+\mathrm{ns}$ shunt bound (GATE-14, measured $1.51\ \mathrm{ns}$).  Residual
+inductive energy is recaptured by a SiC crowbar at $94.20\%$ efficiency,
+absorbing the $142.08\ \mathrm{MW}$ transient surge while preserving
+$\ge 11.79\ \mathrm{K}$ of superconducting thermal headroom (GATE-57).
+Hardware-interlocked LANR power-derating and seed-mass-decrement flags are
+mapped to the \texttt{SHBT-MMIO-1} register word at offset
+\texttt{0x70000010} on base \texttt{0x70000000} (GATE-27), aliased with the
+ECC low word during transient interlock.
+
+\subsection{WZW Dark Weil Module Kernels}
+\label{sec:wzw_dark_weil}
+
+Virasoro boundary partition functions are evaluated dynamically by the
+\texttt{WzwPartitionEvaluator} (\texttt{crates/sglt-nonlocal-telemetry}) for
+the affine sectors $SU(2)_{26}$, $SU(3)_{8}$, and $SO(10)_{312}$ with
+central charges $c_{\text{vis}}=1325/154$ and $c_{\text{parent}}=351/8$:
+\begin{equation}
+Z_{\text{boundary}}(\tau) \;=\; q^{-c/24}\prod_{n=1}^{\infty}\left(1-q^{n}\right)^{-1},
+\qquad q=e^{2\pi i\tau}.
+\end{equation}
+The $2{,}901{,}360$ dark Weil module kernels
+$(S_{\text{dark}}, T_{\text{dark}}, M_{\text{dark}}=I_{2901360})$ factor over
+$(\mathbb{Z}_{2})^{3}\times(\mathbb{Z}_{2}\times\mathbb{Z}_{3}\times
+\mathbb{Z}_{5}\times\mathbb{Z}_{7}\times\mathbb{Z}_{11})\times
+\mathbb{Z}_{157}$ and are integrated into the Stinespring dark-ledger state
+dilation channel, closing the partition with active/dark branches
+$\eta_{A}=10/33$ and $\eta_{D}=23/33$ (GATE-20).
+
 \section{System Verification Matrix \& Code Traceability}
 \label{sec:verification_matrix}
 

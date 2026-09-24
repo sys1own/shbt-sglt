@@ -12,6 +12,8 @@
 pub mod adm_foliation;
 pub mod eikonal_predistortion;
 pub mod interference_tensor;
+/// Multi-seed superposition + 3+1 CCZ4 solver (shbt-ghost transfer).
+pub mod multiseed_superposition;
 
 /// 512-bit MPFR precision for all arbitrary-precision registers.
 pub const PREC: u32 = 512;

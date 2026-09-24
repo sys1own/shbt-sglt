@@ -24,8 +24,10 @@ pub struct ThermalSolverResult {
     pub is_superconducting: bool,
 }
 
+/// # Safety
+/// `state` and `out_result` must be valid, non-null pointers.
 #[no_mangle]
-pub extern "C" fn sglt_diamond_transducer_solve_thermal(
+pub unsafe extern "C" fn sglt_diamond_transducer_solve_thermal(
     state: *const NodalThermalState,
     out_result: *mut ThermalSolverResult,
 ) -> c_int {
@@ -33,7 +35,7 @@ pub extern "C" fn sglt_diamond_transducer_solve_thermal(
         return -1;
     }
 
-    let st = unsafe { &*state };
+    let st = &*state;
 
     let vol_m3 = (st.substrate_area_mm2 * 1.0e-6) * (st.substrate_thickness_mm * 1.0e-3);
     let energy_j = (st.power_transient_mw * 1.0e6) * (st.transient_duration_ns * 1.0e-9);
@@ -60,17 +62,17 @@ pub extern "C" fn sglt_diamond_transducer_solve_thermal(
     let headroom = NBN_CRITICAL_TEMP - peak_k;
     let is_super = headroom > 0.0;
 
-    unsafe {
-        (*out_result).peak_temperature_k = peak_k;
-        (*out_result).quench_headroom_k = headroom;
-        (*out_result).is_superconducting = is_super;
-    }
+    (*out_result).peak_temperature_k = peak_k;
+    (*out_result).quench_headroom_k = headroom;
+    (*out_result).is_superconducting = is_super;
 
     0
 }
 /// C-ABI alias matching the unified `sglt_abi.h` surface name.
+/// # Safety
+/// `state` and `out_result` must be valid, non-null pointers.
 #[no_mangle]
-pub extern "C" fn sglt_diamond_transducer_solve_nodal(
+pub unsafe extern "C" fn sglt_diamond_transducer_solve_nodal(
     state: *const NodalThermalState,
     out_result: *mut ThermalSolverResult,
 ) -> c_int {

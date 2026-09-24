@@ -33,6 +33,10 @@ The SGLT synthesizes an artificial gravitational lens via a boundary-state conge
 * **PINN Reconstruction & Image Synthesis** (`sglt-neural-optics`, `sglt-astro-reconstruction`): Physics-informed neural network deconvolution of the SGL wave equation (multi-resolution Fourier features, Huber $`\delta = 10^{-3}`$, biosignature unmixing) and regularized Richardson–Lucy reconstruction achieving $`\theta_{\text{res}} = 0.0629''`$ and Strehl $`S = 0.999999984`$.
 * **Self-Healing Metamaterials** (`sglt-metamaterial-radiation`): GST ($`\text{Ge}_2\text{Sb}_2\text{Te}_5`$) phase-change metamaterial channel routing tolerating $`D_{\text{DDD}} \ge 100\text{ krad(Si)}`$, restored by $`27.9\text{ mJ/cm}^2`$ nanosecond pulses recovering $`> 99.9\%`$ initial conductivity.
 * **Non-Local Telemetry & Causal-Point Metrology** (`sglt-nonlocal-telemetry`, `sglt-causal-point-metrology`): Isometric Stinespring dilation $`V_{\text{unified}} : \mathcal{H}_{\text{active}} \to \mathcal{H}_{\text{active}} \otimes \mathcal{H}_{\text{dark}}`$ de-rendering inter-craft phase telemetry into the dark ledger under the exact partition $`\eta_A = 10/33`$ / $`\eta_D = 23/33`$; Heegaard-Floer boundary relabeling $`T^\partial_{ij} \in \mathrm{Sp}(2g, \mathbb{Z})`$ with Kojima entropy $`\mathrm{Ent}(\phi) = 0`$; $`3+1`$ ADM shift nullification with third-order wake-tensor compensation ($`\vert\delta\mu\vert \le 10^{-12}`$); rank-one history projectors $`\Pi_{A,\iota} = \vert\psi\rangle\langle\psi\vert`$, holographic register bound $`N_{\text{limit}} = \min(N_{\text{local}}, A/4L_P^2\ln 2)`$, and Landauer GET accounting $`C_{\text{get}} = \max(1, \log_2\vert R\vert)`$, $`Q_H \ge k_B T\ln 2 \cdot C_{\text{op}}`$.
+* **Multi-Seed Metric Superposition & 3+1 CCZ4** (`sglt-core-metric`): Linearized $`K`$-seed metric superposition $`g_{\mu\nu} = \eta_{\mu\nu} + \sum h_{\mu\nu}^{(i)} + I_{\mu\nu}`$ with exact 512-bit MPFR interference constants ($`I_{00}..I_{33}`$), bit-congestion safety radius $`R_{\text{congestion}} = 2.954 \times 10^{15}\text{ m}`$, and a CCZ4/BSSN hyperbolic solver with Gundlach constraint damping for strong-field near-seed curvature and solar $`J_2`$ quadrupole coupling (`multiseed_superposition.rs`).
+* **Reactionless Traction & Kinematic Wake Compensation** (`sglt-swarm-dynamics`, `sglt-flight-gnc`): Geodesic traction drive $`\mathbf{a}_{\text{thrust}} = -\nabla\Phi_{\text{seed}}(\mathbf{r}_{\text{offset}})`$ with power-aware delta-V bit-stepping $`\Delta N(k) = \lfloor \Delta P_{\text{net}} / P_{\text{bit}} \rfloor`$ (`traction.rs`), and 3rd-order wake-tensor momentum compensation $`\mu_{\text{comp}}(t)`$ enforcing holographic eigenvector rigidity $`\vert{}\mu_{\text{comp}} - \mu_0\vert{} \le 10^{-12}`$ for $`v_{\text{eff}} \le 0.1c`$ (`wake_compensation.rs`).
+* **Non-Equilibrium Seed Quench Kinetics** (`kernel/`, `sglt-hil-microkernel`): Exponential transient decay $`\Delta N(t) = \Delta N_0 \exp(-t/\tau_{\text{quench}})\Theta(t)`$ with $`\tau_{\text{quench}} \le 2.18\text{ ns}`$, sub-$`2.50\text{ ns}`$ GaN emergency current-shunt interlock, and 94.20%-efficient SiC crowbar capture of the $`142.08\text{ MW}`$ transient surge (`seed_kinetics.rs`, `shbt_core_runtime.c`).
+* **WZW Dark Weil Module Kernels** (`sglt-nonlocal-telemetry`): Dynamic Virasoro boundary partition evaluator $`Z_{\text{boundary}}(\tau) = q^{-c/24}\prod_n (1-q^n)^{-1}`$ for affine sectors $`SU(2)_{26}`$, $`SU(3)_8`$, $`SO(10)_{312}`$ ($`c_{\text{vis}} = 1325/154`$, $`c_{\text{parent}} = 351/8`$), integrating 2,901,360 dark Weil module kernels over $`(\mathbb{Z}_2)^3 \times (\mathbb{Z}_2 \times \mathbb{Z}_3 \times \mathbb{Z}_5 \times \mathbb{Z}_7 \times \mathbb{Z}_{11}) \times \mathbb{Z}_{157}`$ into the Stinespring dark-ledger channel (`wzw_partition.rs`).
 * **LANR Power & $`N-k`$ Derating** (`sglt-lanr-power`): 1,800-module LANR plant ($`P_{\text{thermal}} = 3093.44\text{ W}`$, $`P_{\text{TEG}} = 1045.58\text{ W}`$, $`P_{\text{net}} = 555.03\text{ W}`$ per module) delivering $`999.054\text{ kW}_{\text{net}}`$ at $`33.804\%`$ TEG efficiency with $`N+167`$ reserve above the 1,633-module floor, register-mapped derating $`\Delta N(k) = \lfloor \Delta P_{\text{net}} / P_{\text{bit}} \rfloor`$, and focal baseline expansion $`f_0 = 169.30\text{ m} \to f_{\max} = 1692.99\text{ m}`$.
 * **Multi-GPU Physics Acceleration** (`sglt-gpu-physics`, `sglt-hardware-dma`): Distributed CUDA/ROCm 2PN wave-optics solver with GPUDirect Storage ingestion ($`> 100\text{ GB/s}`$), CUDA-aware MPI halo exchange, and LibTorch PINN deconvolution sustaining $`106.3\text{ Hz}`$ at $`4096 \times 4096`$; PCIe Gen5 x16 zero-copy DMA streaming at $`504\text{ Gbps}`$ via a 4096-descriptor ring into `/dev/shm/sglt_frame_buffer`.
 * **Bare-Metal Microkernel** (`kernel/` & `sglt-hil-microkernel`): Freestanding C11 `shbt-os` runtime at SHBT-MMIO-1 base `0x70000000`, statically allocated 2,112-byte `UnifiedStinespringFrame` SRAM arena (640 B active + 1,472 B dark ledger), Hamming(72,64) SECDED ECC, AVX-512 SIMD interlock, and lock-free POSIX shared-memory transport.
@@ -60,7 +64,7 @@ shbt-sglt/
 │   ├── sglt-uncertainty-uq/        # Hyper-dual Monte Carlo Bayesian UQ engine
 │   ├── sglt-tqec-dark-ledger/      # Dark ledger active TQEC (Union-Find / Blossom V)
 │   ├── sglt-webgpu-vis/            # Wasm + WebGPU 3D rendering pipeline (WGSL)
-│   ├── sglt-nonlocal-telemetry/    # Stinespring dilation, Heegaard-Floer relabeling, ADM wake comp
+│   ├── sglt-nonlocal-telemetry/    # Stinespring dilation, Heegaard-Floer relabeling, ADM wake comp, WZW dark Weil partition kernels
 │   ├── sglt-causal-point-metrology/# Causal Point memory, holographic bound, Landauer GET
 │   ├── sglt-optical-raytrace/      # Wideband multi-spectral wave optics (200 nm - 5 µm)
 │   ├── sglt-orbital-flight/        # Ephemeris 4-body CR3BP DOP853 orbital dynamics
@@ -70,12 +74,12 @@ shbt-sglt/
 │   ├── sglt-neural-optics/         # PINN SGL wave-equation deconvolution
 │   ├── sglt-hardware-dma/          # PCIe Gen5 x16 zero-copy DMA streaming fabric
 │   ├── sglt-quantum-decoherence/   # Lindblad anyon decoherence & MPO-DMRG solver
-│   ├── sglt-swarm-dynamics/        # M-node swarm formation & metrology mesh
+│   ├── sglt-swarm-dynamics/        # M-node swarm formation, metrology mesh & reactionless traction drive
 │   ├── sglt-hil-fault-injection/   # POSIX SHM fault injection & recovery harness
 │   ├── sglt-astro-reconstruction/  # Regularized Richardson-Lucy image reconstruction
-│   ├── sglt-core-metric/           # 512-bit MPFR metric tensor & ADM foliation
-│   ├── sglt-flight-gnc/            # SE-L2 formation flight & hybrid GNC
-│   ├── sglt-hil-microkernel/       # shbt-os microkernel FFI wrapper & POSIX SHM
+│   ├── sglt-core-metric/           # 512-bit MPFR metric tensor, ADM foliation, multi-seed superposition & CCZ4
+│   ├── sglt-flight-gnc/            # SE-L2 formation flight, hybrid GNC & 3rd-order wake compensation
+│   ├── sglt-hil-microkernel/       # shbt-os microkernel FFI wrapper, POSIX SHM & seed quench kinetics
 │   ├── sglt-lanr-power/            # 1,800-module LANR power ledger & N-k derating
 │   └── sglt-transducer-fea/        # Acoustic wave FEA & transducer array control
 ├── include/
@@ -98,7 +102,7 @@ shbt-sglt/
 | `0x70000004` | `SR0_STAT` | R | 32 bit | Lock status, thermal alarm, metrology valid, shunt latch |
 | `0x70000008` | `DET_MU_HI` | R | 32 bit | Upper 32 bits of signed Q1.62 eigenvector detuning $\delta\mu$ |
 | `0x7000000C` | `DET_MU_LO` | R | 32 bit | Lower 32 bits of signed Q1.62 eigenvector detuning $\delta\mu$ |
-| `0x70000010` | `BIT_OVF_H` | R/W | 32 bit | Upper word of 64-bit state overflow mantissa |
+| `0x70000010` | `BIT_OVF_H` | R/W | 32 bit | Upper word of 64-bit state overflow mantissa; aliased during transient interlock as `LANR_DERATE` (LANR power-derating / seed-mass-decrement flags) |
 | `0x70000014` | `BIT_OVF_L` | R/W | 32 bit | Lower word of 64-bit state overflow mantissa |
 | `0x70000018` | `RF_PHASE_V` | R/W | 32 bit | Channel address `[31:16]` and 16-bit DAC voltage code `[15:0]` |
 | `0x7000001C` | `SHUNT_TRIG` | W | 32 bit | Nonzero write immediately fires solid-state shunt interlock |

@@ -19,6 +19,7 @@ impl ShmFrameBuffer {
             .read(true)
             .write(true)
             .create(true)
+            .truncate(true)
             .open(SHM_PATH)?;
         file.set_len(FRAME_BYTES as u64)?;
         Ok(Self { file })

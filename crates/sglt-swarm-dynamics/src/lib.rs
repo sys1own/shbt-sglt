@@ -5,6 +5,8 @@
 
 pub mod eom;
 pub mod metrology;
+/// Reactionless traction drive + delta-V bit-stepping (shbt-ghost transfer).
+pub mod traction;
 
 pub const SCHWARZSCHILD_RADIUS_SUN: f64 = 2953.25008;
 pub const AU_TO_METERS: f64 = 1.495978707e11;
@@ -99,9 +101,9 @@ impl SwarmDynamicsEngine {
     pub fn compute_pairwise_distances_simd(&mut self) -> [[f64; 4]; 4] {
         let mut out = [[0.0f64; 4]; 4];
         let count = self.state_vector.count.min(4) as usize;
-        for i in 0..count {
+        for (i, row) in out.iter_mut().enumerate().take(count) {
             let pi = &self.state_vector.nodes[i].position_m;
-            for j in 0..count {
+            for (j, cell) in row.iter_mut().enumerate().take(count) {
                 if i == j {
                     continue;
                 }
@@ -110,7 +112,7 @@ impl SwarmDynamicsEngine {
                 let dy = pi.y - pj.y;
                 let dz = pi.z - pj.z;
                 let d = (dx * dx + dy * dy + dz * dz).sqrt();
-                out[i][j] = d;
+                *cell = d;
                 self.metrology_mesh.link_ranges_pm[i][j] = d * 1e12;
                 self.metrology_mesh.link_dws_theta_nrad[i][j] = (d / 1e6).atan() * 1e9;
             }

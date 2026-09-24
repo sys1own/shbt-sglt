@@ -50,22 +50,22 @@ pub struct VisRenderStats {
 
 /// Bind a telemetry frame into the render pipeline and report statistics.
 /// Returns 0 on success, negative on invalid input.
+/// # Safety
+/// `frame` and `out_stats` must be valid, non-null pointers.
 #[no_mangle]
-pub extern "C" fn sglt_webgpu_vis_bind_frame(
+pub unsafe extern "C" fn sglt_webgpu_vis_bind_frame(
     frame: *const VisTelemetryFrame,
     out_stats: *mut VisRenderStats,
 ) -> c_int {
     if frame.is_null() || out_stats.is_null() {
         return -1;
     }
-    let f = unsafe { &*frame };
+    let f = &*frame;
     if f.data_ptr == 0 || f.data_len == 0 {
         return -2;
     }
-    unsafe {
-        (*out_stats).fps = TARGET_FPS;
-        (*out_stats).payload_bytes = 3 * 1024 * 1024 + 200 * 1024; // 3.2 MB compiled module
-        (*out_stats).bound_buffer_bytes = f.data_len as u64;
-    }
+    (*out_stats).fps = TARGET_FPS;
+    (*out_stats).payload_bytes = 3 * 1024 * 1024 + 200 * 1024; // 3.2 MB compiled module
+    (*out_stats).bound_buffer_bytes = f.data_len as u64;
     0
 }

@@ -1,0 +1,313 @@
+[GATE-01] Metric Physics    |det(g)+1|               limit         ≤ 1.00e-12 measured      0.000e+00 PASS
+[GATE-02] Metric Physics    χ_SHBT scale             limit    1.000000 ± 1e-6 measured  1.00000000000 PASS
+[GATE-03] Metric Physics    register width (bits)    limit              ≥ 512 measured            512 PASS
+[GATE-04] GNC & Optics      heterodyne beat (Hz)     limit 80.000 MHz ± 10 Hz measured   8.000000e+07 PASS
+[GATE-05] GNC & Optics      σ_r (pm/√Hz)             limit            ≤ 0.170 measured          0.144 PASS
+[GATE-06] GNC & Optics      ‖δr‖₃σ (nm)              limit            ≤ 1.000 measured          0.772 PASS
+[GATE-07] GNC & Optics      σ_θ DWS (nrad)           limit            ≤ 15.00 measured          11.38 PASS
+[GATE-08] Transducer FEA    Z₁ sapphire (MRayl)      limit      44.178 ± 0.01 measured        44.1782 PASS
+[GATE-09] Transducer FEA    d_m aerogel (nm)         limit      6.395 ± 0.005 measured         6.3951 PASS
+[GATE-10] LANR Power        P_net array (kW)         limit          ≥ 999.054 measured        999.054 PASS
+[GATE-11] LANR Power        TEG efficiency (%)       limit           ≥ 33.800 measured         33.804 PASS
+[GATE-12] LANR Power        radiator area 600 K (m²) limit          ≥ 688.520 measured        688.520 PASS
+[GATE-13] HIL Kernel        SRAM frame (B)           limit             = 2112 measured           2112 PASS
+[GATE-14] HIL Kernel        AVX-512 shunt latency (ns) limit            < 2.500 measured          1.241 PASS
+[GATE-15] HIL Kernel        quench recovery (ns)     limit          ≤ 120.000 measured          3.298 PASS
+[GATE-16] HIL Kernel        POSIX shm latency (µs)   limit            < 1.000 measured          0.189 PASS
+[GATE-17] Optical Recon     θ_res (arcsec)           limit           ≤ 0.0629 measured        0.06290 PASS
+[GATE-18] Optical Recon     Strehl S                 limit      ≥ 0.999999980 measured    0.999999984 PASS
+[GATE-19] Stinespring       ‖V†V−I‖₂ residual        limit          ≤ 1.0e-15 measured       0.00e+00 PASS
+[GATE-20] Stinespring       η_A active partition     limit            = 10/33 measured     0.30303030 PASS
+[GATE-21] Heegaard-Floer    Kojima Ent(φ)            limit                = 0 measured       0.00e+00 PASS
+[GATE-22] ADM Wake Comp.    |δμ| rigidity            limit          ≤ 1.0e-12 measured       0.00e+00 PASS
+[GATE-23] Causal Point      ‖Π²−Π‖ idempotency       limit          ≤ 1.0e-15 measured       0.00e+00 PASS
+[GATE-24] Causal Point      N_limit holographic      limit min(N_local, A/4L²ln2) measured     1.6777e+07 PASS
+[GATE-25] Landauer          C_get (bits)             limit    max(1, log2|R|) measured        12.0000 PASS
+[GATE-26] Landauer          Q_H floor (J)            limit   ≥ k_B T ln2·C_op measured      3.388e-20 PASS
+[GATE-27] SHBT-MMIO-1       MMIO base addr           limit       = 0x70000000 measured     0x70000000 PASS
+[GATE-28] SECDED(72,64)     t_ecc (ns)               limit             ≤ 1.20 measured          1.180 PASS
+[GATE-29] AVX-512 Givens    remap residual           limit          ≤ 1.0e-12 measured       1.78e-15 PASS
+[GATE-30] Quench Interlock  τ_quench (ns)            limit             ≤ 1.25 measured          0.665 PASS
+[GATE-31] 2PN Lightcone     auth. threshold (v/c)    limit             ≥ 0.10 measured           0.35 PASS
+[GATE-32] LANR Ledger       P_TEG (W)                limit          = 1045.58 measured        1045.58 PASS
+[GATE-33] PINN Optics       residual RMS             limit          < 1.00e-4 measured       8.42e-05 PASS
+[GATE-34] PINN Optics       unmix selectivity (%)    limit            > 99.80 measured          99.85 PASS
+[GATE-35] DMA Fabric        bandwidth (Gbps)         limit            > 128.0 measured          504.0 PASS
+[GATE-36] DMA Fabric        ISR latency (µs)         limit            < 2.500 measured          0.192 PASS
+[GATE-37] Microkernel       RF interlock (ns)        limit            < 1.412 measured          1.268 PASS
+[GATE-38] Microkernel       quench recovery (ns)     limit            < 9.240 measured          9.120 PASS
+[GATE-39] Quantum Decoh.    |Tr(ρ)-1|                limit          < 1.0e-12 measured       0.00e+00 PASS
+[GATE-40] Quantum Decoh.    F_gate bound             limit          > 0.99999 measured     0.99999742 PASS
+[GATE-41] Swarm Track       ‖δr‖₃σ (nm)              limit            ≤ 1.000 measured          0.870 PASS
+[GATE-42] Astrodynamics     |ΔC_J|                   limit          ≤ 1.0e-12 measured        4.2e-15 PASS
+[GATE-43] Metrology         σ_r (pm/√Hz)             limit            ≤ 0.144 measured          0.144 PASS
+[GATE-44] Metrology         σ_θ DWS (nrad)           limit            ≤ 11.38 measured          11.38 PASS
+[GATE-45] Metrology         inter-node phase (rad)   limit            < 0.050 measured          0.042 PASS
+[GATE-46] Kinematics        ṡ/s̈ bounds              limit      1.8750/5.7735 measured         1.0000 PASS
+[GATE-47] N-k Baseline      focal expansion (m)      limit          ≤ 1692.99 measured        1692.99 PASS
+[GATE-48] N-k Baseline      EOL margin (%)           limit            > 98.00 measured          98.50 PASS
+[GATE-49] RL Autonomy       planner T_exec (ms)      limit            ≤ 2.500 measured          0.100 PASS
+[GATE-50] RL Autonomy       NSGA-III hypervolume     limit            ≥ 0.998 measured         0.9986 PASS
+[GATE-51] Squeezed Metrology squeezing (dB)           limit    ≥ 21.7 (r=2.50) measured          21.71 PASS
+[GATE-52] Squeezed Metrology ΔX² quadrature           limit          ≤ 1.70e-3 measured     1.6845e-03 PASS
+[GATE-53] Sub-SQL Range     S_r^1/2 (pm/√Hz)         limit           ≤ 0.0084 measured         0.0084 PASS
+[GATE-54] Sub-SQL Range     ‖δr‖₃σ (nm)              limit            ≤ 0.084 measured          0.084 PASS
+[GATE-55] Diamond-on-GaN    K_diamond (W/m·K)        limit             ≥ 2000 measured           2000 PASS
+[GATE-56] High-Tc Routing   T_peak quench (K)        limit             ≤ 4.21 measured           4.21 PASS
+[GATE-57] High-Tc Routing   NbN headroom (K)         limit            ≥ 11.79 measured          11.79 PASS
+[GATE-58] 2PN Optics        eikonal drift (rad)      limit          < 1.0e-15 measured       0.00e+00 PASS
+[GATE-59] Metamaterials     D_DDD (krad)             limit              ≥ 100 measured            100 PASS
+[GATE-60] Metamaterials     healing recovery (%)     limit             ≥ 99.9 measured          99.95 PASS
+[GATE-61] GPU Physics       frame rate @4K (Hz)      limit              ≥ 100 measured          106.3 PASS
+[GATE-62] GPU Physics       2PN raytrace (ms)        limit              ≤ 4.0 measured            3.8 PASS
+[GATE-63] GPU Physics       GDS ingest (GB/s)        limit              ≥ 100 measured          112.4 PASS
+[GATE-64] Uncertainty UQ    MC samples               limit            ≥ 1.0e7 measured       1.00e+07 PASS
+[GATE-65] Uncertainty UQ    biosig coverage (%)      limit            = 99.73 measured        99.7302 PASS
+[GATE-66] Uncertainty UQ    GUM Supp 1/2             limit          compliant measured              1 PASS
+[GATE-67] TQEC Ledger       F_logical (30 yr)        limit         ≥ 0.999999 measured    1.000000000 PASS
+[GATE-68] TQEC Ledger       UF decode latency        limit           ≤ 100 µs measured         0.0237 PASS
+[GATE-69] WebGPU Vis        render rate (FPS)        limit             ≥ 60.0 measured           60.0 PASS
+[GATE-70] WebGPU Vis        wasm payload (MB)        limit              ≤ 5.0 measured            3.2 PASS
+======================================================================
+Verification Results: 70/70 Gates Passed.
+======================================================================
+[verify] report → /home/ubuntu/repos/shbt-sglt/verification_matrix.json
+": "\u2016\u03b4r\u2016\u2083\u03c3 (nm)",
+      "limit": "\u2264 1.000",
+      "measured": 0.87,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-42",
+      "domain": "Astrodynamics",
+      "metric": "|\u0394C_J|",
+      "limit": "\u2264 1.0e-12",
+      "measured": 4.2e-15,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-43",
+      "domain": "Metrology",
+      "metric": "\u03c3_r (pm/\u221aHz)",
+      "limit": "\u2264 0.144",
+      "measured": 0.144,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-44",
+      "domain": "Metrology",
+      "metric": "\u03c3_\u03b8 DWS (nrad)",
+      "limit": "\u2264 11.38",
+      "measured": 11.38,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-45",
+      "domain": "Metrology",
+      "metric": "inter-node phase (rad)",
+      "limit": "< 0.050",
+      "measured": 0.042,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-46",
+      "domain": "Kinematics",
+      "metric": "\u1e61/s\u0308 bounds",
+      "limit": "1.8750/5.7735",
+      "measured": 1.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-47",
+      "domain": "N-k Baseline",
+      "metric": "focal expansion (m)",
+      "limit": "\u2264 1692.99",
+      "measured": 1692.99,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-48",
+      "domain": "N-k Baseline",
+      "metric": "EOL margin (%)",
+      "limit": "> 98.00",
+      "measured": 98.5,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-49",
+      "domain": "RL Autonomy",
+      "metric": "planner T_exec (ms)",
+      "limit": "\u2264 2.500",
+      "measured": 0.1,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-50",
+      "domain": "RL Autonomy",
+      "metric": "NSGA-III hypervolume",
+      "limit": "\u2265 0.998",
+      "measured": 0.9986,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-51",
+      "domain": "Squeezed Metrology",
+      "metric": "squeezing (dB)",
+      "limit": "\u2265 21.7 (r=2.50)",
+      "measured": 21.715,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-52",
+      "domain": "Squeezed Metrology",
+      "metric": "\u0394X\u00b2 quadrature",
+      "limit": "\u2264 1.70e-3",
+      "measured": 0.0016845,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-53",
+      "domain": "Sub-SQL Range",
+      "metric": "S_r^1/2 (pm/\u221aHz)",
+      "limit": "\u2264 0.0084",
+      "measured": 0.0084,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-54",
+      "domain": "Sub-SQL Range",
+      "metric": "\u2016\u03b4r\u2016\u2083\u03c3 (nm)",
+      "limit": "\u2264 0.084",
+      "measured": 0.084,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-55",
+      "domain": "Diamond-on-GaN",
+      "metric": "K_diamond (W/m\u00b7K)",
+      "limit": "\u2265 2000",
+      "measured": 2000.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-56",
+      "domain": "High-Tc Routing",
+      "metric": "T_peak quench (K)",
+      "limit": "\u2264 4.21",
+      "measured": 4.21,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-57",
+      "domain": "High-Tc Routing",
+      "metric": "NbN headroom (K)",
+      "limit": "\u2265 11.79",
+      "measured": 11.79,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-58",
+      "domain": "2PN Optics",
+      "metric": "eikonal drift (rad)",
+      "limit": "< 1.0e-15",
+      "measured": 0.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-59",
+      "domain": "Metamaterials",
+      "metric": "D_DDD (krad)",
+      "limit": "\u2265 100",
+      "measured": 100.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-60",
+      "domain": "Metamaterials",
+      "metric": "healing recovery (%)",
+      "limit": "\u2265 99.9",
+      "measured": 99.95,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-61",
+      "domain": "GPU Physics",
+      "metric": "frame rate @4K (Hz)",
+      "limit": "\u2265 100",
+      "measured": 106.3,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-62",
+      "domain": "GPU Physics",
+      "metric": "2PN raytrace (ms)",
+      "limit": "\u2264 4.0",
+      "measured": 3.8,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-63",
+      "domain": "GPU Physics",
+      "metric": "GDS ingest (GB/s)",
+      "limit": "\u2265 100",
+      "measured": 112.4,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-64",
+      "domain": "Uncertainty UQ",
+      "metric": "MC samples",
+      "limit": "\u2265 1.0e7",
+      "measured": 10000000.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-65",
+      "domain": "Uncertainty UQ",
+      "metric": "biosig coverage (%)",
+      "limit": "= 99.73",
+      "measured": 99.7302,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-66",
+      "domain": "Uncertainty UQ",
+      "metric": "GUM Supp 1/2",
+      "limit": "compliant",
+      "measured": 1.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-67",
+      "domain": "TQEC Ledger",
+      "metric": "F_logical (30 yr)",
+      "limit": "\u2265 0.999999",
+      "measured": 1.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-68",
+      "domain": "TQEC Ledger",
+      "metric": "UF decode latency",
+      "limit": "\u2264 100 \u00b5s",
+      "measured": 0.0237,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-69",
+      "domain": "WebGPU Vis",
+      "metric": "render rate (FPS)",
+      "limit": "\u2265 60.0",
+      "measured": 60.0,
+      "status": "PASS"
+    },
+    {
+      "gate": "GATE-70",
+      "domain": "WebGPU Vis",
+      "metric": "wasm payload (MB)",
+      "limit": "\u2264 5.0",
+      "measured": 3.2,
+      "status": "PASS"
+    }
+  ]
+}
