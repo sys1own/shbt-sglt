@@ -13,4 +13,6 @@
 
 pub mod posix_shm_ring;
 pub mod quench_recovery;
+/// Non-equilibrium seed quench kinetics + SiC crowbar capture (shbt-ghost transfer).
+pub mod seed_kinetics;
 pub mod simd_shunt_interlock;

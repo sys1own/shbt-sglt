@@ -396,3 +396,78 @@ int32_t shbt_metamaterial_heal_pulse(double fluence_mj_cm2,
     sdr_quench_reg[0] = 0U;
     return 0;
 }
+
+/* --------------------------------------------------------------------------
+ * Non-equilibrium seed transient kinetics + LANR derate interlock
+ * (sys1own/shbt-ghost transfer)
+ *
+ * DeltaN(t) = DeltaN0 * exp(-t/tau_quench) * Theta(t) with
+ * tau_quench <= 2.18 ns enforced by the GaN current-shunt crowbar.  The
+ * 94.20% SiC crowbar path harvests the 142.08 MW transient surge.
+ * -------------------------------------------------------------------------- */
+
+/* Transient-interlock aperture: hardware-interlocked LANR power derating
+ * and seed mass decrement flags at offset 0x70000010. */
+static volatile uint32_t *const lanr_derate_reg =
+    (volatile uint32_t *)SHBT_LANR_DERATE_ADDR;
+
+/* Freestanding exp(-x), x >= 0: e^-x = e^-k * e^-f with k = floor(x) and
+ * f in [0,1); the fractional part uses a 16-term Taylor expansion. */
+static double shbt_exp_neg(double x)
+{
+    if (x <= 0.0)
+        return 1.0;
+    double k = 0.0;
+    while (x >= 1.0) { x -= 1.0; k += 1.0; }
+    double term = 1.0, sum = 1.0;
+    for (int n = 1; n <= 16; ++n) {
+        term *= -x / (double)n;
+        sum += term;
+    }
+    /* e^-1 = 0.36787944117144233 applied k times. */
+    double ek = 1.0;
+    for (double i = 0.0; i < k; i += 1.0)
+        ek *= 0.36787944117144233;
+    return ek * sum;
+}
+
+void shbt_lanr_derate_interlock(uint32_t flags)
+{
+    *lanr_derate_reg = flags;
+    SHBT_SYS_BARRIER();
+}
+
+void shbt_seed_ignition_transient(uint64_t delta_n0_bits)
+{
+    /* Arm the crowbar and record the initial active overflow.  The seed
+     * mass decrement flag stays set until the writeback commits. */
+    shbt_lanr_derate_interlock(SHBT_DERATE_SEED_MASS_BIT);
+    ShbtRegisters *hw = SHBT_MMIO;
+    hw->ecc_low  = (uint32_t)(delta_n0_bits & 0xFFFFFFFFU);
+    hw->ecc_high = (uint32_t)(delta_n0_bits >> 32);
+}
+
+void shbt_emergency_current_shunt(void)
+{
+    /* Sub-2.50 ns crowbar: LANR derating + seed mass decrement flags at
+     * 0x70000010, then drop enable.  Propagation is hardware-bound at
+     * tau_quench <= 2.18 ns. */
+    shbt_lanr_derate_interlock(SHBT_DERATE_LANR_BIT | SHBT_DERATE_SEED_MASS_BIT);
+    ShbtRegisters *hw = SHBT_MMIO;
+    hw->control = 0U;
+    hw->status |= SHBT_STATUS_FAULT_ST;
+}
+
+double shbt_quench_transient_delta_n(uint64_t delta_n0_bits, double t_ns)
+{
+    if (t_ns < 0.0)
+        return (double)delta_n0_bits;          /* Theta(t): pre-quench hold */
+    return (double)delta_n0_bits * shbt_exp_neg(t_ns / SHBT_TAU_QUENCH_NS);
+}
+
+double shbt_sic_crowbar_capture_mw(double surge_mw)
+{
+    if (surge_mw <= 0.0)
+        return 0.0;
+    return SHBT_SIC_CROWBAR_ETA * surge_mw;
+}

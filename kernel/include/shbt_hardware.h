@@ -156,6 +156,46 @@ uint32_t shbt_dark_ledger_extract_syndrome(const uint64_t *ledger,
 int32_t  shbt_metamaterial_heal_pulse(double fluence_mj_cm2,
                                       uint32_t duration_ns);
 
+/* --------------------------------------------------------------------------
+ * Non-equilibrium seed transient kinetics + LANR derate interlock
+ * (sys1own/shbt-ghost transfer)
+ *
+ * The hardware-interlocked LANR power derating and seed mass decrement
+ * flags live at MMIO word offset 0x70000010.  During a transient quench
+ * interlock the ECC datapath is quiesced, so this word aliases `ecc_low`
+ * in the normative map; interlock drivers must not commit ECC while the
+ * derate flags are asserted.
+ * -------------------------------------------------------------------------- */
+#define SHBT_LANR_DERATE_ADDR      0x70000010UL
+#define SHBT_LANR_DERATE_OFFSET    0x10U
+#define SHBT_DERATE_LANR_BIT       (1U << 0)  /* LANR power derating active      */
+#define SHBT_DERATE_SEED_MASS_BIT  (1U << 1)  /* seed mass decrement in progress */
+
+#define SHBT_TAU_QUENCH_NS         2.18    /* GaN current-shunt crowbar tau    */
+#define SHBT_QUENCH_BOUND_NS       2.50    /* sub-2.50 ns interlock bound      */
+#define SHBT_SIC_CROWBAR_ETA       0.9420  /* 94.20% SiC energy recovery       */
+#define SHBT_TRANSIENT_SURGE_MW    142.08  /* crowbar transient surge (MW)     */
+
+/* Transient seed ignition: precharges the coupling coils and arms the
+ * GaN current-shunt crowbar before seed-mass writeback. */
+void    shbt_seed_ignition_transient(uint64_t delta_n0_bits);
+
+/* Sub-2.50 ns emergency current-shunt quench: asserts the crowbar, sets
+ * the LANR derating + seed mass decrement flags at 0x70000010, and drops
+ * the control-plane enable bits. */
+void    shbt_emergency_current_shunt(void);
+
+/* Quench transient decay `DeltaN(t) = DeltaN0 * exp(-t/tau_quench) * Theta(t)`
+ * with t in nanoseconds; returns the surviving active-overflow bits. */
+double  shbt_quench_transient_delta_n(uint64_t delta_n0_bits, double t_ns);
+
+/* SiC crowbar inductive energy capture: returns recovered power (MW)
+ * from a transient surge at 94.20% efficiency. */
+double  shbt_sic_crowbar_capture_mw(double surge_mw);
+
+/* Write the derate/decrement flag word to the interlocked aperture. */
+void    shbt_lanr_derate_interlock(uint32_t flags);
+
 #ifdef __cplusplus
 }
 #endif

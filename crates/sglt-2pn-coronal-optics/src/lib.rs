@@ -5,8 +5,8 @@ use libm::{pow, sin};
 pub const GRAVITATIONAL_RADIUS_SUN: f64 = 1476.625; // meters (GM/c^2)
 pub const SOLAR_RADIUS: f64 = 6.9634e8; // meters
 pub const ELECTRON_CHARGE: f64 = 1.602_176_634e-19; // C
-pub const ELECTRON_MASS: f64 = 9.109_383_7015e-31; // kg
-pub const VACUUM_PERMITTIVITY: f64 = 8.854_187_8128e-12; // F/m
+pub const ELECTRON_MASS: f64 = 9.109_383_701_5e-31; // kg
+pub const VACUUM_PERMITTIVITY: f64 = 8.854_187_812_8e-12; // F/m
 pub const SPEED_OF_LIGHT: f64 = 299_792_458.0; // m/s
 
 #[repr(C)]
@@ -26,8 +26,10 @@ pub struct EikonalPhaseResult {
     pub total_predistortion_phase_rad: f64,
 }
 
+/// # Safety
+/// `params` and `out_result` must be valid, non-null pointers.
 #[no_mangle]
-pub extern "C" fn sglt_2pn_coronal_optics_compute_eikonal(
+pub unsafe extern "C" fn sglt_2pn_coronal_optics_compute_eikonal(
     params: *const CoronalOpticsParams,
     out_result: *mut EikonalPhaseResult,
 ) -> c_int {
@@ -35,7 +37,7 @@ pub extern "C" fn sglt_2pn_coronal_optics_compute_eikonal(
         return -1;
     }
 
-    let p = unsafe { &*params };
+    let p = &*params;
 
     if p.heliocentric_r_solar_radii <= 1.0 {
         return -2; // Inside solar interior
@@ -67,17 +69,17 @@ pub extern "C" fn sglt_2pn_coronal_optics_compute_eikonal(
     let plasma_phase = k0 * n_plasma_minus_1 * path_length_m;
     let total_phase = grav_phase + plasma_phase;
 
-    unsafe {
-        (*out_result).grav_2pn_phase_rad = grav_phase;
-        (*out_result).plasma_phase_rad = plasma_phase;
-        (*out_result).total_predistortion_phase_rad = total_phase;
-    }
+    (*out_result).grav_2pn_phase_rad = grav_phase;
+    (*out_result).plasma_phase_rad = plasma_phase;
+    (*out_result).total_predistortion_phase_rad = total_phase;
 
     0
 }
 /// C-ABI alias matching the unified `sglt_abi.h` surface name.
+/// # Safety
+/// `params` and `out_result` must be valid, non-null pointers.
 #[no_mangle]
-pub extern "C" fn sglt_2pn_coronal_optics_evaluate(
+pub unsafe extern "C" fn sglt_2pn_coronal_optics_evaluate(
     params: *const CoronalOpticsParams,
     out_result: *mut EikonalPhaseResult,
 ) -> c_int {

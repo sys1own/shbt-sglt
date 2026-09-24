@@ -17,6 +17,9 @@
 use core::ffi::c_int;
 use libm::{cos, exp, fabs, log, sin};
 
+/// WZW affine boundary partition + dark Weil module kernels (shbt-ghost transfer).
+pub mod wzw_partition;
+
 /// Active residual capacity coefficient `eta_A = 10/33`.
 pub const ETA_ACTIVE: f64 = 10.0 / 33.0;
 /// Dark ledger capacity coefficient `eta_D = 23/33`.

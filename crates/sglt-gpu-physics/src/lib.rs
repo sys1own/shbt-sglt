@@ -68,20 +68,23 @@ struct GpuEngine {
 /// Initialize the distributed physics engine. Returns an opaque engine
 /// handle via `out_engine`; the caller owns it and must release it with
 /// `sglt_gpu_physics_destroy`.
+/// # Safety
+/// `config` and `out_engine` must be valid, non-null pointers; the returned
+/// engine handle must be released via `sglt_gpu_physics_destroy`.
 #[no_mangle]
-pub extern "C" fn sglt_gpu_physics_init(
+pub unsafe extern "C" fn sglt_gpu_physics_init(
     config: *const SgltGpuConfig,
     out_engine: *mut *mut c_void,
 ) -> c_int {
     if config.is_null() || out_engine.is_null() {
         return -1;
     }
-    let cfg = unsafe { &*config };
+    let cfg = &*config;
     if cfg.grid_width == 0 || cfg.grid_height == 0 || cfg.num_gpus < 1 {
         return -2;
     }
     let engine = Box::new(GpuEngine { config: *cfg });
-    unsafe { *out_engine = Box::into_raw(engine) as *mut c_void };
+    *out_engine = Box::into_raw(engine) as *mut c_void;
     0
 }
 
@@ -106,8 +109,11 @@ fn mu0(wavelength_m: f64) -> f64 {
     4.0 * std::f64::consts::PI.powi(2) * SCHWARZSCHILD_RADIUS_SUN / wavelength_m
 }
 
+/// # Safety
+/// `engine` must come from `sglt_gpu_physics_init`; `input_frame`,
+/// `output_frame`, and `result_metrics` must be valid, non-null pointers.
 #[no_mangle]
-pub extern "C" fn sglt_gpu_physics_process_frame_4k(
+pub unsafe extern "C" fn sglt_gpu_physics_process_frame_4k(
     engine: *mut c_void,
     input_frame: *const SgltFrameBuffer,
     output_frame: *mut SgltFrameBuffer,
@@ -118,9 +124,9 @@ pub extern "C" fn sglt_gpu_physics_process_frame_4k(
     {
         return -1;
     }
-    let eng = unsafe { &mut *(engine as *mut GpuEngine) };
-    let inp = unsafe { &*input_frame };
-    let out = unsafe { &mut *output_frame };
+    let eng = &mut *(engine as *mut GpuEngine);
+    let inp = &*input_frame;
+    let out = &mut *output_frame;
     if inp.data_ptr.is_null() || out.data_ptr.is_null()
         || inp.width != out.width || inp.height != out.height
     {
@@ -134,8 +140,8 @@ pub extern "C" fn sglt_gpu_physics_process_frame_4k(
     let scale = (2.0 * SCHWARZSCHILD_RADIUS_SUN / z).sqrt();
     let mu = mu0(lambda_m);
 
-    let src = unsafe { std::slice::from_raw_parts(inp.data_ptr, n) };
-    let dst = unsafe { std::slice::from_raw_parts_mut(out.data_ptr, n) };
+    let src = std::slice::from_raw_parts(inp.data_ptr, n);
+    let dst = std::slice::from_raw_parts_mut(out.data_ptr, n);
 
     let mut max_i = 0.0f32;
     let half = out.width as f64 / 2.0;
@@ -161,23 +167,24 @@ pub extern "C" fn sglt_gpu_physics_process_frame_4k(
     }
 
     let elapsed_us = t0.elapsed().as_micros() as u32;
-    unsafe {
-        (*result_metrics).max_caustic_intensity = max_i;
-        (*result_metrics).strehl_ratio = 0.999_999_98;
-        (*result_metrics).pinn_loss_val = 8.42e-5;
-        (*result_metrics).execution_time_us = elapsed_us;
-        (*result_metrics).status_code = 0;
-    }
+    (*result_metrics).max_caustic_intensity = max_i;
+    (*result_metrics).strehl_ratio = 0.999_999_98;
+    (*result_metrics).pinn_loss_val = 8.42e-5;
+    (*result_metrics).execution_time_us = elapsed_us;
+    (*result_metrics).status_code = 0;
     0
 }
 
 /// Tear down the engine and release device/host resources.
+/// # Safety
+/// `engine` must be a handle returned by `sglt_gpu_physics_init` and not yet
+/// destroyed.
 #[no_mangle]
-pub extern "C" fn sglt_gpu_physics_destroy(engine: *mut c_void) -> c_int {
+pub unsafe extern "C" fn sglt_gpu_physics_destroy(engine: *mut c_void) -> c_int {
     if engine.is_null() {
         return -1;
     }
-    unsafe { drop(Box::from_raw(engine as *mut GpuEngine)) };
+    drop(Box::from_raw(engine as *mut GpuEngine));
     0
 }
 
@@ -196,7 +203,7 @@ fn bessel_j0(x: f64) -> f64 {
             + y * (-0.000_000_77
             + y * (-0.005_527_40
             + y * 0.000_095_12));
-        let theta0 = ax - 0.785_398_16
+        let theta0 = ax - std::f64::consts::FRAC_PI_4
             + y * (-0.000_000_16
             + y * (-0.000_041_66
             + y * -0.000_000_39));

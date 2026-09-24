@@ -42,7 +42,7 @@ def render() -> None:
             else:
                 c1, c2, c3, c4 = st.columns(4)
                 c1.metric("LANR net margin", f"{frame.get('net_power_margin_w', 0):.2f} W")
-                c2.metric("Failed modules (k)", frame.get("k", 0))
+                c2.metric("Failed modules (k)", frame.get("fault_injection_k", 0))
                 c3.metric("Focal baseline", f"{frame.get('focal_baseline_m', 0):.3f} m")
                 c4.metric("M_seed", f"{frame.get('m_seed_msun', 0):.3e} M☉")
                 st.json(frame)

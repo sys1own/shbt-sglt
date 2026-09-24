@@ -1,4 +1,6 @@
 //! Prince–Dormand 8(7) explicit Runge–Kutta integrator (DOP853) with
+#![allow(clippy::excessive_precision)]
+//!
 //! adaptive step control: ε_abs ≤ 1e-14, ε_rel ≤ 1e-12 (up1.txt §3).
 
 /// Adaptive integration tolerances.
@@ -136,8 +138,8 @@ impl Dop853 {
             for j in 0..s {
                 let a = if s == 12 { B[j.min(11)] } else { A[s - 1][j] };
                 if a != 0.0 {
-                    for i in 0..6 {
-                        yt[i] += h * a * k[j][i];
+                    for (i, v) in yt.iter_mut().enumerate() {
+                        *v += h * a * k[j][i];
                     }
                 }
             }

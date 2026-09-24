@@ -28,8 +28,10 @@ pub struct HealingResult {
     pub lattice_reorganized: bool,
 }
 
+/// # Safety
+/// `rad_state`, `pulse_cfg`, and `out_result` must be valid, non-null pointers.
 #[no_mangle]
-pub extern "C" fn sglt_metamaterial_trigger_self_healing(
+pub unsafe extern "C" fn sglt_metamaterial_trigger_self_healing(
     rad_state: *const RadiationState,
     pulse_cfg: *const SelfHealingPulseConfig,
     out_result: *mut HealingResult,
@@ -38,33 +40,31 @@ pub extern "C" fn sglt_metamaterial_trigger_self_healing(
         return -1;
     }
 
-    let state = unsafe { &*rad_state };
+    let state = &*rad_state;
 
-    let pulse = unsafe { &*pulse_cfg };
+    let pulse = &*pulse_cfg;
 
     if pulse.pulse_energy_mj_cm2 < HEALING_THRESHOLD_FLUENCE_MJ_CM2 {
-        unsafe {
-            (*out_result).post_healing_conductivity_s_m = state.current_conductivity_s_m;
-            (*out_result).recovery_ratio = state.current_conductivity_s_m / state.initial_conductivity_s_m;
-            (*out_result).lattice_reorganized = false;
-        }
+        (*out_result).post_healing_conductivity_s_m = state.current_conductivity_s_m;
+        (*out_result).recovery_ratio = state.current_conductivity_s_m / state.initial_conductivity_s_m;
+        (*out_result).lattice_reorganized = false;
         return 0;
     }
 
     let recovery = 0.9995;
     let healed_sigma = state.initial_conductivity_s_m * recovery;
 
-    unsafe {
-        (*out_result).post_healing_conductivity_s_m = healed_sigma;
-        (*out_result).recovery_ratio = recovery;
-        (*out_result).lattice_reorganized = true;
-    }
+    (*out_result).post_healing_conductivity_s_m = healed_sigma;
+    (*out_result).recovery_ratio = recovery;
+    (*out_result).lattice_reorganized = true;
 
     0
 }
 /// C-ABI alias matching the unified `sglt_abi.h` surface name.
+/// # Safety
+/// `rad_state`, `pulse_cfg`, and `out_result` must be valid, non-null pointers.
 #[no_mangle]
-pub extern "C" fn sglt_metamaterial_radiation_heal(
+pub unsafe extern "C" fn sglt_metamaterial_radiation_heal(
     rad_state: *const RadiationState,
     pulse_cfg: *const SelfHealingPulseConfig,
     out_result: *mut HealingResult,

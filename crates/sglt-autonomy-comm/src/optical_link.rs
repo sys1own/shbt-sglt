@@ -62,7 +62,7 @@ impl OpticalLink {
     /// Achievable data rate — capped by the 12 Gbps design point (GATE-20).
     pub fn data_rate_gbps(&self, pr_w: f64) -> f64 {
         // Simple photon-starvation roll-off vs. 1e-9 W reference sensitivity.
-        let margin = (pr_w / 1e-9).max(0.0).min(1.0);
+        let margin = (pr_w / 1e-9).clamp(0.0, 1.0);
         12.0 * margin
     }
 

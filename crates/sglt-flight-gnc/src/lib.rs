@@ -17,3 +17,5 @@ pub mod heterodyne_metrology;
 pub mod hybrid_controller;
 pub mod minimum_jerk;
 pub mod propellant_budget;
+/// 3rd-order kinematic wake tensor momentum compensation (shbt-ghost transfer).
+pub mod wake_compensation;

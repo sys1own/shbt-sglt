@@ -13,7 +13,7 @@ pub const DARK_LEDGER_BYTES: usize = 1472;
 /// Tiny xorshift PRNG for reproducible fault sequences.
 pub struct XorShift(pub u64);
 impl XorShift {
-    pub fn next(&mut self) -> u64 {
+    pub fn next_u64(&mut self) -> u64 {
         let mut x = self.0;
         x ^= x << 13;
         x ^= x >> 7;
@@ -22,7 +22,7 @@ impl XorShift {
         x
     }
     pub fn uniform(&mut self) -> f64 {
-        (self.next() >> 11) as f64 / (1u64 << 53) as f64
+        (self.next_u64() >> 11) as f64 / (1u64 << 53) as f64
     }
     /// Poisson(k | λΔt) count of SEUs in Δt.
     pub fn poisson_events(&mut self, lambda_dt: f64) -> u32 {

@@ -61,15 +61,17 @@ fn logical_error_per_round() -> f64 {
 }
 
 /// Run one syndrome extraction + decode pass over the dark ledger frame.
+/// # Safety
+/// `frame` and `out` must be valid, non-null pointers.
 #[no_mangle]
-pub extern "C" fn sglt_tqec_dark_ledger_decode(
+pub unsafe extern "C" fn sglt_tqec_dark_ledger_decode(
     frame: *const SyndromeFrame,
     out: *mut DecodeResult,
 ) -> c_int {
     if frame.is_null() || out.is_null() {
         return -1;
     }
-    let f = unsafe { &*frame };
+    let f = &*frame;
     if !(0.0..=1.0).contains(&f.defect_density) || f.transit_time_s < 0.0 {
         return -2;
     }
@@ -81,12 +83,10 @@ pub extern "C" fn sglt_tqec_dark_ledger_decode(
     let fidelity = 1.0 - rounds * p_l;
     let defects = f.syndrome_bits.count_ones();
 
-    unsafe {
-        (*out).decoder_used = if use_mwpm { 1 } else { 0 };
-        (*out).decode_latency_ns = if use_mwpm { 87.4 } else { 23.7 };
-        (*out).logical_error_rate = p_l;
-        (*out).fidelity_logical = fidelity;
-        (*out).corrected_defects = defects;
-    }
+    (*out).decoder_used = if use_mwpm { 1 } else { 0 };
+    (*out).decode_latency_ns = if use_mwpm { 87.4 } else { 23.7 };
+    (*out).logical_error_rate = p_l;
+    (*out).fidelity_logical = fidelity;
+    (*out).corrected_defects = defects;
     0
 }
