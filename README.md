@@ -289,3 +289,4 @@ The unified specification dictates strict compliance across seventy cross-bench 
 | SGLT platform & CLI | [`sys1own/shbt-sglt`](https://github.com/sys1own/shbt-sglt) |
 | Precision cosmology & audits | [`sys1own/shbt-precision`](https://github.com/sys1own/shbt-precision) |
 | Unified translocator workspace | [`sys1own/shbt-recon`](https://github.com/sys1own/shbt-recon) |
+| Graser Aneutronic Fusion | [`sys1own/shbt-power`](https://github.com/sys1own/shbt-power) |
