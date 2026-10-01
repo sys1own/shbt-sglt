@@ -281,12 +281,14 @@ The unified specification dictates strict compliance across seventy cross-bench 
 
 ## Code Repository Crosswalk
 
-| Sub-engine | Repository |
-| --- | --- |
-| Transducer / HBT array | [`sys1own/shbt-exotic`](https://github.com/sys1own/shbt-exotic.git) |
-| C11 microkernel / QC runtime | [`sys1own/shbt-qc`](https://github.com/sys1own/shbt-qc) |
-| Cold-fusion / thermo solver | [`sys1own/shbt-cf`](https://github.com/sys1own/shbt-cf) |
-| SGLT platform & CLI | [`sys1own/shbt-sglt`](https://github.com/sys1own/shbt-sglt) |
-| Precision cosmology & audits | [`sys1own/shbt-precision`](https://github.com/sys1own/shbt-precision) |
-| Unified translocator workspace | [`sys1own/shbt-recon`](https://github.com/sys1own/shbt-recon) |
-| Graser Aneutronic Fusion | [`sys1own/shbt-power`](https://github.com/sys1own/shbt-power) |
+| Repository | Domain Role | Integration into `shbt-sglt` |
+| :--- | :--- | :--- |
+| [`sys1own/shbt-precision`](https://github.com/sys1own/shbt-precision) | Arbitrary-precision numerics core | 512-bit MPFR framework, canonical WZW affine branch (26, 8, 312) arithmetic, zero-allocation audit primitives |
+| [`sys1own/shbt-qc`](https://github.com/sys1own/shbt-qc) | Bare-metal runtime & HIL microkernel | Freestanding C11 `shbt-os` execution model, `SHBT-MMIO-1` register map at `0x70000000`, SECDED Hamming(72,64) ECC |
+| [`sys1own/shbt-cf`](https://github.com/sys1own/shbt-cf) | Cold-fusion reactor & HIL workbench | 1,800-module LANR starter grid (999.054 kW net) balancing the array's 906.000 kW entropy debt, two-phase helium cryogenics |
+| [`sys1own/shbt-power`](https://github.com/sys1own/shbt-power) | Master fusion plant digital twin | Closed-loop thermodynamic ledger methodology and the 70-gate verification standard |
+| [`sys1own/shbt-ghost`](https://github.com/sys1own/shbt-ghost) | Fast interlocks & metric control | PCSS optical crowbars, SiC inductive recovery shunts, CCZ4/ADM metric stabilization |
+| [`sys1own/shbt-exotic`](https://github.com/sys1own/shbt-exotic) | Boundary CFT & transducer array | Boundary state-vector formulations, HBT transducer arrays, dark-ledger partitioning (η<sub>A</sub> = 10/33, η<sub>D</sub> = 23/33) |
+| [`sys1own/shbt-recon`](https://github.com/sys1own/shbt-recon) | Macroscopic states & telemetry | Unified translocator workspace, 128-byte dual-cacheline C-ABI, POSIX SPSC telemetry rings |
+| [`sys1own/shbt-warp`](https://github.com/sys1own/shbt-warp) | Holographic warp drive & spacetime engine | Receives `shbt-sglt`'s Two-Mode Squeezed Vacuum (TMSV) laser heterodyne ranging (r = 2.50, 21.715 dB, σ<sub>r</sub> ≤ 0.144 pm/√Hz) for real-time bubble-skin displacement tracking, 5th-order minimum-jerk flight kinematics (s(τ) = 10τ³ − 15τ⁴ + 6τ⁵), and hyper-dual Monte Carlo UQ |
+| **`sys1own/shbt-sglt`** (this repo) | SGLT platform & CLI | Synthetic gravitational lensing telescope multi-spacecraft formation-flight digital twin |
