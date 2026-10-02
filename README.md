@@ -47,7 +47,76 @@ The SGLT synthesizes an artificial gravitational lens via a boundary-state conge
 * **Cryo-Thermal & Observatory** (`sglt-cryo-thermal`, `sglt-target-observatory`): 3D nodal transient thermal-fluid solver across He-4 (4.20 K), sapphire, aerogel, and 600 K radiators; exoplanetary spectroscopy with FITS v4.0 / HDF5 datacube export.
 
 ---
+## System Topology
+```
+ ╭────────────────────────────────────────────────────────────────────────────────────────╮
+ │        SHBT-SGLT SYNTHETIC GRAVITATIONAL LENSING TELESCOPE & SENSOR MESH MAP           │
+ ╰────────────────────────────────────────────────────────────────────────────────────────╯
 
+ ┌── [ 1. GHOST-SEED GRAVITATIONAL LENS SYNTHESIS ] ─────────────────────────────────────┐
+ │                                                                                       │
+ │  ╭─────────────────────────────────────╮       ╭───────────────────────────────────╮  │
+ │  │ Boundary Congestion Ghost Seed      │       │ Artificial Relativistic Focal Line│  │
+ │  │ • M_seed = 10⁻⁶ M_sun (α_seed · ΔN) │──────►│ • Impact parameter: r_0 = 1.000 m │  │
+ │  │ • Bit depth: ΔN_0 = 7.5426×10⁴⁴ bit │       │ • Focal baseline:   f_0 = 169.30 m│  │
+ │  │ • Multi-seed metric superposition   │       │ • CCZ4 lapse lock: |det g+1|≤1e-12│  │
+ │  ╰─────────────────────────────────────╯       ╰─────────────────┬─────────────────╯  │
+ └──────────────────────────────────────────────────────────────────┼────────────────────┘
+                                                                    │ Optical Axis
+                                                                    ▼
+ ┌── [ 2. DEEP-SPACE SWARM FORMATION & SUB-SQL QUANTUM METROLOGY (550–650 AU) ] ──────────┐
+ │                                                                                        │
+ │  ╭────────────────────────────────────╮   72 GHz Pump  ╭────────────────────────────╮  │
+ │  │ M-Node Swarm Formation (M > 2)     │── TMSV Seed ──►│ Two-Mode Squeezed Metrology│  │
+ │  │• SE-L2 / 547.8–650.0 AU baseline   │   (r = 2.50)   │• Squeezing: 21.715 dB      │  │
+ │  │• 5th-order min-jerk: max |s″|≤5.77 │                │• Sensitivity: ≤0.144 pm/√Hz│  │
+ │  │• 3rd-order wake comp: |Δμ| ≤ 1e-12 │                │• DWS: σ_θ ≤ 11.38 nrad     │  │
+ │  ╰─────────────────┬──────────────────╯                ╰─────────────┬──────────────╯  │
+ │                    │                                                 │                 │
+ │                    └───────────────────────┬─────────────────────────┘                 │
+ │                                            │ Inter-Node Range Lock                     │
+ │                                            ▼                                           │
+ │  ╭─────────────────────────────────────────────────────────────────────────────────╮   │
+ │  │ Non-Local Sensor Mesh: Stinespring Dark Ledger Telemetry                        │   │
+ │  │ • De-rendered phase telemetry: η_A = 10/33 visible, η_D = 23/33 dark ledger     │   │
+ │  │ • Heegaard-Floer Sp(2g, ℤ) relabeling | Zero inter-node RF propagation delay    │   │
+ │  ╰─────────────────────────────────────────────────────────────────────────────────╯   │
+ └────────────────────────────────────────────┬───────────────────────────────────────────┘
+                                              │ Coherent Synthetic Aperture
+                                              ▼
+ ┌── [ 3. RELATIVISTIC WAVE OPTICS & CORONAL CORONAGRAPH NULLING ] ──────────────────────┐
+ │                                                                                       │
+ │  ╭──────────────────────────────────╮          ╭───────────────────────────────────╮  │
+ │  │ 2PN Coronal Wave-Optics Engine   │          │ C6 Hybrid Coronagraph Mask        │  │
+ │  │• Dynamic Baumbach-Allen plasma   │─────────►│• Host star suppression: C ≤ 10⁻¹⁰ │  │
+ │  │• Multi-spectral: 200 nm ➔ 5.0 µm│          │• Inner working angle: θ_IWA ≤ 2λ/D│  │
+ │  │• Geodesic eikonal raytracing     │          │• Sub-SQL phase-locked nulling     │  │
+ │  ╰──────────────────────────────────╯          ╰─────────────────┬─────────────────╯  │
+ └──────────────────────────────────────────────────────────────────┼────────────────────┘
+                                                                    │ Filtered Caustic
+                                                                    ▼
+ ┌── [ 4. INVERSE RECONSTRUCTION & EXOPLANET SPECTROSCOPY PIPELINE ] ────────────────────┐
+ │                                                                                       │
+ │  ╭─────────────────────────────────────────────────────────────────────────────────╮  │
+ │  │ Physics-Informed Neural Network (PINN) & Richardson-Lucy Deconvolution          │  │
+ │  │ • Bessel J₀² caustic inversion ➔ Regularized spatial deconvolution             │  │
+ │  │ • Photometric dynamic range > 10⁸:1 | Bayesian hyper-dual uncertainty bounds    │  │
+ │  │ • Direct science exports: FITS v4.0 datacubes, HDF5 spectroscopy, Touchstone S2P│  │
+ │  ╰─────────────────────────────────────────────────────────────────────────────────╯  │
+ └────────────────────────────────────────────┬──────────────────────────────────────────┘
+                                              │ Telemetry & DMA Streaming
+                                              ▼
+ ┌── [ 5. HARDWARE INTERLOCKS, CRYOGENIC TRANSDUCERS & MICROKERNEL ] ────────────────────┐
+ │                                                                                       │
+ │  ╭─────────────────────────────────────────╮    ╭──────────────────────────────────╮  │
+ │  │ Dual-Tier Power & Thermal Substrate     │    │ Freestanding C11 shbt-os Runtime │  │
+ │  │ • 1,800-module LANR: 999.05 kW @ 400 V  │    │ • 128 B MMIO mapped @ 0x70000000 │  │
+ │  │ • Landauer floor: 906.00 kW (+93 kW res)│    │ • SECDED ECC, PCIe Gen5 DMA      │  │
+ │  │ • CVD Diamond-on-GaN (K = 2,250 W/m·K)  │    │ • Sub-2.18 ns PCSS crowbar trips │  │
+ │  │ • NbN / MgB₂ rails (ΔT_headroom ≥ 11.7K)│    │ • 94.20% SiC inductive recovery  │  │
+ │  ╰─────────────────────────────────────────╯    ╰──────────────────────────────────╯  │
+ ╰───────────────────────────────────────────────────────────────────────────────────────╯
+```
 ## Directory Structure
 
 ```text
