@@ -22,29 +22,29 @@ streamlit run python/shbt_sglt/dashboard_hud.py
 
 ## Technical Overview
 
-The SGLT synthesizes an artificial gravitational lens via a boundary-state congestion ghost seed of $M_{\text{seed}} = 10^{-6} M_{\odot}$ ($\Delta N_0 = 7.5426 \times 10^{44}\text{ bit}$), producing a thin-lens focal baseline of $f_0 = 169.30\text{ m}$ for an impact parameter $r_0 = 1.000\text{ m}$, observed by an $M$-node spacecraft swarm ($M > 2$) distributed across heliocentric distances $z \in [547.8\text{ AU}, 650.0\text{ AU}]$. The upgraded architecture operates as a **Non-Local Synthetic Aperture Sensor Mesh & Gravitational Telescope**: optical phase telemetry is de-rendered into dark-ledger degrees of freedom through the Stinespring dilation channel, eliminating light-like signal degradation across inter-craft baselines.
+The SGLT synthesizes an artificial gravitational lens via a boundary-state congestion ghost seed of *M*<sub>seed</sub> = 10<sup>−6</sup> *M*<sub>☉</sub> (Δ*N*<sub>0</sub> = 7.5426 × 10<sup>44</sup> bit), producing a thin-lens focal baseline of *f*<sub>0</sub> = 169.30 m for an impact parameter *r*<sub>0</sub> = 1.000 m, observed by an *M*-node spacecraft swarm (*M* > 2) distributed across heliocentric distances *z* ∈ [547.8 AU, 650.0 AU]. The upgraded architecture operates as a **Non-Local Synthetic Aperture Sensor Mesh & Gravitational Telescope**: optical phase telemetry is de-rendered into dark-ledger degrees of freedom through the Stinespring dilation channel, eliminating light-like signal degradation across inter-craft baselines.
 
 ### Primary Architectural Subsystems
 
-* **$`M`$-Node Swarm Architecture** (`sglt-swarm-dynamics`, `sglt-flight-gnc`): Multi-spacecraft formation operating in the SGL focal region, with relative equations of motion incorporating solar $`J_2`$ quadrupole and 1PN Schwarzschild geodesic corrections across the full $`M(M-1)/2`$ heterodyne metrology mesh.
-* **Two-Mode Squeezed Vacuum Metrology** (`sglt-squeezed-metrology`): TMSV injection ($`r_{\text{squeeze}} = 2.50`$, $`21.7\text{ dB}`$ quantum-noise attenuation) and $`N00N`$-state interferometry delivering sub-SQL displacement density $`S_r^{1/2}(f) \le 0.0084\text{ pm}/\sqrt{\text{Hz}}`$ and integrated tracking $`\Vert{}\delta\mathbf{r}\Vert{}_{3\sigma} \le 0.084\text{ nm}`$.
-* **Diamond-on-GaN & High-$`T_c`$ Transducers** (`sglt-diamond-transducer`, `sglt-transducer-fea`): CVD synthetic Diamond-on-GaN substrate ($`K_{\text{diamond}} \ge 2000\text{ W/m}\cdot\text{K}`$) with NbN ($`T_c = 16.0\text{ K}`$) / $`\text{MgB}_2`$ ($`T_c = 39.0\text{ K}`$) superconducting routing and Debye $`T^3`$ heat-capacity kinetics, maintaining $`> 11.79\text{ K}`$ quench headroom ($`T_{\text{peak}} \le 4.21\text{ K}`$) under $`142\text{ MW}`$ transients, plus the $`8 \times 8`$ InP/InGaAs HBT array with sapphire ($`44.178\text{ MRayl}`$) and aerogel ($`6.395\text{ nm}`$) matching into the He-4 bath.
-* **Relativistic Metric & 2PN Coronal Optics** (`sglt-core-metric`, `sglt-2pn-coronal-optics`, `sglt-optical-raytrace`): 512-bit MPFR ADM metric foliation, wideband multi-spectral wave optics ($`200\text{ nm} - 5.0\ \mu\text{m}`$), and second post-Newtonian propagation through the dynamic Baumbach–Allen coronal plasma $`N_e(r,\theta,t)`$ for wide-angle steering ($`\Theta_{\text{tilt}} > 15^{\circ}`$).
-* **PINN Reconstruction & Image Synthesis** (`sglt-neural-optics`, `sglt-astro-reconstruction`): Physics-informed neural network deconvolution of the SGL wave equation (multi-resolution Fourier features, Huber $`\delta = 10^{-3}`$, biosignature unmixing) and regularized Richardson–Lucy reconstruction achieving $`\theta_{\text{res}} = 0.0629''`$ and Strehl $`S = 0.999999984`$.
-* **Self-Healing Metamaterials** (`sglt-metamaterial-radiation`): GST ($`\text{Ge}_2\text{Sb}_2\text{Te}_5`$) phase-change metamaterial channel routing tolerating $`D_{\text{DDD}} \ge 100\text{ krad(Si)}`$, restored by $`27.9\text{ mJ/cm}^2`$ nanosecond pulses recovering $`> 99.9\%`$ initial conductivity.
-* **Non-Local Telemetry & Causal-Point Metrology** (`sglt-nonlocal-telemetry`, `sglt-causal-point-metrology`): Isometric Stinespring dilation $`V_{\text{unified}} : \mathcal{H}_{\text{active}} \to \mathcal{H}_{\text{active}} \otimes \mathcal{H}_{\text{dark}}`$ de-rendering inter-craft phase telemetry into the dark ledger under the exact partition $`\eta_A = 10/33`$ / $`\eta_D = 23/33`$; Heegaard-Floer boundary relabeling $`T^\partial_{ij} \in \mathrm{Sp}(2g, \mathbb{Z})`$ with Kojima entropy $`\mathrm{Ent}(\phi) = 0`$; $`3+1`$ ADM shift nullification with third-order wake-tensor compensation ($`\vert\delta\mu\vert \le 10^{-12}`$); rank-one history projectors $`\Pi_{A,\iota} = \vert\psi\rangle\langle\psi\vert`$, holographic register bound $`N_{\text{limit}} = \min(N_{\text{local}}, A/4L_P^2\ln 2)`$, and Landauer GET accounting $`C_{\text{get}} = \max(1, \log_2\vert R\vert)`$, $`Q_H \ge k_B T\ln 2 \cdot C_{\text{op}}`$.
-* **Multi-Seed Metric Superposition & 3+1 CCZ4** (`sglt-core-metric`): Linearized $`K`$-seed metric superposition $`g_{\mu\nu} = \eta_{\mu\nu} + \sum h_{\mu\nu}^{(i)} + I_{\mu\nu}`$ with exact 512-bit MPFR interference constants ($`I_{00}..I_{33}`$), bit-congestion safety radius $`R_{\text{congestion}} = 2.954 \times 10^{15}\text{ m}`$, and a CCZ4/BSSN hyperbolic solver with Gundlach constraint damping for strong-field near-seed curvature and solar $`J_2`$ quadrupole coupling (`multiseed_superposition.rs`).
-* **Reactionless Traction & Kinematic Wake Compensation** (`sglt-swarm-dynamics`, `sglt-flight-gnc`): Geodesic traction drive $`\mathbf{a}_{\text{thrust}} = -\nabla\Phi_{\text{seed}}(\mathbf{r}_{\text{offset}})`$ with power-aware delta-V bit-stepping $`\Delta N(k) = \lfloor \Delta P_{\text{net}} / P_{\text{bit}} \rfloor`$ (`traction.rs`), and 3rd-order wake-tensor momentum compensation $`\mu_{\text{comp}}(t)`$ enforcing holographic eigenvector rigidity $`\vert{}\mu_{\text{comp}} - \mu_0\vert{} \le 10^{-12}`$ for $`v_{\text{eff}} \le 0.1c`$ (`wake_compensation.rs`).
-* **Non-Equilibrium Seed Quench Kinetics** (`kernel/`, `sglt-hil-microkernel`): Exponential transient decay $`\Delta N(t) = \Delta N_0 \exp(-t/\tau_{\text{quench}})\Theta(t)`$ with $`\tau_{\text{quench}} \le 2.18\text{ ns}`$, sub-$`2.50\text{ ns}`$ GaN emergency current-shunt interlock, and 94.20%-efficient SiC crowbar capture of the $`142.08\text{ MW}`$ transient surge (`seed_kinetics.rs`, `shbt_core_runtime.c`).
-* **WZW Dark Weil Module Kernels** (`sglt-nonlocal-telemetry`): Dynamic Virasoro boundary partition evaluator $`Z_{\text{boundary}}(\tau) = q^{-c/24}\prod_n (1-q^n)^{-1}`$ for affine sectors $`SU(2)_{26}`$, $`SU(3)_8`$, $`SO(10)_{312}`$ ($`c_{\text{vis}} = 1325/154`$, $`c_{\text{parent}} = 351/8`$), integrating 2,901,360 dark Weil module kernels over $`(\mathbb{Z}_2)^3 \times (\mathbb{Z}_2 \times \mathbb{Z}_3 \times \mathbb{Z}_5 \times \mathbb{Z}_7 \times \mathbb{Z}_{11}) \times \mathbb{Z}_{157}`$ into the Stinespring dark-ledger channel (`wzw_partition.rs`).
-* **LANR Power & $`N-k`$ Derating** (`sglt-lanr-power`): 1,800-module LANR plant ($`P_{\text{thermal}} = 3093.44\text{ W}`$, $`P_{\text{TEG}} = 1045.58\text{ W}`$, $`P_{\text{net}} = 555.03\text{ W}`$ per module) delivering $`999.054\text{ kW}_{\text{net}}`$ at $`33.804\%`$ TEG efficiency with $`N+167`$ reserve above the 1,633-module floor, register-mapped derating $`\Delta N(k) = \lfloor \Delta P_{\text{net}} / P_{\text{bit}} \rfloor`$, and focal baseline expansion $`f_0 = 169.30\text{ m} \to f_{\max} = 1692.99\text{ m}`$.
-* **Multi-GPU Physics Acceleration** (`sglt-gpu-physics`, `sglt-hardware-dma`): Distributed CUDA/ROCm 2PN wave-optics solver with GPUDirect Storage ingestion ($`> 100\text{ GB/s}`$), CUDA-aware MPI halo exchange, and LibTorch PINN deconvolution sustaining $`106.3\text{ Hz}`$ at $`4096 \times 4096`$; PCIe Gen5 x16 zero-copy DMA streaming at $`504\text{ Gbps}`$ via a 4096-descriptor ring into `/dev/shm/sglt_frame_buffer`.
+* ***M*-Node Swarm Architecture** (`sglt-swarm-dynamics`, `sglt-flight-gnc`): Multi-spacecraft formation operating in the SGL focal region, with relative equations of motion incorporating solar *J*<sub>2</sub> quadrupole and 1PN Schwarzschild geodesic corrections across the full *M*(*M*−1)/2 heterodyne metrology mesh.
+* **Two-Mode Squeezed Vacuum Metrology** (`sglt-squeezed-metrology`): TMSV injection (*r*<sub>squeeze</sub> = 2.50, 21.7 dB quantum-noise attenuation) and N00N-state interferometry delivering sub-SQL displacement density *S*<sub>r</sub><sup>1/2</sup>(*f*) ≤ 0.0084 pm/√Hz and integrated tracking ‖δ**r**‖<sub>3σ</sub> ≤ 0.084 nm.
+* **Diamond-on-GaN & High-*T*<sub>c</sub> Transducers** (`sglt-diamond-transducer`, `sglt-transducer-fea`): CVD synthetic Diamond-on-GaN substrate (*K*<sub>diamond</sub> ≥ 2000 W/m·K) with NbN (*T*<sub>c</sub> = 16.0 K) / MgB<sub>2</sub> (*T*<sub>c</sub> = 39.0 K) superconducting routing and Debye *T*<sup>3</sup> heat-capacity kinetics, maintaining > 11.79 K quench headroom (*T*<sub>peak</sub> ≤ 4.21 K) under 142 MW transients, plus the 8 × 8 InP/InGaAs HBT array with sapphire (44.178 MRayl) and aerogel (6.395 nm) matching into the He-4 bath.
+* **Relativistic Metric & 2PN Coronal Optics** (`sglt-core-metric`, `sglt-2pn-coronal-optics`, `sglt-optical-raytrace`): 512-bit MPFR ADM metric foliation, wideband multi-spectral wave optics (200 nm – 5.0 µm), and second post-Newtonian propagation through the dynamic Baumbach–Allen coronal plasma *N*<sub>e</sub>(*r*, θ, *t*) for wide-angle steering (Θ<sub>tilt</sub> > 15°).
+* **PINN Reconstruction & Image Synthesis** (`sglt-neural-optics`, `sglt-astro-reconstruction`): Physics-informed neural network deconvolution of the SGL wave equation (multi-resolution Fourier features, Huber δ = 10<sup>−3</sup>, biosignature unmixing) and regularized Richardson–Lucy reconstruction achieving θ<sub>res</sub> = 0.0629″ and Strehl *S* = 0.999999984.
+* **Self-Healing Metamaterials** (`sglt-metamaterial-radiation`): GST (Ge<sub>2</sub>Sb<sub>2</sub>Te<sub>5</sub>) phase-change metamaterial channel routing tolerating *D*<sub>DDD</sub> ≥ 100 krad(Si), restored by 27.9 mJ/cm<sup>2</sup> nanosecond pulses recovering > 99.9% initial conductivity.
+* **Non-Local Telemetry & Causal-Point Metrology** (`sglt-nonlocal-telemetry`, `sglt-causal-point-metrology`): Isometric Stinespring dilation *V*<sub>unified</sub> : ℋ<sub>active</sub> → ℋ<sub>active</sub> ⊗ ℋ<sub>dark</sub> de-rendering inter-craft phase telemetry into the dark ledger under the exact partition η<sub>A</sub> = 10/33 / η<sub>D</sub> = 23/33; Heegaard-Floer boundary relabeling *T*<sup>∂</sup><sub>ij</sub> ∈ Sp(2*g*, ℤ) with Kojima entropy Ent(φ) = 0; 3+1 ADM shift nullification with third-order wake-tensor compensation (∣δμ∣ ≤ 10<sup>−12</sup>); rank-one history projectors Π<sub>A,ι</sub> = ∣ψ⟩⟨ψ∣, holographic register bound *N*<sub>limit</sub> = min(*N*<sub>local</sub>, *A*/4*L*<sub>P</sub><sup>2</sup> ln 2), and Landauer GET accounting *C*<sub>get</sub> = max(1, log<sub>2</sub>∣*R*∣), *Q*<sub>H</sub> ≥ *k*<sub>B</sub>*T* ln 2 · *C*<sub>op</sub>.
+* **Multi-Seed Metric Superposition & 3+1 CCZ4** (`sglt-core-metric`): Linearized *K*-seed metric superposition *g*<sub>μν</sub> = η<sub>μν</sub> + Σ *h*<sub>μν</sub><sup>(i)</sup> + *I*<sub>μν</sub> with exact 512-bit MPFR interference constants (*I*<sub>00</sub>..*I*<sub>33</sub>), bit-congestion safety radius *R*<sub>congestion</sub> = 2.954 × 10<sup>15</sup> m, and a CCZ4/BSSN hyperbolic solver with Gundlach constraint damping for strong-field near-seed curvature and solar *J*<sub>2</sub> quadrupole coupling (`multiseed_superposition.rs`).
+* **Reactionless Traction & Kinematic Wake Compensation** (`sglt-swarm-dynamics`, `sglt-flight-gnc`): Geodesic traction drive **a**<sub>thrust</sub> = −∇Φ<sub>seed</sub>(**r**<sub>offset</sub>) with power-aware delta-V bit-stepping Δ*N*(*k*) = ⌊Δ*P*<sub>net</sub> / *P*<sub>bit</sub>⌋ (`traction.rs`), and 3rd-order wake-tensor momentum compensation μ<sub>comp</sub>(*t*) enforcing holographic eigenvector rigidity ∣μ<sub>comp</sub> − μ<sub>0</sub>∣ ≤ 10<sup>−12</sup> for *v*<sub>eff</sub> ≤ 0.1*c* (`wake_compensation.rs`).
+* **Non-Equilibrium Seed Quench Kinetics** (`kernel/`, `sglt-hil-microkernel`): Exponential transient decay Δ*N*(*t*) = Δ*N*<sub>0</sub> exp(−*t*/τ<sub>quench</sub>)Θ(*t*) with τ<sub>quench</sub> ≤ 2.18 ns, sub-2.50 ns GaN emergency current-shunt interlock, and 94.20%-efficient SiC crowbar capture of the 142.08 MW transient surge (`seed_kinetics.rs`, `shbt_core_runtime.c`).
+* **WZW Dark Weil Module Kernels** (`sglt-nonlocal-telemetry`): Dynamic Virasoro boundary partition evaluator *Z*<sub>boundary</sub>(τ) = *q*<sup>−c/24</sup>∏<sub>n</sub> (1−*q*<sup>n</sup>)<sup>−1</sup> for affine sectors SU(2)<sub>26</sub>, SU(3)<sub>8</sub>, SO(10)<sub>312</sub> (*c*<sub>vis</sub> = 1325/154, *c*<sub>parent</sub> = 351/8), integrating 2,901,360 dark Weil module kernels over (ℤ<sub>2</sub>)<sup>3</sup> × (ℤ<sub>2</sub> × ℤ<sub>3</sub> × ℤ<sub>5</sub> × ℤ<sub>7</sub> × ℤ<sub>11</sub>) × ℤ<sub>157</sub> into the Stinespring dark-ledger channel (`wzw_partition.rs`).
+* **LANR Auxiliary Payload Power & *N*−*k* Derating** (`sglt-lanr-power`): SGLT imports the 1,800-module LANR starter-grid ledger owned by [`shbt-cf`](https://github.com/sys1own/shbt-cf) (*P*<sub>thermal</sub> = 3093.44 W, *P*<sub>TEG</sub> = 1045.58 W, *P*<sub>net</sub> = 555.03 W per module) as its auxiliary power plant, delivering 999.054 kW<sub>net</sub> at 33.804% TEG efficiency with *N*+167 reserve above the 1,633-module floor, register-mapped derating Δ*N*(*k*) = ⌊Δ*P*<sub>net</sub> / *P*<sub>bit</sub>⌋, and focal baseline expansion *f*<sub>0</sub> = 169.30 m → *f*<sub>max</sub> = 1692.99 m.
+* **Multi-GPU Physics Acceleration** (`sglt-gpu-physics`, `sglt-hardware-dma`): Distributed CUDA/ROCm 2PN wave-optics solver with GPUDirect Storage ingestion (> 100 GB/s), CUDA-aware MPI halo exchange, and LibTorch PINN deconvolution sustaining 106.3 Hz at 4096 × 4096; PCIe Gen5 x16 zero-copy DMA streaming at 504 Gbps via a 4096-descriptor ring into `/dev/shm/sglt_frame_buffer`.
 * **Bare-Metal Microkernel** (`kernel/` & `sglt-hil-microkernel`): Freestanding C11 `shbt-os` runtime at SHBT-MMIO-1 base `0x70000000`, statically allocated 2,112-byte `UnifiedStinespringFrame` SRAM arena (640 B active + 1,472 B dark ledger), Hamming(72,64) SECDED ECC, AVX-512 SIMD interlock, and lock-free POSIX shared-memory transport.
-* **Bayesian Uncertainty Quantification** (`sglt-uncertainty-uq`): Hyper-dual automatic differentiation Monte Carlo engine ($`N \ge 10^{7}`$ draws) coupling GNC, thermal, LANR-derating, and decoherence noise domains, ISO/IEC Guide 98-3 (GUM) Supplements 1 & 2 compliant, delivering $`99.73\%`$ ($`3\sigma`$) biosignature confidence intervals.
-* **Quantum Decoherence & Active TQEC** (`sglt-quantum-decoherence`, `sglt-tqec-dark-ledger`, `sglt-hil-fault-injection`): Continuous Lindblad master-equation evolution of 124 Fibonacci anyon braid descriptors in the dark ledger, with hybrid distributed Union-Find / MWPM Blossom V decoding sustaining $`F_{\text{logical}} \ge 0.999999`$ over a 30-year transit at $`600\text{ AU}`$.
-* **WebGPU Native Visualizer** (`sglt-webgpu-vis`): Zero-dependency Rust WebAssembly (`wasm32-unknown-unknown`) + WebGPU rendering engine executing WGSL compute shaders for ADM curvature, Bessel $`J_0^2`$ caustics, and swarm orbital dynamics at $`60\text{ FPS}`$ ($`3.2\text{ MB}`$ payload).
-* **Ephemeris Astrodynamics & RL Autonomy** (`sglt-orbital-flight`, `sglt-autonomy-comm`): Four-body CR3BP Prince–Dormand 8(7) (DOP853) integration with $`\vert{}\Delta C_J\vert{} \le 10^{-12}`$, fifth-order minimum-jerk trajectories, PPO/SAC deep-RL planning with NSGA-III Pareto optimization ($`\mathcal{HV} \ge 0.998`$), $`12\text{ Gbps}`$ 1550 nm optical downlink, and $`32\text{ GHz}`$ Ka-band backup at $`150\text{ kbps}`$.
-* **Cryo-Thermal & Observatory** (`sglt-cryo-thermal`, `sglt-target-observatory`): 3D nodal transient thermal-fluid solver across He-4 ($`4.20\text{ K}`$), sapphire, aerogel, and $`600\text{ K}`$ radiators; exoplanetary spectroscopy with FITS v4.0 / HDF5 datacube export.
+* **Bayesian Uncertainty Quantification** (`sglt-uncertainty-uq`): Hyper-dual automatic differentiation Monte Carlo engine (*N* ≥ 10<sup>7</sup> draws) coupling GNC, thermal, LANR-derating, and decoherence noise domains, ISO/IEC Guide 98-3 (GUM) Supplements 1 & 2 compliant, delivering 99.73% (3σ) biosignature confidence intervals.
+* **Quantum Decoherence & Active TQEC** (`sglt-quantum-decoherence`, `sglt-tqec-dark-ledger`, `sglt-hil-fault-injection`): Continuous Lindblad master-equation evolution of 124 Fibonacci anyon braid descriptors in the dark ledger, with hybrid distributed Union-Find / MWPM Blossom V decoding sustaining *F*<sub>logical</sub> ≥ 0.999999 over a 30-year transit at 600 AU.
+* **WebGPU Native Visualizer** (`sglt-webgpu-vis`): Zero-dependency Rust WebAssembly (`wasm32-unknown-unknown`) + WebGPU rendering engine executing WGSL compute shaders for ADM curvature, Bessel *J*<sub>0</sub><sup>2</sup> caustics, and swarm orbital dynamics at 60 FPS (3.2 MB payload).
+* **Ephemeris Astrodynamics & RL Autonomy** (`sglt-orbital-flight`, `sglt-autonomy-comm`): Four-body CR3BP Prince–Dormand 8(7) (DOP853) integration with ∣Δ*C*<sub>J</sub>∣ ≤ 10<sup>−12</sup>, fifth-order minimum-jerk trajectories, PPO/SAC deep-RL planning with NSGA-III Pareto optimization (ℋ𝒱 ≥ 0.998), 12 Gbps 1550 nm optical downlink, and 32 GHz Ka-band backup at 150 kbps.
+* **Cryo-Thermal & Observatory** (`sglt-cryo-thermal`, `sglt-target-observatory`): 3D nodal transient thermal-fluid solver across He-4 (4.20 K), sapphire, aerogel, and 600 K radiators; exoplanetary spectroscopy with FITS v4.0 / HDF5 datacube export.
 
 ---
 
@@ -80,7 +80,7 @@ shbt-sglt/
 │   ├── sglt-core-metric/           # 512-bit MPFR metric tensor, ADM foliation, multi-seed superposition & CCZ4
 │   ├── sglt-flight-gnc/            # SE-L2 formation flight, hybrid GNC & 3rd-order wake compensation
 │   ├── sglt-hil-microkernel/       # shbt-os microkernel FFI wrapper, POSIX SHM & seed quench kinetics
-│   ├── sglt-lanr-power/            # 1,800-module LANR power ledger & N-k derating
+│   ├── sglt-lanr-power/            # 1,800-module LANR power ledger (imported from shbt-cf) & N-k derating
 │   └── sglt-transducer-fea/        # Acoustic wave FEA & transducer array control
 ├── include/
 │   └── sglt_abi.h                  # Unified C-ABI FFI surface (repr(C, align(64)))
@@ -100,8 +100,8 @@ shbt-sglt/
 | --- | --- | --- | --- | --- |
 | `0x70000000` | `CR0_CTRL` | R/W | 32 bit | System control, mode select, phase arm, soft reset |
 | `0x70000004` | `SR0_STAT` | R | 32 bit | Lock status, thermal alarm, metrology valid, shunt latch |
-| `0x70000008` | `DET_MU_HI` | R | 32 bit | Upper 32 bits of signed Q1.62 eigenvector detuning $\delta\mu$ |
-| `0x7000000C` | `DET_MU_LO` | R | 32 bit | Lower 32 bits of signed Q1.62 eigenvector detuning $\delta\mu$ |
+| `0x70000008` | `DET_MU_HI` | R | 32 bit | Upper 32 bits of signed Q1.62 eigenvector detuning δμ |
+| `0x7000000C` | `DET_MU_LO` | R | 32 bit | Lower 32 bits of signed Q1.62 eigenvector detuning δμ |
 | `0x70000010` | `BIT_OVF_H` | R/W | 32 bit | Upper word of 64-bit state overflow mantissa; aliased during transient interlock as `LANR_DERATE` (LANR power-derating / seed-mass-decrement flags) |
 | `0x70000014` | `BIT_OVF_L` | R/W | 32 bit | Lower word of 64-bit state overflow mantissa |
 | `0x70000018` | `RF_PHASE_V` | R/W | 32 bit | Channel address `[31:16]` and 16-bit DAC voltage code `[15:0]` |
@@ -132,7 +132,7 @@ shbt-sglt/
 
 ### Native System Dependencies
 
-* **Toolchain**: Rust $\ge 1.83$ (with the `wasm32-unknown-unknown` target), GCC with AVX-512 support (`-mavx512f`), Python $\ge 3.10$, NVIDIA CUDA Toolkit (v12+) / AMD ROCm.
+* **Toolchain**: Rust ≥ 1.83 (with the `wasm32-unknown-unknown` target), GCC with AVX-512 support (`-mavx512f`), Python ≥ 3.10, NVIDIA CUDA Toolkit (v12+) / AMD ROCm.
 * **Libraries**: `libgmp-dev`, `libmpfr-dev`, `libmpc-dev`, `libhdf5-dev`, `libcfitsio-dev`, `m4`.
 * **Python Packages**: `numpy`, `streamlit`, `maturin`, `pyo3`, `torch`, `h5py`, `fitsio`.
 
@@ -206,89 +206,128 @@ The unified specification dictates strict compliance across seventy cross-bench 
 
 | Gate | Domain / Metric | Acceptance Bound | Measured | Status |
 | --- | --- | --- | --- | --- |
-| 01 | Metric physics: ADM determinant error $\vert{}\det(g)+1\vert{}$ | $\le 1.00 \times 10^{-12}$ | $0.0$ | PASS |
-| 02 | Metric physics: $\chi_{\text{SHBT}}$ scale calibration | $1.000000 \pm 10^{-6}$ | $1.0$ | PASS |
-| 03 | Metric physics: register width | $\ge 512\text{ bit}$ | $512$ | PASS |
-| 04 | GNC & optics: heterodyne beat frequency | $80.000\text{ MHz} \pm 10\text{ Hz}$ | $80.000002\text{ MHz}$ | PASS |
-| 05 | GNC & optics: range-noise density $\sigma_r$ | $\le 0.170\text{ pm}/\sqrt{\text{Hz}}$ | $0.1437\text{ pm}/\sqrt{\text{Hz}}$ | PASS |
-| 06 | GNC & optics: $3\sigma$ baseline error $\|\delta\mathbf{r}\|_{3\sigma}$ | $\le 1.000\text{ nm}$ | $0.7719\text{ nm}$ | PASS |
-| 07 | GNC & optics: DWS pointing $\sigma_\theta$ | $\le 15.00\text{ nrad}$ | $11.38\text{ nrad}$ | PASS |
-| 08 | Transducer FEA: sapphire impedance $Z_1$ | $44.178 \pm 0.010\text{ MRayl}$ | $44.1782\text{ MRayl}$ | PASS |
-| 09 | Transducer FEA: aerogel thickness $d_m$ | $6.395 \pm 0.005\text{ nm}$ | $6.3951\text{ nm}$ | PASS |
-| 10 | LANR power: net array output $P_{\text{net}}$ | $\ge 999.054\text{ kW}$ | $999.054\text{ kW}$ | PASS |
-| 11 | LANR power: TEG conversion efficiency | $\ge 33.800\%$ | $33.804\%$ | PASS |
-| 12 | LANR power: radiator area at $600\text{ K}$ | $\ge 688.520\text{ m}^2$ | $688.52\text{ m}^2$ | PASS |
-| 13 | HIL kernel: SRAM frame allocation | $= 2112\text{ B}$ | $2112\text{ B}$ | PASS |
-| 14 | HIL kernel: AVX-512 shunt latency | $< 2.500\text{ ns}$ | $1.035\text{ ns}$ | PASS |
-| 15 | HIL kernel: quench recovery | $\le 120.000\text{ ns}$ | $3.294\text{ ns}$ | PASS |
-| 16 | HIL kernel: POSIX SHM latency | $< 1.000\ \mu\text{s}$ | $0.177\ \mu\text{s}$ | PASS |
-| 17 | Optical reconstruction: angular resolution $\theta_{\text{res}}$ | $\le 0.0629''$ | $0.06290''$ | PASS |
-| 18 | Optical reconstruction: Strehl ratio $S$ | $\ge 0.999999980$ | $0.999999984$ | PASS |
-| 19 | Stinespring dilation: $\|V^\dagger V - I\|_2$ residual | $\le 1.0 \times 10^{-15}$ | $1.11 \times 10^{-16}$ | PASS |
-| 20 | Stinespring dilation: active partition $\eta_A$ | $= 10/33$ | $0.30303030$ | PASS |
-| 21 | Heegaard-Floer relabeling: Kojima entropy $\mathrm{Ent}(\phi)$ | $= 0$ | $0.0$ | PASS |
-| 22 | ADM wake compensation: $\vert\delta\mu\vert$ rigidity | $\le 1.0 \times 10^{-12}$ | $2.52 \times 10^{-18}$ | PASS |
-| 23 | Causal Point: $\|\Pi^2 - \Pi\|$ idempotency | $\le 1.0 \times 10^{-15}$ | $5.55 \times 10^{-17}$ | PASS |
-| 24 | Causal Point: holographic register bound $N_{\text{limit}}$ | $\min(N_{\text{local}}, A/4L_P^2\ln 2)$ | $1.6777 \times 10^{7}$ | PASS |
-| 25 | Landauer accounting: GET cost $C_{\text{get}}$ | $\max(1, \log_2\vert R\vert)$ | $12.0$ | PASS |
-| 26 | Landauer accounting: heat floor $Q_H$ | $\ge k_B T\ln 2 \cdot C_{\text{op}}$ | $3.388 \times 10^{-20}\text{ J}$ | PASS |
-| 27 | SHBT-MMIO-1: register base address | $= \texttt{0x70000000}$ | $\texttt{0x70000000}$ | PASS |
-| 28 | SECDED Hamming(72,64): ECC latency $t_{\text{ecc}}$ | $\le 1.20\text{ ns}$ | $1.18\text{ ns}$ | PASS |
-| 29 | AVX-512 Givens remap: round-trip residual | $\le 1.0 \times 10^{-12}$ | $1.78 \times 10^{-15}$ | PASS |
-| 30 | Quench interlock: assertion latency $\tau_{\text{quench}}$ | $\le 1.25\text{ ns}$ | $0.678\text{ ns}$ | PASS |
-| 31 | 2PN lightcone authorization: velocity threshold | $\ge 0.10\, c$ | $0.35\, c$ | PASS |
-| 32 | LANR ledger: per-module TEG output $P_{\text{TEG}}$ | $= 1045.58\text{ W}$ | $1045.58\text{ W}$ | PASS |
-| 33 | PINN optics: wave-loss residual | $< 1.00 \times 10^{-4}$ | $8.42 \times 10^{-5}$ | PASS |
-| 34 | PINN optics: unmixing selectivity | $> 99.80\%$ | $99.85\%$ | PASS |
-| 35 | DMA fabric: payload bandwidth | $> 128.0\text{ Gbps}$ | $504\text{ Gbps}$ | PASS |
-| 36 | DMA fabric: microkernel ISR latency | $< 2.500\ \mu\text{s}$ | $0.175\ \mu\text{s}$ | PASS |
-| 37 | Microkernel: AVX-512 interlock assertion | $< 1.412\text{ ns}$ | $1.201\text{ ns}$ | PASS |
-| 38 | Microkernel: post-quench recovery | $< 9.240\text{ ns}$ | $9.12\text{ ns}$ | PASS |
-| 39 | Quantum decoherence: $\vert\mathrm{Tr}(\rho)-1\vert$ | $< 1.0 \times 10^{-12}$ | $0.0$ | PASS |
-| 40 | Quantum decoherence: $F_{\text{gate}}$ bound ($600\text{ AU}$) | $> 0.99999$ | $0.9999974$ | PASS |
-| 41 | Swarm tracking: $\|\delta\mathbf{r}\|_{3\sigma}$ | $\le 1.000\text{ nm}$ | $0.87\text{ nm}$ | PASS |
-| 42 | Astrodynamics: Jacobi conservation $\vert{}\Delta C_J\vert{}$ | $\le 1.0 \times 10^{-12}$ | $4.2 \times 10^{-15}$ | PASS |
-| 43 | Metrology: inter-satellite range noise $\sigma_r$ | $\le 0.144\text{ pm}/\sqrt{\text{Hz}}$ | $0.144$ | PASS |
-| 44 | Metrology: DWS angular jitter $\sigma_\theta$ | $\le 11.38\text{ nrad}$ | $11.38$ | PASS |
-| 45 | Metrology: multi-spectral phase error | $< 0.050\text{ rad}$ | $0.042\text{ rad}$ | PASS |
-| 46 | Kinematics: minimum-jerk bounds $\max(\dot{s})$ / $\max(\vert{}\ddot{s}\vert{})$ | $1.8750$ / $5.7735$ | compliant | PASS |
-| 47 | $N-k$ baseline: focal expansion | $169.30 \to 1692.99\text{ m}$ | $1692.99\text{ m}$ | PASS |
-| 48 | $N-k$ baseline: EOL propellant margin | $> 98.00\%$ | $98.5\%$ | PASS |
-| 49 | RL autonomy: planner execution latency | $\le 2.500\text{ ms}$ | $0.1\text{ ms}$ | PASS |
-| 50 | RL autonomy: NSGA-III Pareto hypervolume | $\ge 0.998$ | $0.9986$ | PASS |
-| 51 | Squeezed metrology: quantum-noise attenuation | $\ge 21.7\text{ dB}$ ($r_{\text{squeeze}} = 2.50$) | $21.715\text{ dB}$ | PASS |
-| 52 | Squeezed metrology: quadrature variance $\Delta X_\theta^2$ | $\le 1.70 \times 10^{-3}$ | $1.6845 \times 10^{-3}$ | PASS |
-| 53 | Sub-SQL range: displacement density $S_r^{1/2}(f)$ | $\le 0.0084\text{ pm}/\sqrt{\text{Hz}}$ | $0.0084\text{ pm}/\sqrt{\text{Hz}}$ | PASS |
-| 54 | Sub-SQL range: $3\sigma$ tracking $\|\delta\mathbf{r}\|_{3\sigma}$ | $\le 0.084\text{ nm}$ | $0.084\text{ nm}$ | PASS |
-| 55 | Diamond-on-GaN: conductivity $K_{\text{diamond}}$ | $\ge 2000\text{ W/m}\cdot\text{K}$ | $2000\text{ W/m}\cdot\text{K}$ | PASS |
-| 56 | High-$T_c$ routing: quench peak $T_{\text{peak}}$ | $\le 4.21\text{ K}$ | $4.21\text{ K}$ | PASS |
-| 57 | High-$T_c$ routing: NbN quench headroom | $\ge 11.79\text{ K}$ | $11.79\text{ K}$ | PASS |
-| 58 | 2PN coronal optics: eikonal phase drift | $< 1.0 \times 10^{-15}\text{ rad}$ | $0.0$ | PASS |
-| 59 | Metamaterials: displacement dose $D_{\text{DDD}}$ | $\ge 100\text{ krad(Si)}$ | $100\text{ krad}$ | PASS |
-| 60 | Metamaterials: self-healing recovery $\eta$ | $\ge 99.9\%$ | $99.95\%$ | PASS |
-| 61 | GPU physics: frame ingestion at $4096 \times 4096$ | $\ge 100\text{ Hz}$ | $106.3\text{ Hz}$ | PASS |
-| 62 | GPU physics: 2PN raytracing latency | $\le 4.0\text{ ms}$ | $3.8\text{ ms}$ | PASS |
-| 63 | GPU physics: GPUDirect Storage bandwidth | $\ge 100\text{ GB/s}$ | $112.4\text{ GB/s}$ | PASS |
-| 64 | Uncertainty UQ: Monte Carlo draws | $\ge 1.0 \times 10^{7}$ | $1.0 \times 10^{7}$ | PASS |
-| 65 | Uncertainty UQ: biosignature coverage | $99.73\%$ ($3\sigma$) | $99.7302\%$ | PASS |
+| 01 | Metric physics: ADM determinant error ∣det(g)+1∣ | ≤ 1.00 × 10<sup>−12</sup> | 0.0 | PASS |
+| 02 | Metric physics: χ<sub>SHBT</sub> scale calibration | 1.000000 ± 10<sup>−6</sup> | 1.0 | PASS |
+| 03 | Metric physics: register width | ≥ 512 bit | 512 | PASS |
+| 04 | GNC & optics: heterodyne beat frequency | 80.000 MHz ± 10 Hz | 80.000002 MHz | PASS |
+| 05 | GNC & optics: range-noise density σ<sub>r</sub> | ≤ 0.170 pm/√Hz | 0.1437 pm/√Hz | PASS |
+| 06 | GNC & optics: 3σ baseline error ‖δ**r**‖<sub>3σ</sub> | ≤ 1.000 nm | 0.7719 nm | PASS |
+| 07 | GNC & optics: DWS pointing σ<sub>θ</sub> | ≤ 15.00 nrad | 11.38 nrad | PASS |
+| 08 | Transducer FEA: sapphire impedance *Z*<sub>1</sub> | 44.178 ± 0.010 MRayl | 44.1782 MRayl | PASS |
+| 09 | Transducer FEA: aerogel thickness *d*<sub>m</sub> | 6.395 ± 0.005 nm | 6.3951 nm | PASS |
+| 10 | LANR power: net array output *P*<sub>net</sub> | ≥ 999.054 kW | 999.054 kW | PASS |
+| 11 | LANR power: TEG conversion efficiency | ≥ 33.800% | 33.804% | PASS |
+| 12 | LANR power: radiator area at 600 K | ≥ 688.520 m<sup>2</sup> | 688.52 m<sup>2</sup> | PASS |
+| 13 | HIL kernel: SRAM frame allocation | = 2112 B | 2112 B | PASS |
+| 14 | HIL kernel: AVX-512 shunt latency | < 2.500 ns | 1.035 ns | PASS |
+| 15 | HIL kernel: quench recovery | ≤ 120.000 ns | 3.294 ns | PASS |
+| 16 | HIL kernel: POSIX SHM latency | < 1.000 µs | 0.177 µs | PASS |
+| 17 | Optical reconstruction: angular resolution θ<sub>res</sub> | ≤ 0.0629″ | 0.06290″ | PASS |
+| 18 | Optical reconstruction: Strehl ratio *S* | ≥ 0.999999980 | 0.999999984 | PASS |
+| 19 | Stinespring dilation: ‖*V*<sup>†</sup>*V* − *I*‖<sub>2</sub> residual | ≤ 1.0 × 10<sup>−15</sup> | 1.11 × 10<sup>−16</sup> | PASS |
+| 20 | Stinespring dilation: active partition η<sub>A</sub> | = 10/33 | 0.30303030 | PASS |
+| 21 | Heegaard-Floer relabeling: Kojima entropy Ent(φ) | = 0 | 0.0 | PASS |
+| 22 | ADM wake compensation: ∣δμ∣ rigidity | ≤ 1.0 × 10<sup>−12</sup> | 2.52 × 10<sup>−18</sup> | PASS |
+| 23 | Causal Point: ‖Π<sup>2</sup> − Π‖ idempotency | ≤ 1.0 × 10<sup>−15</sup> | 5.55 × 10<sup>−17</sup> | PASS |
+| 24 | Causal Point: holographic register bound *N*<sub>limit</sub> | min(*N*<sub>local</sub>, *A*/4*L*<sub>P</sub><sup>2</sup> ln 2) | 1.6777 × 10<sup>7</sup> | PASS |
+| 25 | Landauer accounting: GET cost *C*<sub>get</sub> | max(1, log<sub>2</sub>∣*R*∣) | 12.0 | PASS |
+| 26 | Landauer accounting: heat floor *Q*<sub>H</sub> | ≥ *k*<sub>B</sub>*T* ln 2 · *C*<sub>op</sub> | 3.388 × 10<sup>−20</sup> J | PASS |
+| 27 | SHBT-MMIO-1: register base address | = `0x70000000` | `0x70000000` | PASS |
+| 28 | SECDED Hamming(72,64): ECC latency *t*<sub>ecc</sub> | ≤ 1.20 ns | 1.18 ns | PASS |
+| 29 | AVX-512 Givens remap: round-trip residual | ≤ 1.0 × 10<sup>−12</sup> | 1.78 × 10<sup>−15</sup> | PASS |
+| 30 | Quench interlock: assertion latency τ<sub>quench</sub> | ≤ 1.25 ns | 0.678 ns | PASS |
+| 31 | 2PN lightcone authorization: velocity threshold | ≥ 0.10 *c* | 0.35 *c* | PASS |
+| 32 | LANR ledger: per-module TEG output *P*<sub>TEG</sub> | = 1045.58 W | 1045.58 W | PASS |
+| 33 | PINN optics: wave-loss residual | < 1.00 × 10<sup>−4</sup> | 8.42 × 10<sup>−5</sup> | PASS |
+| 34 | PINN optics: unmixing selectivity | > 99.80% | 99.85% | PASS |
+| 35 | DMA fabric: payload bandwidth | > 128.0 Gbps | 504 Gbps | PASS |
+| 36 | DMA fabric: microkernel ISR latency | < 2.500 µs | 0.175 µs | PASS |
+| 37 | Microkernel: AVX-512 interlock assertion | < 1.412 ns | 1.201 ns | PASS |
+| 38 | Microkernel: post-quench recovery | < 9.240 ns | 9.12 ns | PASS |
+| 39 | Quantum decoherence: ∣Tr(ρ)−1∣ | < 1.0 × 10<sup>−12</sup> | 0.0 | PASS |
+| 40 | Quantum decoherence: *F*<sub>gate</sub> bound (600 AU) | > 0.99999 | 0.9999974 | PASS |
+| 41 | Swarm tracking: ‖δ**r**‖<sub>3σ</sub> | ≤ 1.000 nm | 0.87 nm | PASS |
+| 42 | Astrodynamics: Jacobi conservation ∣Δ*C*<sub>J</sub>∣ | ≤ 1.0 × 10<sup>−12</sup> | 4.2 × 10<sup>−15</sup> | PASS |
+| 43 | Metrology: inter-satellite range noise σ<sub>r</sub> | ≤ 0.144 pm/√Hz | 0.144 | PASS |
+| 44 | Metrology: DWS angular jitter σ<sub>θ</sub> | ≤ 11.38 nrad | 11.38 | PASS |
+| 45 | Metrology: multi-spectral phase error | < 0.050 rad | 0.042 rad | PASS |
+| 46 | Kinematics: minimum-jerk bounds max(ṡ) / max(∣s̈∣) | 1.8750 / 5.7735 | compliant | PASS |
+| 47 | *N*−*k* baseline: focal expansion | 169.30 → 1692.99 m | 1692.99 m | PASS |
+| 48 | *N*−*k* baseline: EOL propellant margin | > 98.00% | 98.5% | PASS |
+| 49 | RL autonomy: planner execution latency | ≤ 2.500 ms | 0.1 ms | PASS |
+| 50 | RL autonomy: NSGA-III Pareto hypervolume | ≥ 0.998 | 0.9986 | PASS |
+| 51 | Squeezed metrology: quantum-noise attenuation | ≥ 21.7 dB (*r*<sub>squeeze</sub> = 2.50) | 21.715 dB | PASS |
+| 52 | Squeezed metrology: quadrature variance Δ*X*<sub>θ</sub><sup>2</sup> | ≤ 1.70 × 10<sup>−3</sup> | 1.6845 × 10<sup>−3</sup> | PASS |
+| 53 | Sub-SQL range: displacement density *S*<sub>r</sub><sup>1/2</sup>(*f*) | ≤ 0.0084 pm/√Hz | 0.0084 pm/√Hz | PASS |
+| 54 | Sub-SQL range: 3σ tracking ‖δ**r**‖<sub>3σ</sub> | ≤ 0.084 nm | 0.084 nm | PASS |
+| 55 | Diamond-on-GaN: conductivity *K*<sub>diamond</sub> | ≥ 2000 W/m·K | 2000 W/m·K | PASS |
+| 56 | High-*T*<sub>c</sub> routing: quench peak *T*<sub>peak</sub> | ≤ 4.21 K | 4.21 K | PASS |
+| 57 | High-*T*<sub>c</sub> routing: NbN quench headroom | ≥ 11.79 K | 11.79 K | PASS |
+| 58 | 2PN coronal optics: eikonal phase drift | < 1.0 × 10<sup>−15</sup> rad | 0.0 | PASS |
+| 59 | Metamaterials: displacement dose *D*<sub>DDD</sub> | ≥ 100 krad(Si) | 100 krad | PASS |
+| 60 | Metamaterials: self-healing recovery η | ≥ 99.9% | 99.95% | PASS |
+| 61 | GPU physics: frame ingestion at 4096 × 4096 | ≥ 100 Hz | 106.3 Hz | PASS |
+| 62 | GPU physics: 2PN raytracing latency | ≤ 4.0 ms | 3.8 ms | PASS |
+| 63 | GPU physics: GPUDirect Storage bandwidth | ≥ 100 GB/s | 112.4 GB/s | PASS |
+| 64 | Uncertainty UQ: Monte Carlo draws | ≥ 1.0 × 10<sup>7</sup> | 1.0 × 10<sup>7</sup> | PASS |
+| 65 | Uncertainty UQ: biosignature coverage | 99.73% (3σ) | 99.7302% | PASS |
 | 66 | Uncertainty UQ: ISO/IEC Guide 98-3 Supp. 1 & 2 | zero non-conformance | compliant | PASS |
-| 67 | TQEC ledger: logical fidelity $F_{\text{logical}}$ (30 yr) | $\ge 0.999999$ | $1.0$ | PASS |
-| 68 | TQEC ledger: Union-Find decode latency | $\le 100\ \mu\text{s}$ | $0.0237\ \mu\text{s}$ | PASS |
-| 69 | WebGPU visualizer: native render rate | $\ge 60.0\text{ FPS}$ | $60.0\text{ FPS}$ | PASS |
-| 70 | WebGPU visualizer: wasm payload size | $\le 5.0\text{ MB}$ | $3.2\text{ MB}$ | PASS |
+| 67 | TQEC ledger: logical fidelity *F*<sub>logical</sub> (30 yr) | ≥ 0.999999 | 1.0 | PASS |
+| 68 | TQEC ledger: Union-Find decode latency | ≤ 100 µs | 0.0237 µs | PASS |
+| 69 | WebGPU visualizer: native render rate | ≥ 60.0 FPS | 60.0 FPS | PASS |
+| 70 | WebGPU visualizer: wasm payload size | ≤ 5.0 MB | 3.2 MB | PASS |
 
 ---
 
-## Code Repository Crosswalk
+## SHBT Ecosystem: Canonical 9-Pillar Topology
 
-| Repository | Domain Role | Integration into `shbt-sglt` |
+`shbt-sglt` is one pillar of the nine-repository Static Holographic Boundary Theory configuration-controlled ecosystem:
+
+```text
+                              [shbt-precision]
+                       Computational Math & Cosmology
+                       (512-bit MPFR / WZW Characters)
+                                     │
+    ┌────────────────────────────────┼───────────────────────────────┐
+    ▼                                ▼                               ▼
+ [shbt-power]                     [shbt-cf]                       [shbt-qc]
+ Commercial Fusion Grid         1,800-Module LANR Array         Bare-Metal Microkernel &
+ (8,750 MW p-11B Twin)          & Thermal-Hydraulics            Photonic Quantum Bus
+        │                                │                               │
+        └────────────────────────┬───────┴───────────────────────────────┘
+                                 ▼
+        ┌────────────────────────────────────────────────────────────────┐
+        │                  SPECIALIZED VEHICLE TWINS                     │
+        │  • shbt-ghost : Reactionless Propulsion & Local Gravity Wells  │
+        │  • shbt-recon : Macroscopic State Translocation Gateway        │
+        │  • shbt-sglt  : Synthetic Gravitational Lensing Telescope      │
+        │  • shbt-warp  : Holographic Warp Metric & 3+1D Flight Twin     │
+        └────────────────────────┬───────────────────────────────────────┘
+                                 │
+                                 ▼
+        ┌──────────────────────────────────────────────────────────────────────────┐
+        │                               shbt-exotic                                │
+        │        MULTI-PROTOCOL SPACETIME ENGINEERING CO-SIMULATION BENCH          │
+        │  • Cross-Protocol Field Coupling (Warp + Stasis + Translocation + Wells) │
+        │  • Global Energy Condition & Ford-Roman Quantum Inequality Auditing      │
+        │  • Dynamic 5-Stage Multi-Technology Flight Director                      │
+        └──────────────────────────────────────────────────────────────────────────┘
+```
+
+### Standardized 9-Pillar Ecosystem Crosswalk Table
+
+| Repository | Domain Role & Platform Scope | Shared Invariants & Interface Contracts |
 | :--- | :--- | :--- |
-| [`sys1own/shbt-precision`](https://github.com/sys1own/shbt-precision) | Arbitrary-precision numerics core | 512-bit MPFR framework, canonical WZW affine branch (26, 8, 312) arithmetic, zero-allocation audit primitives |
-| [`sys1own/shbt-qc`](https://github.com/sys1own/shbt-qc) | Bare-metal runtime & HIL microkernel | Freestanding C11 `shbt-os` execution model, `SHBT-MMIO-1` register map at `0x70000000`, SECDED Hamming(72,64) ECC |
-| [`sys1own/shbt-cf`](https://github.com/sys1own/shbt-cf) | Cold-fusion reactor & HIL workbench | 1,800-module LANR starter grid (999.054 kW net) balancing the array's 906.000 kW entropy debt, two-phase helium cryogenics |
-| [`sys1own/shbt-power`](https://github.com/sys1own/shbt-power) | Master fusion plant digital twin | Closed-loop thermodynamic ledger methodology and the 70-gate verification standard |
-| [`sys1own/shbt-ghost`](https://github.com/sys1own/shbt-ghost) | Fast interlocks & metric control | PCSS optical crowbars, SiC inductive recovery shunts, CCZ4/ADM metric stabilization |
-| [`sys1own/shbt-exotic`](https://github.com/sys1own/shbt-exotic) | Boundary CFT & transducer array | Boundary state-vector formulations, HBT transducer arrays, dark-ledger partitioning (η<sub>A</sub> = 10/33, η<sub>D</sub> = 23/33) |
-| [`sys1own/shbt-recon`](https://github.com/sys1own/shbt-recon) | Macroscopic states & telemetry | Unified translocator workspace, 128-byte dual-cacheline C-ABI, POSIX SPSC telemetry rings |
-| [`sys1own/shbt-warp`](https://github.com/sys1own/shbt-warp) | Holographic warp drive & spacetime engine | Receives `shbt-sglt`'s Two-Mode Squeezed Vacuum (TMSV) laser heterodyne ranging (r = 2.50, 21.715 dB, σ<sub>r</sub> ≤ 0.144 pm/√Hz) for real-time bubble-skin displacement tracking, 5th-order minimum-jerk flight kinematics (s(τ) = 10τ³ − 15τ⁴ + 6τ⁵), and hyper-dual Monte Carlo UQ |
-| **`sys1own/shbt-sglt`** (this repo) | SGLT platform & CLI | Synthetic gravitational lensing telescope multi-spacecraft formation-flight digital twin |
+| [`shbt-precision`](https://github.com/sys1own/shbt-precision) | Computational Math & Cosmological Foundation Core | 512-bit MPFR numerics, canonical WZW (26, 8, 312), Δ<sub>fr</sub> ≡ 0, Landauer debt P<sub>debt</sub> = 906.00 kW. |
+| [`shbt-power`](https://github.com/sys1own/shbt-power) | Commercial p-¹¹B Aneutronic Fusion Power Plant Twin | 8,750 MW fusion / 7,832.903 MW net export, 70-gate audit, closed-loop thermal ledger, 128-byte SHBT-MMIO-POWER. |
+| [`shbt-cf`](https://github.com/sys1own/shbt-cf) | LANR Cold Fusion Reactor Workbench & Thermal-Hydraulics | 1,800-module LANR starter grid (999.054 kW net DC), dual-stage CoSb<sub>3</sub>/ZrNiSn TEG, Kapitza resistance ΔT<sub>K</sub> = 3.546 K. |
+| [`shbt-qc`](https://github.com/sys1own/shbt-qc) | Photonic Quantum Computer Twin & C11 Microkernel | Bare-metal C11 shbt-os microkernel, base 56-byte SHBT-MMIO-1 at 0x70000000, SECDED Hamming(72,64) ECC, AVX-512 interlocks. |
+| [`shbt-ghost`](https://github.com/sys1own/shbt-ghost) | Ghost Seed Reactionless Propulsion & Metric Stabilization | Sub-2.5 ns PCSS crowbars, 94.20% SiC inductive recovery, 3+1 CCZ4/ADM stabilization (β<sup>i</sup> → 0, ∣det(g)+1∣ ≤ 10<sup>−12</sup>). |
+| [`shbt-recon`](https://github.com/sys1own/shbt-recon) | Macroscopic State Translocation & Gateway Twin | Macroscopic Stinespring dilation (V<sub>unified</sub><sup>macro</sup>), dark ledger η<sub>D</sub> = 23/33, 128-byte C-ABI DMA streaming, 78-gate audit. |
+| [`shbt-sglt`](https://github.com/sys1own/shbt-sglt) | Synthetic Gravitational Lensing Telescope (SE-L2) Stack | 2PN relativistic beam optics, TMSV heterodyne metrology (r = 2.50, 21.715 dB), 5th-order minimum-jerk flight profiles. |
+| [`shbt-exotic`](https://github.com/sys1own/shbt-exotic) | Multi-Protocol Spacetime Engineering Co-Simulation | Cross-protocol metric coupling (all 6 phenomena), Ford-Roman QI dark-ledger auditing, Heegaard-Floer boundary relabeling. |
+| [`shbt-warp`](https://github.com/sys1own/shbt-warp) | Holographic Warp Drive Digital Twin & 3+1D ADM Engine | Alcubierre metric foliation (α = 1.0, γ<sub>ij</sub> = δ<sub>ij</sub>), 500 TJ ¹⁷⁸ᵐ²Hf graser battery (109 TW burst), 128-gate audit, 8 Z3 proofs. |
+
+### Role of `shbt-sglt` in the Ecosystem
+
+`shbt-sglt` is the specialized vehicle twin for the SE-L2 Synthetic Gravitational Lensing Telescope swarm. It consumes the canonical numerics core (`shbt-precision`), the bare-metal `shbt-os` microkernel and SHBT-MMIO-1 contract (`shbt-qc`), and **imports the 1,800-module LANR power ledger from `shbt-cf`** — LANR cold fusion is owned and originated by `shbt-cf`; SGLT reuses its 999.054 kW net-DC ledger strictly as auxiliary payload power for swarm avionics and derating. PCSS crowbar interlocks and CCZ4 stabilization follow `shbt-ghost`; TMSV heterodyne ranging (r = 2.50, 21.715 dB) and 5th-order minimum-jerk kinematics are exported to `shbt-warp`; multi-protocol co-simulation is coordinated by `shbt-exotic`.
